@@ -1,5 +1,5 @@
 #include <iostream>
-#include <strings.h>
+#include <string.h>
 using namespace std;
 
 char* number = (char*) "\

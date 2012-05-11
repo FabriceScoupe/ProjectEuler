@@ -34,8 +34,8 @@ int main( int argc, char** argv )
        if ( decompose( p, x, y, z ) )
        {
            p *= 11;
-           cout << 11 * i << " x " << j << " = " << p;
-           cout << " = " << x << y << z << z << y << x << endl;
+           //cout << 11 * i << " x " << j << " = " << p;
+           //cout << " = " << x << y << z << z << y << x << endl;
            if ( p > max )
            {
                max = p;
@@ -45,6 +45,6 @@ int main( int argc, char** argv )
        }
     }
 
-    cout << endl;
+    //cout << endl;
     cout << "Greatest = " << max << " = " << max_a << " * " << max_b << endl;
 }

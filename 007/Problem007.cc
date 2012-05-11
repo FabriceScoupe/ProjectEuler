@@ -10,7 +10,6 @@ static Vint primes;
 
 int buildPrimes( int n )
 {
-    int result = 0;
     int np = 0;
     int p = 2;
     while( np < n )
@@ -25,11 +24,11 @@ int buildPrimes( int n )
         {
             ++np;
             primes.push_back( p );
-            cout << "Prime #" << np << " = " << p << endl;
+            //cout << "Prime #" << np << " = " << p << endl;
         }
         ++p;
     }
-    return result;
+    return primes[primes.size()-1];
 }
 
 int main( int argc, char** argv )
@@ -37,4 +36,5 @@ int main( int argc, char** argv )
     int n = 10001;
     if ( argc > 1 ) n = atoi( argv[1] );
     int nth_prime = buildPrimes( n );
+    cout << "Prime # " << n << " = " << nth_prime << endl;
 }

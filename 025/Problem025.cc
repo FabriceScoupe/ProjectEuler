@@ -31,7 +31,7 @@ void dump( BigInt& a )
     while( ( a[pos]==0 ) && ( pos > 0 ) ) --pos;
     while( pos >= 0 )
     {
-        cout << (int) a[pos];
+        //cout << (int) a[pos];
         --pos;
     }
 }
@@ -54,10 +54,11 @@ int main( int argc, char** argv )
     {
         ++idx;
         add( *f1, *f2, *f3 );
-        cout << idx << " term = ";
-        dump( *f3 );
-        cout << " " << f3->size() << " digits." << endl;
+        //cout << idx << " term = ";
+        //dump( *f3 );
+        //cout << " " << f3->size() << " digits." << endl;
         // Rotate pointers
         BigInt* tmp = f1; f1 = f2; f2 = f3; f3 = tmp;
     } while( f2->size() < n );
+    cout << "Index: " << idx << endl;
 }

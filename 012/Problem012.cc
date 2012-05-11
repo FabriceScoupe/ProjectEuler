@@ -56,7 +56,7 @@ int main( int argc, char** argv )
         int curr_nd = ( i % 2 == 0 ? numDivs( i / 2 ) : numDivs( i ) );
         nd = prev_nd * curr_nd;
         prev_nd = curr_nd;
-        cout << t << ": " << nd << " divisors" << endl;
+        //cout << t << ": " << nd << " divisors" << endl;
         ++i;
     }
 

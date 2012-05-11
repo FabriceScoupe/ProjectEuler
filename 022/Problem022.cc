@@ -44,7 +44,7 @@ void parseNames( const char* filename, StringMap& names )
 
 int main( int argc, char** argv )
 {
-    char* filename = "names.txt";
+    char* filename = (char*) "names.txt";
     if ( argc > 1 ) filename = argv[1];
     StringMap names;
     parseNames( (const char*) filename, names );
@@ -54,8 +54,8 @@ int main( int argc, char** argv )
          it != names.end(); ++it )
     {
         ++count;
-        cout << "#" << count << ": " << it->first 
-             << " (" << it->second << ")" << endl;
+        //cout << "#" << count << ": " << it->first 
+        //     << " (" << it->second << ")" << endl;
         total += ( it->second ) * count;
     }
     cout << "Total score = " << total << endl;

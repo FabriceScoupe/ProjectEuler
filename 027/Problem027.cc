@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include <strings.h>
+#include <string.h>
 using namespace std;
 
 // Q(n) = n^2 + a.n + b such as |a| and |b| < 1000

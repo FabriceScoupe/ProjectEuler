@@ -34,8 +34,8 @@ int main( int argc, char** argv )
     if ( n < 10 ) n = 10;
 
     cout << "Calculating sum of all multiples of 3 or 5 < " << n << endl;
-    cout << endl << "Sum1 = " << getSum1(3,5,n) << endl;
-    cout << endl << "Sum2 = " << getSum2(3,5,n) << endl;
+    cout << "Sum1 = " << getSum1(3,5,n) << endl;
+    cout << "Sum2 = " << getSum2(3,5,n) << endl;
 
     return 0;
 }

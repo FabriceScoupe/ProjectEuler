@@ -43,16 +43,16 @@ int main( int argc, char** argv )
     pow2[0]=1;
     for( int i = 1; i <= n; ++i )
     {
-        cout << "2^" << i << "=\t";
+        //cout << "2^" << i << "=\t";
         multiplyBy2( pow2, length );
         int pos = length - 1;
         while( pow2[ pos ] == 0 ) --pos;
         while( pos >= 0 )
         {
-            cout << (int) pow2[ pos ];
+            //cout << (int) pow2[ pos ];
             --pos;
         }
-        cout << endl;
+        //cout << endl;
     }
     cout << "Sum of digits = ";
     int sum = 0;

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include <strings.h>
+#include <string.h>
 using namespace std;
 
 // Find millionth lexicographic permutation of {0,1,2,3,4,5,6,7,8,9}
@@ -62,7 +62,7 @@ int main( int argc, char** argv )
 
     for( i = 1; i < n; ++i )
     {
-        if ( i % 1000 == 0 ) { cout << '.'; flush( cout ); }
+        //if ( i % 1000 == 0 ) { cout << '.'; flush( cout ); }
         if ( ! next_perm( data, len ) )
         {
             cout << endl << i << "th permutation was the last one!" << endl;

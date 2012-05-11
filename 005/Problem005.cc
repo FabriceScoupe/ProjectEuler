@@ -10,7 +10,7 @@ int findSmallestCommonMultiple( int n )
     map< int, int > decomp;
     for( int i = 2; i <= n; ++i )
     {
-        cout << i << " = ";
+        //cout << i << " = ";
         int p = 1;
         int j = i;
         while( j > 1 )
@@ -19,13 +19,13 @@ int findSmallestCommonMultiple( int n )
             ++p;
             while( j % p == 0 )
             {
-                cout << p << " ";
+                //cout << p << " ";
                 ++m;
                 j /= p;
             }
             if ( m > decomp[ p ] ) decomp[ p ] = m;
         }
-        cout << endl;
+        //cout << endl;
     }
 
     int r = 1;
@@ -34,11 +34,11 @@ int findSmallestCommonMultiple( int n )
     {
         for( int j = 0; j < i->second; ++j )
         {
-            cout << i->first << " ";
+            //cout << i->first << " ";
             r *= i->first;
         }
     }
-    cout << endl;
+    //cout << endl;
     return r;
 }
 

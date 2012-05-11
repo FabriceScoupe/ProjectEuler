@@ -33,7 +33,7 @@ int main( int argc, char** argv )
         if ( ! ( sieve[ i / 8 + ( i % 8 ? 1 : 0 ) ] & ( 1 << ( i % 8 ) ) ) )
         {
             sum += i;
-            cout << i << endl;
+            //cout << i << endl;
         }
 
     cout << endl << "Sum of all primes < " << n << " = " << sum << endl;

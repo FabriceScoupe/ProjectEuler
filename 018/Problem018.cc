@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-char* raw = "\
+const char* raw = "\
 75 \
 95 64 \
 17 47 82 \
@@ -88,7 +88,7 @@ int maxSum( vector<int>& triangle )
 
 int main( int argc, char** argv )
 {
-    char* src = raw;
+    char* src = (char*) raw;
     if ( argc > 1 ) src = argv[1];
     vector<int> triangle;
     parseTriangle( src, triangle );

@@ -11,12 +11,15 @@ int cycle( int n )
     int r = 0;
     int c = 0;
     map<int,int> m;
-    cout << "1/" << n << " = 0.";
-    while( p / n == 0 ) { cout << '0'; p*= 10; }
+    //cout << "1/" << n << " = 0.";
+    while( p / n == 0 ) {
+        //cout << '0'; 
+        p*= 10;
+    }
     do
     {
         int d = p / n; // digit
-        cout << d;
+        //cout << d;
         ++c;
         if ( d > 0 )
         {
@@ -37,13 +40,13 @@ int cycle( int n )
     while( r > 0 );
     if ( r > 0 )
     {
-        cout << "...";
+        //cout << "...";
     }
     else
     {
         c = 0; // No recurring cycle
     }
-    cout << " cycle = " << c << endl;
+    //cout << " cycle = " << c << endl;
     return c;
 }
 

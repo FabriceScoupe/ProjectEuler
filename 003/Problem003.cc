@@ -17,11 +17,11 @@ int main( int argc, char** argv )
         ++p;
         while( n % p == 0 )
         {
-            cout << p << " ";
+            //cout << p << " ";
             n  /= p;
         }
     }
-    cout << endl;
+    //cout << endl;
 
     cout << "Largest prime in decomposition of " << m << " is " << p << endl;
 }

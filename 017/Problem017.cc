@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
-#include <strings.h>
+#include <string.h>
 using namespace std;
 
 // How many letters used to write all numbers from 1 to 1000 ?
@@ -96,10 +96,10 @@ int main( int argc, char** argv )
         for( vector< const char* >::iterator it = words.begin();
              it != words.end(); ++it )
         {
-            cout << *it << " ";
+            //cout << *it << " ";
             len += strlen( *it );
         }
-        cout << "(" << len << " letters)" << endl;
+        //cout << "(" << len << " letters)" << endl;
         sum += len;
     }
     cout << "Total letters = " << sum << endl;
