@@ -1,0 +1,23 @@
+#!/bin/sh
+# usage: execproblem <problem number>
+PROBNUM=$1
+if [ -z "$PROBNUM" ]; then echo "Usage: $0 <number>"; exit 1; fi
+PROBDIR=`find . -type d -name $PROBNUM`
+if [ -z "$PROBDIR" ]; then echo "Can't find problem $PROBNUM"; exit 2; fi
+cd $PROBDIR
+CFILE=`find . -type f -name \*.cc`
+if [ -z "$CFILE" ]
+then
+    EXECFILE=`find . -type f -name \*.py`
+    if [ -z "$EXECFILE" ]; then echo "Can't find source file"; exit 3; fi
+else
+    EXECFILE="Problem$PROBNUM"
+    echo "Compiling $CFILE"
+    g++ $CFILE -o $EXECFILE
+fi
+
+echo "Executing: $EXECFILE"
+time -p ./$EXECFILE
+
+cd ..
+make clean 1>&2 > /dev/null
