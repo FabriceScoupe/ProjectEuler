@@ -35,13 +35,15 @@ void add( BigInt& a, BigInt& b, BigInt& s )
 {
     s.clear();
     
-    for( int i = 0; ( i < a.size()) || ( i < b.size() ); ++i ) s.push_back(0);
+    for(int i = 0; (i < (int) a.size()) || (i < (int) b.size()); ++i) {
+         s.push_back(0);
+    }
     s.push_back( 0 );
    
-    for( int i = 0; ( i < a.size()) || ( i < b.size() ); ++i )
+    for( int i = 0; ( i < (int) a.size()) || ( i < (int) b.size() ); ++i )
     {
-        char da = ( i < a.size() ? a[i] : 0 );
-        char db = ( i < b.size() ? b[i] : 0 );
+        char da = ( i < (int) a.size() ? a[i] : 0 );
+        char db = ( i < (int) b.size() ? b[i] : 0 );
         s[i] += da + db;
         if ( s[ i ] >= 10 )
         {
@@ -49,12 +51,12 @@ void add( BigInt& a, BigInt& b, BigInt& s )
             ++s[ i+1 ];
         }
     }
-    if ( 0 == s[ s.size()-1 ] ) s.erase( (++s.rbegin()).base() );
+    if ( 0 == s[ (int)s.size()-1 ] ) s.erase( (++s.rbegin()).base() );
 }
 
 void dump( BigInt& n )
 {
-    for( int i = n.size()-1; i >= 0; --i ) cout << (int) n[i];
+    for( int i = (int) n.size()-1; i >= 0; --i ) cout << (int) n[i];
 }
 
 int main( int argc, char** argv )
@@ -73,16 +75,16 @@ int main( int argc, char** argv )
     for( int i = 1; i <= limit; ++i )
     {
         add( (*p0), (*p1), n );
-        cout << "Expansion(" << i << ") = ";
-        dump(n);
-        cout << " / ";
-        dump(*p1);
+        //cout << "Expansion(" << i << ") = ";
+        //dump(n);
+        //cout << " / ";
+        //dump(*p1);
         if ( n.size() > p1->size() )
         {
             ++count;
-            cout << " (Counted!)";
+            //cout << " (Counted!)";
         }
-        cout << endl;
+        //cout << endl;
         add( (*p0), (*p1), d );
         add( (*p1), d, (*p0) );
         tp = p0; p0 = p1; p1 = tp;  // swap 

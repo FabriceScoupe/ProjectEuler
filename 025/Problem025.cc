@@ -14,10 +14,10 @@ void add( BigInt&a, BigInt& b, BigInt& c )
 {
     c.clear();
     char carry = 0;
-    for( int pos = 0; ( pos < a.size() ) || ( pos < b.size() ); ++pos )
+    for( int pos = 0; (pos < (int) a.size()) || (pos < (int) b.size()); ++pos )
     {
-        char sum = ( pos < a.size() ? a[pos] : 0 ) +
-                   ( pos < b.size() ? b[pos] : 0 ) +
+        char sum = ( pos < (int) a.size() ? a[pos] : 0 ) +
+                   ( pos < (int) b.size() ? b[pos] : 0 ) +
                    carry;
         carry = sum / 10;
         c.push_back( sum % 10 );
@@ -59,6 +59,6 @@ int main( int argc, char** argv )
         //cout << " " << f3->size() << " digits." << endl;
         // Rotate pointers
         BigInt* tmp = f1; f1 = f2; f2 = f3; f3 = tmp;
-    } while( f2->size() < n );
+    } while( (int) f2->size() < n );
     cout << "Index: " << idx << endl;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
+#include <cstdlib>
 #include <iomanip>
-#include <strings.h>
+#include <string.h>
 #include <map>
 using namespace std;
 
@@ -55,11 +56,13 @@ int main( int argc, char** argv )
             {
                 max_count = count;
                 max_prime = sum;
-                cout << sum << " (" << count << " from " << p << ")" << endl;
+                //cout << sum << " (" << count << " from " << p << ")" << endl;
             }
             q = nextPrime( q );
             ++count;
             sum += q;
         }
     }
+    cout << max_prime << " (" << max_count << " primes)" << endl;
+    return 0;
 }

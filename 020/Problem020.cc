@@ -21,7 +21,7 @@ void int2BigInt( int n, BigInt& c )
 void bigInt2BigInt( BigInt& src, BigInt& tgt )
 {
     tgt.clear();
-    for( int i = 0; i < src.size(); ++i ) tgt.push_back( src[i] );
+    for( int i = 0; i < (int) src.size(); ++i ) tgt.push_back( src[i] );
 }
 
 void dump( BigInt& a )
@@ -84,6 +84,6 @@ int main( int argc, char** argv )
     dump(c);
     cout << "Sum of digits of " << n << "! = ";
     int sum = 0;
-    for( int i = 0; i < c.size(); ++i ) sum += c[i];
+    for( int i = 0; i < (int) c.size(); ++i ) sum += c[i];
     cout << sum << endl;
 }

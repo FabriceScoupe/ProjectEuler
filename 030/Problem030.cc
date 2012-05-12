@@ -96,7 +96,7 @@ int sum_for_n_digits( char nd )
 
         if ( n1 == n2 ) // Bingo!
         {
-            cout << "Found: " << n1 << endl;
+            //cout << "Found: " << n1 << endl;
             sum += n1;
         }
 
@@ -140,8 +140,10 @@ int sum_for_n_digits_rec( char nd, int& nfound, int offset = 0, char md = 0 )
             int s  = sum_for_n_digits_rec( nd-1, nf, off, max_d );
             sum += d*power10( nd-1 )*nf + s;
             nfound += nf;
+            /*
             if ( nf > 0 )
                 cout << "Found, digit(" << nd-1 <<") = " << (int) d << endl;
+            */
         }
     }
     else
@@ -152,7 +154,7 @@ int sum_for_n_digits_rec( char nd, int& nfound, int offset = 0, char md = 0 )
             {
                 sum += d;
                 ++nfound;
-                cout << "Found, digit(" << nd-1 <<") = " << (int) d << endl;
+                //cout << "Found, digit(" << nd-1 <<") = " << (int) d << endl;
             }
             else if ( power5( d ) - d > offset )
             {

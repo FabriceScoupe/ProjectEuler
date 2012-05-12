@@ -13,7 +13,7 @@ using namespace std;
 void decompose( long long n, set<long long>& sd )
 {
     sd.clear();
-    cout << n << "= ";
+    //cout << n << "= ";
     int d = 2;
     long long m = n;
     int v = 1;
@@ -27,29 +27,22 @@ void decompose( long long n, set<long long>& sd )
         if ( v > 1 )
         {
             sd.insert(v);
-            cout << v << "\t";
+            //cout << v << "\t";
         }
         v = 1;
         ++d;
     }
-    cout << endl;
+    //cout << endl;
 }
 
 bool addDistinctSets( set<long long>& src, set<long long>& tgt )
 {
-    bool ok = true;
     for( set<long long>::iterator i = src.begin(); i != src.end(); ++i )
     {
-        if ( tgt.find( *i ) != tgt.end() )
-        {
-            ok = false;
-            break;
-        }
-        else
-        {
-            tgt.insert( *i );
-        }
+        if ( tgt.find( *i ) != tgt.end() ) return false;
+        tgt.insert( *i );
     }
+    return true;
 }
 
 
@@ -58,7 +51,7 @@ int main( int argc, char** argv )
     // Not particularly fast...
     int n[5];
     set<long long> sd[5];
-    char count = 1;
+    int count = 1;
     n[1]=210;
     bool shiftAgain = false;
     while( count < 5 )

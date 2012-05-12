@@ -44,7 +44,7 @@ int multiply( BigInt& a, BigInt& b, BigInt& c )
         }
     }
     int digit_sum = 0;
-    for( int i = 0; i < c.size(); ++i ) digit_sum += c[ i ];
+    for( int i = 0; i < (int) c.size(); ++i ) digit_sum += c[ i ];
     return digit_sum;
 }
 
@@ -86,8 +86,8 @@ int main( int argc, char** argv )
         for( int b = 2; b < limit; ++b )
         {
             int sum = multiply( big_a, big_a2, big_prod );
-            cout << a << "^" << b << "= (" << sum << ")\t";
-            dump( big_prod );
+            //cout << a << "^" << b << "= (" << sum << ")\t";
+            //dump( big_prod );
             if ( sum > max_sum )
             {
                 max_sum = sum;

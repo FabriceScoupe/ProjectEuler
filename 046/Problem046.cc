@@ -57,7 +57,7 @@ int main( int argc, char** argv )
     {
         if ( isPrime( n ) )
         {
-            cout << n << " is prime." << endl;
+            //cout << n << " is prime." << endl;
             n += 2;
         }
         else
@@ -73,7 +73,7 @@ int main( int argc, char** argv )
             found = ( r < 3 );
             if ( ! found )
             {
-                cout << n << " = " << r << " + 2 * " << s << "^2" << endl;
+                //cout << n << " = " << r << " + 2 * " << s << "^2" << endl;
                 n+=2;
             }
         }

@@ -32,7 +32,8 @@ struct Hand
     char           primary;
     char           secondary;
 
-    Hand() : combi( HIGH_CARD ), primary( 0 ), secondary( 0 ) { };
+    Hand() : value_map(), suit_map(), combi( HIGH_CARD ),
+             primary( 0 ), secondary( 0 ) { };
 
     void clear()
     {
@@ -163,8 +164,8 @@ int ParseHands( const char* filename )
                 {
                     ++won_by_1;
                 }
-                cout << " won by player" << (h1.less_than(h2)?2:1) << " ";
-                cout << h1.combi << " vs " << h2.combi << endl;
+                //cout << " won by player" << (h1.less_than(h2)?2:1) << " ";
+                //cout << h1.combi << " vs " << h2.combi << endl;
                 h1.clear();
                 h2.clear();
                 h = &h1;
@@ -174,14 +175,14 @@ int ParseHands( const char* filename )
             {
                 ++cards;
                 h->add( value, c );
-                cout << c;
-                if ( 5 == cards ) { h = &h2; cout << "  / "; }
-                if ( 10 == cards ){ cout << "  | "; flush( cout ); }
+                //cout << c;
+                if ( 5 == cards ) { h = &h2; /* cout << "  / "; */ }
+                //if ( 10 == cards ){ cout << "  | "; flush( cout ); }
             }
             else if ((c>='2')&&(c<='9'))
             {
                 value = c-'0';
-                cout << c;
+                //cout << c;
             }
             else
             {
@@ -194,7 +195,7 @@ int ParseHands( const char* filename )
                     case 'A': value = 14; break;
                     default: break;
                 }
-                if (( c != '\r' )&&( c!= 0 )) cout << c; 
+                //if (( c != '\r' )&&( c!= 0 )) cout << c; 
             }
         }
         while( c != 0 );

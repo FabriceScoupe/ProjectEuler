@@ -50,8 +50,6 @@ bool add_digits( map<char,char>& src, map<char,char>& tgt )
 {
     for( char d = 1; d <= 9; ++d )
     {
-        bool found_in_src = ( src.find(d) != src.end() );
-        bool found_in_tgt = ( tgt.find(d) != tgt.end() );
         if ( src.find(d) != src.end() )
         {
             if( tgt.find(d) != tgt.end() ) return false;

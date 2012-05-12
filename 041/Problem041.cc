@@ -93,7 +93,7 @@ int main( int argc, char** argv )
             if ( isPrime( p ) )
             {
                 max = p;
-                cout << "Found: " << p << endl;
+                //cout << "Found: " << p << endl;
             }
         }
     }
@@ -109,7 +109,7 @@ int main( int argc, char** argv )
             if ( isPrime( p ) )
             {
                 max = p;
-                cout << "Found: " << p << endl;
+                //cout << "Found: " << p << endl;
             }
         }
     }

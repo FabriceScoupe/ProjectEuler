@@ -149,13 +149,13 @@ int main( int argc, char** argv )
             if ( i % n == n-1 ) cout << endl;
         }
     }
-    delete[] spiral;
     cout << "Sum of diagonals              = ";
     long long sum = 0;
     // Top-left to bottom-right
     for( int i = 0; i < n*n; i += n+1 ) sum += spiral[i];
     // Top-right to bottom-left, watch that bottom-right corner!
     for( int i = n-1; i < n*n-1; i+= n-1 ) sum += spiral[i]; 
+    delete[] spiral;
     if ( ( n > 1 ) && ( n % 2 != 0 ) )
     {
         --sum;

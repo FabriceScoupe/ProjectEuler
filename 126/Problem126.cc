@@ -66,7 +66,7 @@ int nl(int l, int a, int b, int c) {
 
 int main(int argc, char* argv[])
 {
-    int dim_max = 1500;
+    int dim_max = 4000;
     if (argc > 1) dim_max = atoi(argv[1]);
     int ncubs_max = 20000;
     if (argc > 2) ncubs_max = atoi(argv[2]);

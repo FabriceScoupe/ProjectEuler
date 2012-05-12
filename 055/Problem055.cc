@@ -47,7 +47,7 @@ int main( int argc, char** argv )
 
         if ( iter > 50 )
         {
-            cout << i << " is a Lychrel number." << endl;
+            //cout << i << " is a Lychrel number." << endl;
             ++lychrels;
         }
     }

@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <vector>
 #include <map>
+#include <string.h>
 using namespace std;
 
 // How many circular primes below one million?
@@ -75,7 +76,7 @@ bool checkCircularPrime( int p )
             ok = checkPrime( q );
         }
     }
-    if ( ok ) cout << "Found: " << p << endl;
+    //if ( ok ) cout << "Found: " << p << endl;
     return ok;
 }
 

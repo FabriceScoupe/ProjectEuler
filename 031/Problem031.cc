@@ -25,9 +25,8 @@ int derive( PartitionMap& pm, DerivationMap& dm )
 
     for( dmi = dm.rbegin(); dmi != dm.rend(); ++dmi )
     {
-        cout << "Considering derivations of " << dmi->first << endl;
-        int count = pm.size();
-        cout << count << " elements in partition map." << endl;
+        //cout << "Considering derivations of " << dmi->first << endl;
+        //cout << pm.size() << " elements in partition map." << endl;
         for( vpi = (dmi->second).begin(); vpi!= (dmi->second).end(); ++vpi )
         {
             PartitionMap tmp_pm;
@@ -62,7 +61,7 @@ int derive( PartitionMap& pm, DerivationMap& dm )
                 pm[ pmi->first ] += pmi->second;
             }
         }
-        cout << endl;
+        //cout << endl;
     }
 
     return pm.size();
@@ -109,20 +108,21 @@ int main( int argc, char** argv )
     // Check derivation map
     for( DerivationMap::iterator i = dm.begin(); i != dm.end(); ++i )
     {
-        cout << i->first << " = ";
+        //cout << i->first << " = ";
         for( vector<Partition>::iterator j = i->second.begin();
              j != i->second.end(); ++j )
         {
             for( Partition::iterator k = j->begin(); k != j->end(); ++k )
             {
-                cout << k->second << " x " << k->first << "p ";
+                //cout << k->second << " x " << k->first << "p ";
             }
-            cout << "; ";
+            //cout << "; ";
         }
-        cout << endl;
+        //cout << endl;
     }
 
     int np = derive( pm, dm );
+    /*
     for( PartitionMap::iterator i = pm.begin(); i != pm.end(); ++i )
     {
         Partition p = i->first;
@@ -132,6 +132,7 @@ int main( int argc, char** argv )
         }
         cout << " (" << i->second << " times)" << endl;
     }
+    */
 
     cout << "Total number of partitions: " << np << endl;
 }

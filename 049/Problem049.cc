@@ -30,7 +30,7 @@ void calculatePrimes( set<int>& ps )
         }
         if (isPrime)
         {
-            cout << i << " is prime." << endl;
+            //cout << i << " is prime." << endl;
             ps.insert(i);
         }
     }

@@ -18,7 +18,6 @@ void parseNames( const char* filename, StringMap& names )
     {
         char c = 0;
         vector<char> current;
-        bool ok = true;
         do
         {
             if ( ! in.get(c) ) c = 0;
@@ -27,7 +26,7 @@ void parseNames( const char* filename, StringMap& names )
                 current.push_back(0);
                 string tmp_s( &current[0] );
                 int sum = 0;
-                for( int i = 0; i < tmp_s.length(); ++i )
+                for( int i = 0; i < (int) tmp_s.length(); ++i )
                     sum += tmp_s[i] - 'A' + 1;
                 names[ tmp_s ] = sum;
                 current.clear();

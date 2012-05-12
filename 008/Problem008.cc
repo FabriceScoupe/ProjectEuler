@@ -37,7 +37,7 @@ int main( int argc, char** argv )
    int max_pos = 0;   // Position of first digit in maximum product
 
    int count = 0;     // Current count of non-zero successive digits.
-   for( int i = 0; i < strlen(n); ++i )
+   for( int i = 0; i < (int) strlen(n); ++i )
    {
        if ( n[i] > 0 )
        {

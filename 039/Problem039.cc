@@ -44,7 +44,7 @@ int BuildTriplets( int n )
             {
                 vector< pair< int, int > >& v = tripletMap[ p ];
                 v.push_back( pair<int,int>( a, b ) );
-                if ( v.size() > max_nt )
+                if ( (int) v.size() > max_nt )
                 {
                     max_nt = v.size();
                     max_p  = p;
@@ -61,7 +61,7 @@ int main( int argc, char** argv )
     if ( argc > 1 ) n = atoi( argv[1] );
     int max_p = BuildTriplets( n );
     vector< pair< int, int > >& v = tripletMap[ max_p ];
-    for( int i = 0; i < v.size(); ++i )
+    for( int i = 0; i < (int) v.size(); ++i )
     {
         int a = v[i].first;
         int b = v[i].second;

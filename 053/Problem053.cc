@@ -18,7 +18,7 @@ int nextPascalTriangleLine( vector<int>& line, int threshold )
         {
             // Truncate that line at threshold, to avoid overflows
             line[ i ] = threshold;
-            cout << "C" << line.size()-1 <<","<<i<<" > "<< threshold << endl;
+            //cout << "C" << line.size()-1 <<","<<i<<" > "<< threshold << endl;
             ++count;
         }
     }
@@ -27,7 +27,7 @@ int nextPascalTriangleLine( vector<int>& line, int threshold )
 
 void dump( vector<int>& line )
 {
-    for( int i = 0; i < line.size(); ++i ) cout << line[ i ] << "\t";
+    for( int i = 0; i < (int) line.size(); ++i ) cout << line[ i ] << "\t";
     cout << endl;
 }
 
@@ -43,7 +43,7 @@ int main( int argc, char** argv )
     {
         count += nextPascalTriangleLine( line, threshold );
     }
-    while( line.size() <= n );
+    while( (int) line.size() <= n );
 
     cout << "Cn,r > " << threshold << " for n <= " << n
          << " = " << count << endl;

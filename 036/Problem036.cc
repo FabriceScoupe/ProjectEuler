@@ -29,7 +29,7 @@ int main( int argc, char** argv )
     {
         if ( isPalindrome( i, 2 ) && isPalindrome( i, 10 ) )
         {
-            cout << i << " is a base2- and base10- palindrome" << endl;
+            //cout << i << " is a base2- and base10- palindrome" << endl;
             sum += i;
         }
     }

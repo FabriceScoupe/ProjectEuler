@@ -41,7 +41,7 @@ int main( int argc, char** argv )
 
     while (!found)
     {
-        cout << "Trying P(d=" << d << ")=" << pd << endl;
+        //cout << "Trying P(d=" << d << ")=" << pd << endl;
         // j must be such that P(j) >= 3d+1
         //int lower_bound = (d<<1)+d+1;
         int lower_bound = 3*d+1;
@@ -73,7 +73,7 @@ int main( int argc, char** argv )
                 int s = k;
                 long long tmp_pj = pj;
                 long long tmp_ps = k*(3*k-1)/2;
-                long long max_ps = tmp_ps<<1-pd;
+                long long max_ps = tmp_ps<<(1-pd);
                 // P(j) = P(s)-P(k) P(j)-(P(k+1)-P(k))=P(s)-P(k+1)
                 // Keep substracting until P(s) reached or overshot
                 while( ( tmp_pj > 0 ) && ( tmp_ps < max_ps ) )

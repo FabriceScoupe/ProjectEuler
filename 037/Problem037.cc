@@ -36,7 +36,7 @@ bool checkTruncablePrime( vector<char>& dv, int& p )
     int a = 0;
     int b = 0;
     int pw = 1;
-    for( int i = 0; ( i < dv.size() ) && ok; ++i )
+    for( int i = 0; ( i < (int) dv.size() ) && ok; ++i )
     {
         a += pw*dv[i];
         pw *= 10;

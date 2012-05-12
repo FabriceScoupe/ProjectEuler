@@ -23,7 +23,7 @@ int main( int argc, char** argv )
         while( h < target ) { h += 4*c+1; ++c; }
         while( t < target ) { t += a+1; ++a; }
         while( p < target ) { p += 3*b+1; ++b; }
-        cout << "h = "<<h<<" p = "<<p<<" t = "<<t<<endl;
+        //cout << "h = "<<h<<" p = "<<p<<" t = "<<t<<endl;
         if ( ( p == target ) && ( t == target ) )
         {
             cout << "T("<<a<<")=P("<<b<<")=T("<<c<<")=" << h << endl;

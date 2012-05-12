@@ -30,15 +30,15 @@ int numberOfTriangleWords( const char* filename )
             {
                 if ( triangles.find( value ) != triangles.end() )
                 {
-                    cout << " (triangle=" << value << ")";
+                    //cout << " (triangle=" << value << ")";
                     ++count;
                 }
-                cout << endl;
+                //cout << endl;
                 value = 0;
             }
             else if ( ( c >= 'A' ) && ( c <= 'Z' ) )
             {
-                cout << c;
+                //cout << c;
                 value += c - 'A' + 1;
             }
         }
@@ -50,7 +50,7 @@ int numberOfTriangleWords( const char* filename )
 
 int main( int argc, char** argv )
 {
-    char* filename = "words.txt";
+    char* filename = (char*) "words.txt";
     if ( argc > 1 ) filename = argv[1];
     int count = numberOfTriangleWords( filename );
     cout << endl << "Number of triangle words = " << count << endl;
