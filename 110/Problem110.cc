@@ -40,7 +40,7 @@ void buildPrimes( int limit )
     for( int n = 3; n <= limit; n += 2 )
     {
         bool is_prime = true;
-        for( int i = 0; is_prime && ( i < primes.size() ); ++i )
+        for( int i = 0; is_prime && ( i < (int) primes.size() ); ++i )
         {
             is_prime = ( n % primes[i] != 0 );
         }
