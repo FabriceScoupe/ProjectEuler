@@ -16,64 +16,54 @@ How many composite integers, n < 10^(8), have precisely two,
 not necessarily distinct, prime factors?
 ***/
 
-char sieve[ 3125001 ]; // to detect all primes up to <50000000
+static unsigned char* sieve;
 
-void buildSieve()
+void buildSieve(unsigned long long max)
 {
     cout << "Building sieve..." << endl;
-    memset( sieve, 0, 3125001 );
-    long long iter = 0;
-    for( long long i = 3; i <= 16666666; i+=2 )
-    {
-        for( long long j = 3; i*j <= 50000000; j += 2 )
-        {
-            if ( ++iter % 1000000 == 0 ) { cout << "."; flush( cout ); }
-            long long m = (i*j)/2;
-            sieve[ m/8+(m%8?0:1) ] |= 1<<(m%8);
+    sieve = new unsigned char[(max/16)+1];
+    memset( sieve, 0, (max/16)+1);
+    for(unsigned long long n = 3; n*n <= max; n += 2) {
+        for(unsigned long long m = 3*n; m <= max; m += 2*n) {
+            sieve[(m-1)/16] |= 1 << (((m-1)/2)%8);
         }
     }
-    cout << endl;
 }
 
-bool isPrime( long long p );
-
-long long nextPrime( long long p )
+unsigned long long nextPrime(unsigned long long p)
 {
     if ( 2 == p ) return 3;
-    long long q = p+2;
-    while( ( q < 50000000 ) && ( !isPrime( q ) ) ) q+=2; // not subtle.
-    if ( q >= 50000000 ) q = -1;
-    return q;
+    unsigned int index = (p-1)/16;
+    unsigned int bit   = ((p-1)/2)%8;
+    unsigned long long n = 0;
+    while(0 == n) {
+        ++bit;
+        if (bit >= 8) {
+            ++index;
+            bit = 0;
+        }
+        if ((sieve[index] & (1 << bit)) == 0) {
+            n = 16*index+1+2*bit;
+        }
+    }
+    return n;
 }
-
-bool isPrime( long long p )
-{
-    long long q = p / 2;
-    return ( ( 2 == p ) ||
-             ( ( p % 2 ) && ! ( sieve[q/8+(q%8?0:1)] & 1<<(q%8) ) ) );
-}
-
-
 
 int main( int argc, char** argv )
 {
     int limit = 100000000;
     if ( argc > 1 ) limit = atoi( argv[ 1 ] );
-    buildSieve();
+    buildSieve(50000000);
     int count = 0;
     int a = 2;
     int b = 2;
-    do
-    {
-        do
-        {
+    do {
+        do {
             ++count;
             b = nextPrime( b );
-        }
-        while( ( b > 0 ) && ( a*b < limit ) );
+        } while( ( b > 0 ) && ( a*b < limit ) );
         a = nextPrime( a );
         b = a;
-    }
-    while( ( a > 0 ) && ( a*b < limit ) );
+    } while( ( a > 0 ) && ( a*b < limit ) );
     cout << "Number of semi-primes < " << limit << " = " << count << endl;
 }
