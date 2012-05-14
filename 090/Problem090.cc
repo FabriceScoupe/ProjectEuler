@@ -51,22 +51,22 @@ int main(int argc, char** argv)
                     for(a[4] = a[3]+1; a[4] <= 8; ++a[4])
                         for(a[5] = a[4]+1; a[5] <= 9; ++a[5]) {
                             for(int i = 0; i < 6; ++i) b[i] = a[i]+'0';
-                            cout << b << endl;
+                            //cout << b << endl;
                             dv.push_back(b);
                         }
 
    cout << dv.size() << " dice generated." << endl << endl;
 
    int count = 0;
-   for(int i = 0; i < dv.size(); ++i) {
-       for(int j = i; j < dv.size(); ++j) {
+   for(unsigned int i = 0; i < dv.size(); ++i) {
+       for(unsigned int j = i; j < dv.size(); ++j) {
            for(int k = 0; k < 6; ++k) {
                a[k] = dv[i][k] - '0';
                b[k] = dv[j][k] - '0';
            }
            if (check_constraints(a,b)) {
                ++count;
-               cout << "Found: " << dv[i] << " / " << dv[j] << endl;
+               //cout << "Found: " << dv[i] << " / " << dv[j] << endl;
            }
        }
    }

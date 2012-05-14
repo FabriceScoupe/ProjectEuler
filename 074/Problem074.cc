@@ -26,7 +26,7 @@ using namespace std;
 // sixty non-repeating terms?
 
 // Factorial table:
-inline int fact( char digit )
+static inline int fact( char digit )
 {
     int f = 1;
     switch( digit )
@@ -44,12 +44,11 @@ inline int fact( char digit )
     return f;
 }
 
-inline int next( int n )
+static inline int next( int n )
 {
     int m = n;
     int sumfact = 0;
-    while( m > 0 )
-    {
+    while(m > 0) {
         sumfact += fact( m % 10 );
         m /= 10;
     }
@@ -62,8 +61,7 @@ int non_repeating_terms( int n )
     set< int > seq;
     int m = n;
     int len = 0;
-    while( ( cache[ m ] == 0 ) && ( seq.find( m ) == seq.end() ) )
-    {
+    while( ( cache[ m ] == 0 ) && ( seq.find( m ) == seq.end() ) ) {
         seq.insert( m );
         m = next( m );
     }
@@ -77,10 +75,9 @@ int main( int argc, char** argv )
     int limit = 1000000;
     if ( argc > 1 ) limit = atoi( argv[ 1 ] );
     int count = 0;
-    for( int n = 1; n < limit; ++n )
-    {
+    for( int n = 1; n < limit; ++n ) {
         int len = non_repeating_terms( n );
-        cout << n << "-> " << len << endl;
+        //cout << n << "-> " << len << endl;
         if ( 60 == len ) ++count;
     }
     cout << "Number of 60-long non-repeating chains = " << count << endl;

@@ -49,18 +49,15 @@ void build_primes( int limit )
     cout << "Building primes up to " << limit << "..." << endl;
     primes.clear();
     primes.insert( 2 );
-    for( int n = 3; n <= 2*limit; n+=2 )
-    {
+    for(int n = 3; n <= 2*limit; n+=2) {
         bool is_prime = true;
         for( set<int>::iterator it = primes.begin();
-             ( it != primes.end() )&&( is_prime ); ++it )
-        {
+             ( it != primes.end() )&&( is_prime ); ++it ) {
             is_prime = ( n % *it != 0 );
         }
-        if ( is_prime )
-        {
+        if (is_prime) {
             primes.insert( n );
-            cout << "Prime: " << n << endl;
+            //cout << "Prime: " << n << endl;
         }
     }
     cout << "... done!" << endl;
@@ -72,21 +69,18 @@ void decomp( int n, multiset<int>& ms )
 {
     ms.clear();
 
-    cout << "Decomposition of " << n << " = ";
+    //cout << "Decomposition of " << n << " = ";
     int nn = n;
 
     for( set<int>::iterator it = primes.begin(); 
-         ( it != primes.end() ) && ( *it <= nn ); ++it )
-    {
-        while ( (nn % (*it)) == 0 )
-        {
+         ( it != primes.end() ) && ( *it <= nn ); ++it ) {
+        while ( (nn % (*it)) == 0 ) {
             nn /= (*it);
             ms.insert( *it );
-            cout << *it << " ";
+            //cout << *it << " ";
         }
     }
-
-    cout << endl;
+    //cout << endl;
 }
 
 int main( int argc, char** argv )
@@ -99,13 +93,11 @@ int main( int argc, char** argv )
     map< int, int > mps;
     for( int k = 2; k <= limit; ++k ) mps[ k ] = 2*k; // Set upper bounds
 
-    for( int n = 3; n < 2*limit; ++n )
-    {
-        cout << endl << "### Checking " << n << "..." << endl;
+    for( int n = 3; n < 2*limit; ++n ) {
+        //cout << endl << "### Checking " << n << "..." << endl;
         multiset< int > ms;
         decomp( n, ms );
-        if ( ms.size() > 1 ) // ignore prime numbers
-        {
+        if ( ms.size() > 1 ) { // ignore prime numbers
             // Go through every possible decomposition of n into at least
             // 2 factors (f factors). There are at most v.size() factors.
             // n = sum(factors) + (n-sum(factors))*1
@@ -115,44 +107,35 @@ int main( int argc, char** argv )
             set< multiset< int > > factorisations;
             factorisations.insert( ms );
             set< multiset< int > >::iterator it = factorisations.begin();
-            while( it != factorisations.end() )
-            {
+            while( it != factorisations.end() ) {
                 multiset< int >::iterator jt;
                 int sum = 0; 
-                for( jt = it->begin(); jt != it->end(); ++jt )
-                {
-                    cout << *jt << "+";
+                for( jt = it->begin(); jt != it->end(); ++jt ) {
+                    //cout << *jt << "+";
                     sum += *jt;
                 }
-                cout << "(" << n - sum << ") = " << n;
+                //cout << "(" << n - sum << ") = " << n;
                 int kk = it->size() + n - sum;
-                if ( mps[ kk ] > n )
-                {
-                    cout << " => mps[" << kk << "] = " << n;
+                if ( mps[ kk ] > n ) {
+                    //cout << " => mps[" << kk << "] = " << n;
                     mps[ kk ] = n;
                 }
-                cout << endl;
+                //cout << endl;
                 // Generating factorisations with it->size()-1 terms and
                 // inserting them in the factorisations set.
                 multiset< int > m2;
-                for( int i = 0; i < it->size()-1; ++i )
-                {
+                for(unsigned int i = 0; i < it->size()-1; ++i) {
                     jt = it->begin();
-                    for( int ii = 0; ii < i; ++ii ) ++jt;
-                    for( int j = i+1; j < it->size(); ++j )
-                    {
+                    for(unsigned int ii = 0; ii < i; ++ii) ++jt;
+                    for(unsigned int j = i+1; j < it->size(); ++j) {
                         multiset< int >::iterator kt = it->begin();
-                        for( int jj = 0; jj < j; ++jj ) ++kt;
+                        for(unsigned int jj = 0; jj < j; ++jj ) ++kt;
                         m2.clear();
                         multiset< int >::iterator lt = it->begin();
-                        for( ; lt != it->end(); ++lt )
-                        {
-                            if ( lt == jt )
-                            {
+                        for( ; lt != it->end(); ++lt ) {
+                            if ( lt == jt ) {
                                 m2.insert( (*jt) * (*kt) );
-                            }
-                            else if ( lt != kt )
-                            {
+                            } else if ( lt != kt ) {
                                 m2.insert( *lt );
                             }
                         }
@@ -169,10 +152,10 @@ int main( int argc, char** argv )
     set< int > distinct_mps;
     for( int k = 2; k <= limit; ++k )
     {
-        cout << "mps[" << k << "] = " << mps[k] << endl;
+        //cout << "mps[" << k << "] = " << mps[k] << endl;
         distinct_mps.insert( mps[ k ] );
     }
-    cout << endl;
+    //cout << endl;
 
     int sum = 0;
     for( set<int>::iterator it = distinct_mps.begin();

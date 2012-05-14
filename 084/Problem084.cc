@@ -77,6 +77,7 @@ using namespace std;
 
 // Brute force: Monte Carlo.
 
+/*
 static const char* board[] = {
 //  00      01    02     03     04    05    06     07     08    09
     "GO",   "A1", "CC1", "A2",  "T1", "R1", "B1",  "CH1", "B2", "B3",
@@ -84,6 +85,7 @@ static const char* board[] = {
     "FP",   "E1", "CH2", "E2",  "E3", "R3", "F1",  "F2" , "U2", "F3",
     "G2J",  "G1", "G2",  "CC3", "G3", "R4", "CH3", "H1" , "T2", "H2"
 };
+*/
 
 static int community[16];
 static int community_card = 0;
@@ -92,16 +94,16 @@ static int chance_card = 0;
 
 void shuffle_cards( int* pack )
 {
-    cout << "Shuffling...";
+    //cout << "Shuffling...";
     for( int i = 0; i < 16; ++i ) pack[i] = i+1;
     int j,k,tmp;
     while( rand() % 100 < 99 )
     {
-        cout << '.';
+        //cout << '.';
         j = rand() % 16; k = rand() % 16;
         tmp = pack[ j ]; pack[ j ] = pack[ k ]; pack[ k ] = tmp;
     }
-    cout << endl;
+    //cout << endl;
 }
 
 inline int pick_community( int pos )
@@ -182,18 +184,18 @@ int main( int argc, char** argv )
 
     srand( seed );
     shuffle_cards( community );
-    for( int i = 0; i < 16; ++i ) cout << community[ i ] << " ";
-    cout << endl;
+    //for( int i = 0; i < 16; ++i ) cout << community[ i ] << " ";
+    //cout << endl;
     shuffle_cards( chance );
-    for( int i = 0; i < 16; ++i ) cout << chance[ i ] << " ";
-    cout << endl;
+    //for( int i = 0; i < 16; ++i ) cout << chance[ i ] << " ";
+    //cout << endl;
 
     map< int, int > dist;
     int pos = 0;
     int doubles = 0;
     for( int iter = 0; iter < iters; ++iter )
     {
-        if ( iter % 10000 == 0 ) { cout << '.'; flush( cout ); }
+        //if ( iter % 10000 == 0 ) { cout << '.'; flush( cout ); }
         bool is_double;
         //do
         //{
@@ -220,13 +222,17 @@ int main( int argc, char** argv )
         //while( is_double && ( pos != 10 ) );
         dist[ pos ]++;
     }
-    cout << endl;
+    //cout << endl;
 
     set< pair< int, int > > freq;
     for( int i = 0; i < 40; ++i ) freq.insert( pair<int,int>( dist[i], i ) );
-    for( set< pair< int, int > >::reverse_iterator it = freq.rbegin();
-         it != freq.rend(); ++it )
-    {
+    set<pair<int, int> >::reverse_iterator it = freq.rbegin();
+    /*
+    for(;it != freq.rend(); ++it ) {
         cout << it->second << " (" << it->first << ")" << endl;
     }
+    */
+    cout << "Answer = " << it->second; ++it;
+    cout << it->second; ++it;
+    cout << it->second << endl;
 }

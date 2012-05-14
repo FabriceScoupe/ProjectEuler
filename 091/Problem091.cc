@@ -43,8 +43,8 @@ int main( int argc, char** argv )
                 for( int y2 = (x2>x1?0:y1+1); y2 <= limit; ++y2 )
                     if ( is_right_angle_triangle( x1, y1, x2, y2 ) )
                     {
-                        cout << "P(" << x1 << "," << y1 << ") and ";
-                        cout << "Q(" << x2 << "," << y2 << ")." << endl;
+                        //cout << "P(" << x1 << "," << y1 << ") and ";
+                        //cout << "Q(" << x2 << "," << y2 << ")." << endl;
                         ++count;
                     }
     cout << endl << "Number of right angle triangles with 0 <= x1,y1,x2,y2 <=";

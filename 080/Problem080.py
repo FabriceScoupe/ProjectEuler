@@ -43,6 +43,6 @@ if __name__ == "__main__" :
     sum = 0
     for i in range(1,101):
         s = rootDigitSum( i, 100 )
-        print "sum ",i," = ",s
+        #print "sum ",i," = ",s
         sum += s
     print "Total sum = ",sum

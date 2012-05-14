@@ -12,12 +12,12 @@ then
     if [ -z "$EXECFILE" ]; then echo "Can't find source file"; exit 3; fi
 else
     EXECFILE="Problem$PROBNUM"
-    echo "Compiling $CFILE"
-    g++ -Wall -Werror -Weffc++ $CFILE -o $EXECFILE
+    echo
+    echo "########## Compiling $CFILE"
+    g++ -O2 -Wall -Werror -Weffc++ $CFILE -o $EXECFILE
 fi
-
-echo "Executing: $EXECFILE"
+echo "########## Executing: $EXECFILE"
 time -p ./$EXECFILE
-
+echo
 cd ..
 make clean 1>&2 > /dev/null

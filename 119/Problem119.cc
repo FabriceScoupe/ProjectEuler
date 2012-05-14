@@ -25,8 +25,7 @@ inline int sum_digits( long long n, int& nb_digits )
     long long m = n;
     int s = 0;
     nb_digits = 0;
-    while( m > 0 )
-    {
+    while( m > 0 ) {
         ++nb_digits;
         s += m % 10;
         m /= 10;
@@ -43,23 +42,20 @@ int main( int argc, char** argv )
     set< long long > a;
     int k = 0;
 
-    while( k < n )
-    {
+    while( k < n ) {
         int nd = 0;
         int sd = 0;
         long long p = 1;
-        cout << "Trying " << i << endl;
+        //cout << "Trying " << i << endl;
         int pwr = 0;
-        do
-        {
+        do {
             p *= i;
             ++pwr;
             sd = sum_digits( p, nd );
-            if ( ( nd >= 2 ) && ( sd == i ) )
-            {
+            if ( ( nd >= 2 ) && ( sd == i ) ) {
                  ++k;
                  a.insert( p );
-                 cout << "Found " << p << " k= " << k << endl;
+                 //cout << "Found " << p << " k= " << k << endl;
             }
         }
         // TODO!!! Improve this condition, it doesn't work correctly
@@ -71,7 +67,7 @@ int main( int argc, char** argv )
     for( set< long long >::iterator it = a.begin(); it != a.end(); ++it )
     {
         ++k;
-        cout << "a(" << k << ")=" << *it << endl;
+        if (30 == k) cout << "a(" << k << ")=" << *it << endl;
     }
     return 0;
 }

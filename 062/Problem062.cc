@@ -51,7 +51,7 @@ int main( int argc, char** argv )
         v.push_back( n );
         vector< int >& ndv = ndm[ dio ];
         ndv.push_back( nd );
-        if ( v.size() == limit )
+        if ((int) v.size() == limit)
         {
             found = c;
             for( int i = 1; i < limit; ++i )

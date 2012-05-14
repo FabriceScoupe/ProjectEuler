@@ -47,8 +47,8 @@ string.
 int main(int argc, char* argv[])
 {
     int n = 7;
-    if (argc > 0) n = atoi(argv[1]);
+    if (argc > 1) n = atoi(argv[1]);
 
-
+    cout << n << endl;
     return 0;
 }

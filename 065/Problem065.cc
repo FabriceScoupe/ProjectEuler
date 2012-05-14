@@ -29,10 +29,12 @@ void add( BigInt& a, BigInt& b, BigInt& s )
 {
     s.clear();
 
-    for( int i = 0; ( i < a.size()) || ( i < b.size() ); ++i ) s.push_back(0);
-    s.push_back( 0 );
+    for(unsigned int i = 0; (i < a.size()) || (i < b.size()); ++i) {
+        s.push_back(0);
+    }
+    s.push_back(0);
 
-    for( int i = 0; ( i < a.size()) || ( i < b.size() ); ++i )
+    for(unsigned int i = 0; (i < a.size()) || (i < b.size()); ++i )
     {
         char da = ( i < a.size() ? a[i] : 0 );
         char db = ( i < b.size() ? b[i] : 0 );
@@ -43,7 +45,7 @@ void add( BigInt& a, BigInt& b, BigInt& s )
             ++s[ i+1 ];
         }
     }
-    while( 0 == s[ s.size()-1 ] ) s.erase( (++s.rbegin()).base() );
+    while(0 == s[s.size()-1]) s.erase( (++s.rbegin()).base() );
 }
 
 // Multiply BigInt a and b into c
@@ -55,18 +57,14 @@ void multiply( BigInt& a, BigInt& b, BigInt& c )
     int deg_b = b.size(); // Degree of b
     while( b[deg_b-1] == 0 ) --deg_b;
 
-    for( int i = 0; i < deg_a+deg_b; ++i ) c.push_back( 0 );
-    for( int i = 0; i < deg_a; ++i )
-    {
-        for( int j = 0; j < deg_b; ++j )
-        {
+    for(int i = 0; i < deg_a+deg_b; ++i) c.push_back( 0 );
+    for(int i = 0; i < deg_a; ++i) {
+        for( int j = 0; j < deg_b; ++j ) {
             int prod = a[i]*b[j];
             int pos = i+j;
-            while( ( prod > 0 ) || ( c[pos] >= 10 ) )
-            {
+            while( ( prod > 0 ) || ( c[pos] >= 10 ) ) {
                 c[pos] += prod % 10;
-                if (c[pos] >= 10 )
-                {
+                if (c[pos] >= 10 ) {
                     c[pos]-=10;
                     ++c[pos+1];
                 }
@@ -80,15 +78,14 @@ void multiply( BigInt& a, BigInt& b, BigInt& c )
 
 void dump( BigInt& n )
 {
-    for( int i = n.size()-1; i >= 0; --i ) cout << (int) n[i];
+    for(unsigned int i = n.size(); i > 0; --i) cout << (int) n[i-1];
 }
 
 void int2BigInt( int n, BigInt& b )
 {
     int m = n;
     b.clear();
-    while( m > 0 )
-    {
+    while(m > 0) {
         b.push_back( m % 10 );
         m /= 10;
     }
@@ -110,8 +107,7 @@ int main( int argc, char** argv )
     BigInt a_prev;
     int2BigInt( a_euler( n ), n_curr );
     d_curr.push_back( 1 );
-    while( n > 0 )
-    {
+    while( n > 0 ) {
 // Fn = Nn/Dn with N100 = a100 and D100 = 1
 // Fn-1 = a(n-1) + Dn/Nn <=> Nn-1 = a(n-1).Nn + Dn, Dn-1 = Nn
         int2BigInt( a_euler( n-1 ), a_prev );
@@ -132,6 +128,7 @@ int main( int argc, char** argv )
     cout << endl;
 
     int sum = 0;
-    for( int i = 0; i < n_curr.size(); ++i ) sum += n_curr[i];
+    for(unsigned int i = 0; i < n_curr.size(); ++i) sum += n_curr[i];
     cout << endl << "sum = " << sum << endl;
+    return 0;
 }

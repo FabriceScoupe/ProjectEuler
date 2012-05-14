@@ -28,7 +28,7 @@ exceeding one million.
 // Re-using problem 21
 
 // Returns ceiling(square root(n))
-inline int root( int n )
+static inline int root( int n )
 {
     int r = 1;
     while( r*r < n ) ++r;
@@ -43,10 +43,8 @@ int d( int n )
     int sum = 1;
     int r = root( n );
     int div = 2;
-    while(( div <= r )&&( div < n ))
-    {
-        if ( n % div == 0 )
-        {
+    while(( div <= r )&&( div < n )) {
+        if ( n % div == 0 ) {
             sum += div + n / div;
         }
         ++div;
@@ -64,8 +62,7 @@ int main( int argc, char** argv )
     set< int > items;
     int max_length = 0;
     int min_elem   = 0;
-    for( int n = 2; n < limit; ++n )
-    {
+    for( int n = 2; n < limit; ++n ) {
         if ( n % 10000 == 0 ) { cout << '.'; flush( cout ); }
         if ( lengths[n] != 0 ) continue; // Already spotted in a chain.
         items.clear();
@@ -79,26 +76,26 @@ int main( int argc, char** argv )
         }
         int l = items.size();
         if ( ( 0 == s ) || ( s >= limit ) ) l = -1;
-        if ( s == n ) 
-        {
+        if ( s == n ) {
             for( set<int>::iterator it = items.begin();
                  it != items.end(); ++it )
             {
                 lengths[ *it ] = l;
                 if ( *it < s ) s = *it;
             }
-            if ( l > max_length )
-            {
+            if ( l > max_length ) {
                 max_length = l;
                 min_elem   = s;
                 cout << endl <<  "New max length " << l 
                      << ", min element " << s << endl;
             }
-        }
-        else
-        {
+        } else {
             lengths[ n ] = -1;
         }
     }
     cout << endl;
+    cout << "Max length = " << max_length 
+         << ", min element = " << min_elem << endl;
+
+    return 0;
 }

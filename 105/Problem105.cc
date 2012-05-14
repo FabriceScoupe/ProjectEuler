@@ -36,7 +36,7 @@ and find the value of S(A1) + S(A2) + ... + S(Ak).
 // map n -> min(S(C) / card C = n); min(n)
 // for 1 < n < card A, min(n) > max(n-1)
 
-inline int sum( const set<int>& s )
+static inline int sum( const set<int>& s )
 {
    int sum = 0;
    for( set<int>::iterator i=s.begin(); i!=s.end(); ++i ) sum += *i;
@@ -45,10 +45,11 @@ inline int sum( const set<int>& s )
 
 void dump( const set<int>& s )
 {
-   cout << "{ ";
-   for( set<int>::iterator i=s.begin(); i!=s.end(); ++i ) cout << *i <<
-" ";
-   cout << "}";
+    cout << "{ ";
+    for(set<int>::iterator i=s.begin(); i!=s.end(); ++i) {
+        cout << *i << " ";
+    }
+    cout << "}";
 }
 
 // Generates the set of parts of set s
@@ -57,15 +58,12 @@ void get_parts( const set<int>& s, set< set< int > >& parts )
    parts.clear();
    set< int > t;    
    parts.insert( t ); // Insert empty set
-   int d = 1;
-   while( d < s.size() )
-   {
+   unsigned int d = 1;
+   while(d < s.size()) {
        for( set< set< int > >::iterator pit = parts.begin();
             pit != parts.end(); ++pit )
        {
-           for( set< int >::iterator sit = s.begin(); sit != s.end();
-++sit )
-           {
+           for(set< int >::iterator sit = s.begin(); sit != s.end(); ++sit) {
                set< int > u = *pit;
                u.insert( *sit );
                parts.insert( u );
@@ -84,14 +82,12 @@ int is_special( const set<int>& s )
    set< int > e;
    p.erase( p.find( e ) ); // erase empty set
    p.erase( p.find( s ) ); // erase full set
-   cout << "size of p = " << p.size() << endl;
+   //cout << "size of p = " << p.size() << endl;
 
    set< int > sums;
    map< int, int > mins;
    map< int, int > maxs;
-   for( set< set< int > >::iterator pit = p.begin();
-        pit != p.end(); ++pit )
-   {
+   for(set< set< int > >::iterator pit = p.begin(); pit != p.end(); ++pit) {
        int tmp = sum( *pit );
        // Checking that all parts have different sums
        if ( sums.find( tmp ) != sums.end() ) return 0;
@@ -102,8 +98,7 @@ int is_special( const set<int>& s )
        if ( tmp > mx ) mx = tmp;
    }
    // Checking 1 < n < card s, min(n) > max(n-1)
-   for( int d = 2; d < s.size(); ++d )
-   {
+   for(unsigned int d = 2; d < s.size(); ++d ) {
        if ( mins[ d ] <= maxs[ d-1 ] ) return 0;
    }
    return sum(s);
@@ -116,34 +111,26 @@ int parseFile( char* filename )
    char c = 0;
    int  n = 0;
    set< int > s;
-   if ( in ) do
-   {
+   if ( in ) do {
        if ( ! in.get( c ) ) c = 0;
-       if ( ( '\r' == c ) || ( '\n' == c ) || ( 0 == c ) )
-       {
-           if ( n > 0 )
-           {
+       if ( ( '\r' == c ) || ( '\n' == c ) || ( 0 == c ) ) {
+           if ( n > 0 ) {
                s.insert( n );
                n = 0;
-               dump( s );
+               //dump( s );
                int tmp = is_special( s );
-               cout << " special sum = " << tmp << endl;
+               //cout << " special sum = " << tmp << endl;
                total += tmp;
                s.clear();
            }
-       }
-       else if ( ',' == c )
-       {
+       } else if ( ',' == c ) {
            s.insert( n );
            n = 0;
-       }
-       else if ( ( c >= '0' ) && ( c <= '9' ) )
-       {
+       } else if ( ( c >= '0' ) && ( c <= '9' ) ) {
            n *= 10;
            n += c - '0';
        }
-   }
-   while( c != 0 );
+   } while( c != 0 );
    return total;
 }
 
@@ -151,6 +138,5 @@ int main( int argc, char** argv )
 {
    char* filename = (char*) "sets.txt";
    if ( argc > 1 ) filename = argv[ 1 ];
-   cout << "Sum of special sets' sum = " << parseFile( filename ) <<
-endl;
+   cout << "Sum of special sets' sum = " << parseFile( filename ) << endl;
 }

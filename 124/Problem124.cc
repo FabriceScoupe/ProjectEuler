@@ -34,7 +34,7 @@ int main( int argc, char** argv )
     {
         int rad = 1;
         int p = i;
-        for( int j = 0; j < primes.size(); ++j )
+        for(unsigned int j = 0; j < primes.size(); ++j )
         {
             int pj = primes[j];
             if ( p % pj == 0 )

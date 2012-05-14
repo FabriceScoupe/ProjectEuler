@@ -24,45 +24,36 @@ int max_line( char* filename )
     int    max_line = 0;
 
     ifstream in( filename );
-    if ( in )
-    {
+    if ( in ) {
         char c = 0;
 
         int  num = 0;
         int  line = 0;
         double val = 0.0;
 
-        do
-        {
+        do {
             if ( ! in.get( c ) ) c = 0;
-            if ( ( c >= '0' ) && ( c <= '9' ) )
-            {
+            if ( ( c >= '0' ) && ( c <= '9' ) ) {
                 num = num*10 + (c-'0');
-            }
-            else if ( ',' == c )
-            {
-                cout << num << ',';
+            } else if ( ',' == c ) {
+                //cout << num << ',';
                 val = log( num );
                 num = 0;
-            }
-            else if ( num > 0 )
-            {
-                cout << num << " = ";
+            } else if ( num > 0 ) {
+                //cout << num << " = ";
                 val *= num;
-                cout << val;
+                //cout << val;
                 ++line;
-                if ( val > max )
-                {
+                if ( val > max ) {
                     max = val;
                     max_line = line;
-                    cout << " (NEW MAX)";
+                    //cout << " (NEW MAX)";
                 }
-                cout << " line = " << line << endl;
+                //cout << " line = " << line << endl;
                 val = 0.0;
                 num = 0;
             }
-        }
-        while( c != 0 );
+        } while( c != 0 );
         in.close();
     }
     return max_line;

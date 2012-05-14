@@ -38,26 +38,21 @@ void reverse( char* set, int length )
 bool next_perm( char* set, int dim )
 {
     bool ok = false;
-    if ( dim > 2 )
-    {
+    if ( dim > 2 ) {
         ok = next_perm( set + 1, dim - 1 );
-        if ( ! ok )
-        {
+        if (!ok) {
              // No next perm for set + 1 => set + 1 "reverse" ordered
              // Try and find smallest elem in set+1 greater than set[0]
              int pos = dim-1;
              while( ( pos > 0 ) && ( set[0] > set[pos] ) ) --pos;
-             if ( pos > 0 )
-             {
+             if ( pos > 0 ) {
                  swap( set[0], set[pos] );
                  // reverse order of set+1
                  reverse( set+1, dim-1 );
                  ok = true;
              }
         }
-    }
-    else if ( 2 == dim )
-    {
+    } else if ( 2 == dim ) {
         ok = ( set[ 1 ] > set[ 0 ] );
         if ( ok ) swap( set[ 1 ], set[ 0 ] );
     }
@@ -71,54 +66,45 @@ int main( int argc, char** argv )
     long long max_s = 0;
     vector<char> selems;
     // Sums: (6,1,2), (7,2,3), (8,3,4), (9,4,5), (10,5,1)
-    do
-    {
+    do {
         char s[5];
-        for( int i = 0; i < 5; ++i )
-        {
+        for(int i = 0; i < 5; ++i) {
             s[i] = data[5+i] + data[i] + data[(i+1)%5];
         }
-        if ((s[0]==s[1])&&(s[2]==s[3])&&(s[4]==s[0])&&(s[1]==s[2]))
-        {
+        if ((s[0]==s[1])&&(s[2]==s[3])&&(s[4]==s[0])&&(s[1]==s[2])) {
             // Solution found!
             char m = 7;
             int shift = 0;
-            for( int i = 0; i < 5; ++i )
-            {
-                if (data[i+5] < m)
-                {
+            for(int i = 0; i < 5; ++i) {
+                if (data[i+5] < m) {
                     m = data[i+5];
                     shift = i;
                 }
             }
             cout << (int) s[0] << " : ";
             selems.clear();
-            for( int i = 0; i < 5; ++i )
-            {
+            for( int i = 0; i < 5; ++i ) {
+                /*
                 cout << "(" << (int) data[5+((i+shift)%5)] << ", "
                      << (int) data[(i+shift)%5] << ", "
                      << (int) data[(i+1+shift)%5] << ") ";
+                */
                 selems.push_back( data[5+((i+shift)%5)] );
                 selems.push_back( data[(i+shift)%5 ] );
                 selems.push_back( data[(i+1+shift)%5 ] );
             }
             long long str = 0;
-            for( int i = 0; i < selems.size(); ++i )
-            {
+            for(unsigned int i = 0; i < selems.size(); ++i) {
                 str *= 10;
-                if ( selems[i] == 10 )
-                {
+                if (10 == selems[i]) {
                     str = (str+1)*10;
-                }
-                else
-                {
+                } else {
                     str += selems[i];
                 }
             }
-            cout << "  " << str << endl;
+            //cout << "  " << str << endl;
             if ( ( str < 10000000000000000LL )&&( str > max_s ) ) max_s = str;
         }
-    }
-    while( next_perm( data, 10 ));
+    } while(next_perm(data, 10));
     cout << endl << "Maximum 16-digit string = " << max_s << endl;
 }

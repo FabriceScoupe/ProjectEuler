@@ -222,7 +222,7 @@ int main( int argc, char** argv )
                 {
                     if ( ( c >= '0' ) && ( c <= '9' ) )
                     {
-                        grid[ items++ ] = c - '0';
+                        grid[(int) items++] = c - '0';
                     }
                     if ( 81 == items )
                     {

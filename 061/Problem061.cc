@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <set>
 #include <map>
 #include <vector>
@@ -101,8 +102,8 @@ int main( int argc, char** argv )
                                                 {
                                                     flag = n[i]->second;
                                                     curr = n[i]->first;
-                                                    cout << names[flag] << " ";
-                                                    cout << curr << " ";
+                                                    cout << names[(int)flag];
+                                                    cout << " " << curr << " ";
                                                     sum += curr;
                                                 }
                                                 cout << "= " << sum <<endl;

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <map>
 
 using namespace std;
 
@@ -37,31 +36,30 @@ using namespace std;
 
 int main( int argc, char** argv )
 {
-    int limit = 1000000;
-    if ( argc > 1 ) limit = atoi( argv[ 1 ] );
+    unsigned int limit = 1000000;
+    if ( argc > 1 ) limit = (unsigned int) atoi( argv[ 1 ] );
 
-    int count = 0;
-    int a = 1;
-    int b = 1;
-    int c = 1;
+    unsigned int count = 0;
+    unsigned int c = 1;
 
-    map< long, int > roots;
-
-    while( count < limit )
-    {
-        long cs = c*c;
-        roots.clear();
-        for( long i = c; i*i <= 5*c*c; ++i ) roots[ i*i ] = i;
-        for( b = 1; b <= c; ++b )
-        {
-            for( a = 1; a <= b; ++a )
-            {
-                long s = a + b;
-                long l = s*s + cs;
-                if ( roots[ l ] != 0 ) ++count;
+    while(count <= limit) {
+        unsigned long c2 = c*c;
+        for(unsigned int b = 1; b <= c; ++b) {
+            unsigned int  r = c;
+            for(unsigned long ab = b+1; ab <= 2*b; ++ab) {
+                unsigned long l = (ab)*(ab) + c2;
+                unsigned long r2 = r*r;
+                while(r2 < l) {
+                    r2 += 2*r+1;
+                    ++r;
+                }
+                if (r2 == l) ++count;
             }
         }
-        cout << "count(" << c << ") = " << count << endl;
+        cout << '.'; flush(cout);
+        //cout << "count(" << c << ") = " << count << endl;
         ++c;
     }
+    cout << endl << "Answer: " << c-1 << endl;
+    return 0;
 }

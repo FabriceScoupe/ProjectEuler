@@ -22,7 +22,7 @@ int main( int argc, char** argv )
             floor_log10 = floor( n*log10( a ) ) + 1;
             if ( floor_log10 == n )
             {
-                cout << a << "^" << n << endl;
+                //cout << a << "^" << n << endl;
                 ++count;
             }
         }

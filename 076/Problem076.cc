@@ -27,8 +27,8 @@ using namespace std;
 // (as long as n - sp?(m) >= 0 )
 // Convention p(0)=1
 
-inline int sp1( int m ) { return (m*(3*m-1))/2; }
-inline int sp2( int m ) { return (m*(3*m+1))/2; }
+static inline int sp1( int m ) { return (m*(3*m-1))/2; }
+static inline int sp2( int m ) { return (m*(3*m+1))/2; }
 
 int main( int argc, char** argv )
 {
@@ -38,30 +38,28 @@ int main( int argc, char** argv )
     // Recurrence 
     vector< int > p;
     p.push_back( 1 ); // p[0] = 1;
-    for( int i = 1; i <= n; ++i )
-    {
+    for(int i = 1; i <= n; ++i) {
         bool keep_going = true;
         int tmp_p = 0;
         int sp[2];
-        for( int m = 1; keep_going; ++m )
-        {
+        for(int m = 1; keep_going; ++m) {
             sp[0] = sp1( m );
             sp[1] = sp2( m );
             //cout << sp[0] << " " << sp[1] << endl;
             keep_going = false;
-            for( int j = 0; j <= 1; ++j )
-            {
-                if ( ( i - sp[j] ) >= 0 )
-                {
+            for(int j = 0; j <= 1; ++j) {
+                if ((i - sp[j]) >= 0) {
                     tmp_p += ( m % 2 ? p[i-sp[j]] : -p[i-sp[j]] );
                     keep_going = true;
                 }
             }
         }
-        cout << "p("<<i<<")= " << tmp_p << endl;
+        //cout << "p("<<i<<")= " << tmp_p << endl;
         p.push_back( tmp_p );
     }
 
     cout << "Number of way to write " << n << " as a sum = "
          << p[n] - 1 << endl;
+
+    return 0;
 }

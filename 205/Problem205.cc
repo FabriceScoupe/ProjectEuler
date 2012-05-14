@@ -71,12 +71,12 @@ int main( int argc, char** argv )
     {
         norm9d4 += hist9d4[ i ];
         norm6d6 += hist6d6[ i ];
-        cout << "[" << i << "] -> " << hist9d4[ i ] << " vs " << hist6d6[ i ]
-             << endl;
+        //cout << "[" << i << "] -> " << hist9d4[ i ] << " vs " << hist6d6[ i ]
+        //     << endl;
     }
 
-    cout << "Total 9d4 = " << norm9d4 << endl;
-    cout << "Total 6d6 = " << norm6d6 << endl;
+    //cout << "Total 9d4 = " << norm9d4 << endl;
+    //cout << "Total 6d6 = " << norm6d6 << endl;
 
     map< int, double > prob_9d4_gte_x;
     map< int, double > prob_6d6_eq_x;
@@ -86,8 +86,8 @@ int main( int argc, char** argv )
         prob_6d6_eq_x[ i ] = (double) hist6d6[ i ] / (double) norm6d6;
         hist9d4[ i ] += hist9d4[ i+1 ];
         prob_9d4_gte_x[ i ] = (double) hist9d4[ i ] / (double) norm9d4;
-        cout << "Prob(6d6 = " << i << ") = " << prob_6d6_eq_x[ i ]
-             << " Prob(9d4 >= " << i << ") = " << prob_9d4_gte_x[ i ] << endl;
+        //cout << "Prob(6d6 = " << i << ") = " << prob_6d6_eq_x[ i ]
+        //     << " Prob(9d4 >= " << i << ") = " << prob_9d4_gte_x[ i ] << endl;
     }
 
     double prob = 0.0;

@@ -34,13 +34,12 @@ void buildPrimes( int limit, vector<int>& p )
     for( int n = 3; n <= limit; n+= 2 )
     {
         bool is_prime = true;
-        for( int r = 0; is_prime && ( r < p.size() ) && (p[r]*p[r] <= n); ++r )
-        {
-           is_prime = ( n % p[r] != 0 );
+        for(unsigned int r = 0;
+            is_prime && ( r < p.size() ) && (p[r]*p[r] <= n); ++r) {
+           is_prime = (n % p[r] != 0);
         }
-        if ( is_prime )
-        {
-            cout << n << " is prime." << endl;
+        if (is_prime) {
+            //cout << n << " is prime." << endl;
             p.push_back( n );
         }
     }
@@ -48,8 +47,7 @@ void buildPrimes( int limit, vector<int>& p )
 
 void multiply_series( int dim, int* a, int* b, int* c )
 {
-    for( int k = 0; k < dim; ++k )
-    {
+    for(int k = 0; k < dim; ++k) {
         c[ k ] = 0;
         for( int j = 0; j <= k; ++j ) c[ k ] += a[ j ]* b[ k - j ];
     }
@@ -68,8 +66,7 @@ int main( int argc, char** argv )
     int* p2 = c;
     int* tmp;
 
-    for( int i = 0; i < 100; ++i )
-    {
+    for( int i = 0; i < 100; ++i ) {
         a[ i ] = 0;
         b[ i ] = 0;
     }
@@ -78,16 +75,18 @@ int main( int argc, char** argv )
 
     vector<int> primes;
     buildPrimes( 10000, primes );
-    for( int p = 0; p < primes.size(); ++p )
-    {
+    for(unsigned int p = 0; p < primes.size(); ++p ) {
         for( int i = 0; i < 100; ++i ) b[ i ] = ( i % primes[p] ? 0 : 1 );
         multiply_series( 100, p1, b, p2 );
         tmp = p1; p1 = p2; p2 = tmp; // swap p1 and p2
     }
 
-    for( int i = 0; i < 100; ++i )
-    {
-        cout << "p(" << i << ")= " << p1[ i ] << endl;
-        if ( p1[i] > n ) break;
+    unsigned int value = 0;
+    while((value < 100) && (p1[value] <= n)) {
+        //cout << "p(" << value << ")= " << p1[value] << endl;
+        ++value;
     }
+    cout << "Value is " << value << "(" << p1[value] << " ways)" << endl;
+
+    return 0;
 }

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include <map>
+#include <cstring>
 
 using namespace std;
 
@@ -18,32 +18,30 @@ int main( int argc, char** argv )
     if ( argc > 1 ) limit = atoi( argv[ 1 ] );
 
     int count = 0;
-    map<int,int> limits;
+    int* limits = new int[limit];
+    memset(limits, 0, sizeof(int)*limit);
 
-    for( int i = 1; i < limit; ++i )
-    {
+    for( int i = 1; i < limit; ++i ) {
         if ( i % 10000 == 0 ) { cout << '.'; flush( cout ); }
         int n = i;
         int l = 0;
-        do
-        {
-            l = limits[ n ];
-            if ( l ) break;
+        do {
+            l = limits[n-1];
+            if (l) break;
             int s = 0;
-            while( n )
-            {
+            while(n) {
                 char d = n % 10;
                 s += d*d;
                 n /= 10;
             }
             n = s;
-        }
-        while( ( n != 1 ) && ( n != 89 ) );
-        if ( 0 == l ) l = n;
-        limits[ i ] = l;
-        if ( 89 == l ) ++count;
+        } while((n != 1) && (n != 89));
+        if (0 == l) l = n;
+        limits[i-1] = l;
+        if (89 == l) ++count;
     }
     cout << endl;
-    cout << count << " numbers below " << limit << " arrive at 89.";
-    cout << endl;
+    cout << count << " numbers below " << limit << " arrive at 89." << endl;
+    delete[] limits;
+    return 0;
 }

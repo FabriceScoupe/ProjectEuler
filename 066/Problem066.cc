@@ -23,28 +23,22 @@ using namespace std;
 // for y, at some point a solution will emerge.
 // So, re-use solutions of problems 65 and 
 
-struct BigInt : public vector<char>
+typedef vector<char> BigInt;
+
+bool operator< (const BigInt& left, const BigInt& right)
 {
-    bool operator< ( const BigInt& right ) const
-    {
-        bool yes = false;
-        if ( this->size() != right.size() )
-        {
-            yes = ( size() < right.size() );
-        }
-        else
-        {
-            for( int i = size()-1; i >= 0; --i )
-            {
-                if ( (*this)[i] != right[i] )
-                {
-                    yes = ( (*this)[i] < right[i] );
-                    break;
-                }
+    bool yes = false;
+    if (left.size() != right.size()) {
+        yes = (left.size() < right.size());
+    } else {
+        for(unsigned int i = left.size(); i > 0; --i) {
+            if (left[i-1] != right[i-1]) {
+                yes = (left[i-1] < right[i-1] );
+                break;
             }
         }
-        return yes;
     }
+    return yes;
 };
 
 // Add BigInt a and b into s
@@ -52,16 +46,16 @@ void add( BigInt& a, BigInt& b, BigInt& s )
 {
     s.clear();
 
-    for( int i = 0; ( i < a.size()) || ( i < b.size() ); ++i ) s.push_back(0);
-    s.push_back( 0 ); // For carry, if need be.
+    for(unsigned int i = 0; (i < a.size()) || (i < b.size()); ++i) {
+        s.push_back(0);
+    }
+    s.push_back(0); // For carry, if need be.
 
-    for( int i = 0; ( i < a.size()) || ( i < b.size() ); ++i )
-    {
-        char da = ( i < a.size() ? a[i] : 0 );
-        char db = ( i < b.size() ? b[i] : 0 );
+    for(unsigned int i = 0; (i < a.size()) || (i < b.size()); ++i) {
+        char da = (i < a.size() ? a[i] : 0);
+        char db = (i < b.size() ? b[i] : 0);
         s[i] += da + db;
-        if ( s[ i ] >= 10 )
-        {
+        if (s[ i ] >= 10) {
             s[ i ] -= 10;
             ++s[ i+1 ];
         }
@@ -74,23 +68,19 @@ void add( BigInt& a, BigInt& b, BigInt& s )
 void multiply( BigInt& a, BigInt& b, BigInt& c )
 {
     c.clear();
-    int deg_a = a.size();             // Degree of a
+    unsigned int deg_a = a.size();             // Degree of a
     while( a[deg_a-1] == 0 ) --deg_a; // Ignore leading zeroes
-    int deg_b = b.size();             // Degree of b
+    unsigned int deg_b = b.size();             // Degree of b
     while( b[deg_b-1] == 0 ) --deg_b; // Ignore leading zeroes
 
-    for( int i = 0; i < deg_a+deg_b; ++i ) c.push_back( 0 );
-    for( int i = 0; i < deg_a; ++i )
-    {
-        for( int j = 0; j < deg_b; ++j )
-        {
+    for(unsigned int i = 0; i < deg_a+deg_b; ++i) c.push_back(0);
+    for(unsigned int i = 0; i < deg_a; ++i) {
+        for(unsigned int j = 0; j < deg_b; ++j) {
             int prod = a[i]*b[j];
             int pos = i+j;
-            while( ( prod > 0 ) || ( c[pos] >= 10 ) )
-            {
+            while((prod > 0) || (c[pos] >= 10)) {
                 c[pos] += prod % 10;
-                if (c[pos] >= 10 )
-                {
+                if (c[pos] >= 10) {
                     c[pos]-=10;
                     ++c[pos+1];
                 }
@@ -104,16 +94,15 @@ void multiply( BigInt& a, BigInt& b, BigInt& c )
 
 void dump( BigInt& n )
 {
-    for( int i = n.size()-1; i >= 0; --i ) cout << (int) n[i];
+    for(unsigned int i = n.size(); i > 0; --i ) cout << (int) n[i-1];
 }
 
 void int2BigInt( int n, BigInt& b )
 {
     int m = n;
     b.clear();
-    while( m > 0 )
-    {
-        b.push_back( m % 10 );
+    while( m > 0 ) {
+        b.push_back(m % 10);
         m /= 10;
     }
 }
@@ -137,8 +126,7 @@ long long a_root( int dd, int n )
     m = 0;
     d = 1;
     a = r;
-    for( int i = 1; i <= n; ++i )
-    {
+    for( int i = 1; i <= n; ++i ) {
         m_next = d*a - m;
         d_next = (dd - m_next*m_next) / d;
         a_next = ( r + m_next ) / d_next;
@@ -164,8 +152,7 @@ void getNumDenom( int m, int d, BigInt& num, BigInt& denom )
     BigInt a_prev;
     int2BigInt( a_root( d, n ), n_curr );
     d_curr.push_back( 1 );
-    while( n > 0 )
-    {
+    while( n > 0 ) {
 // Fn = Nn/Dn with N100 = a100 and D100 = 1
 // Fn-1 = a(n-1) + Dn/Nn <=> Nn-1 = a(n-1).Nn + Dn, Dn-1 = Nn
         int2BigInt( a_root( d, n-1 ), a_prev );
@@ -190,14 +177,12 @@ int main( int argc, char** argv )
     BigInt num, denom, sqr1, sqr2, dmul, tmp, max_x;
     int max_d = 0;
 
-    for( int i = 2; i <= limit; ++i )
-    {
+    for( int i = 2; i <= limit; ++i ) {
         if ( r*r < i ) ++r;
         if ( r*r == i ) continue; // Skip squares
         bool found = false;
         int n = 0;
-        do
-        {
+        do {
             getNumDenom( n, i, num, denom );
             multiply( num, num, sqr1 );
             multiply( denom, denom, sqr2 );
@@ -208,17 +193,20 @@ int main( int argc, char** argv )
             add( dmul, sqr2, tmp );
             found = ( sqr1 == tmp );
             ++n;
-        }
-        while( !found );
-        if ( max_x < num ) // Using BigInt operator< defined above!
-        {
+        } while( !found );
+        if (max_x < num) { // Using BigInt operator< defined above!
             max_x = num;
             max_d = i;
         }
+        /*
         cout << "For D=" << i << ": ( x = ";
         dump( num );
         cout << ", y = ";
         dump( denom );
         cout << "), max D so far = " << max_d << endl;
+        */
     }
+
+    cout << "Max D = " << max_d << endl;
+    return 0;
 }

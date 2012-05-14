@@ -79,7 +79,7 @@ int parseFile( char* filename )
         }
         else
         {
-            buf[ l++ ] = c;
+            buf[(int)(l++)] = c;
         }
     }
     while( c != 0 );

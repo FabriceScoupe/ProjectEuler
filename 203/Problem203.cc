@@ -40,11 +40,9 @@ bool is_square_free( long long n )
 
     int d = 2;
     int nd = 0;
-    while( d <= n )
-    {
+    while( d <= n ) {
         nd = 0;
-        while( n % d == 0 )
-        {
+        while( n % d == 0 ) {
             n /= d;
             ++nd;
             if ( 2 == nd ) break;
@@ -69,21 +67,18 @@ int main( int argc, char** argv )
     int r = 1;
     set< long long > sf;
 
-    while( r <= rows )
-    {
+    while( r <= rows ) {
         // Dump row
-        for( int i = 1; i < pascal.size()-1; ++i )
-        {
+        for(unsigned int i = 1; i < pascal.size()-1; ++i) {
             long long pi = pascal[i];
-            cout << pi << " ";
+            //cout << pi << " ";
             if ( is_square_free( pi ) ) sf.insert( pi );
         }
-        cout << endl;
+        //cout << endl;
 
         // Build new row
         // C(n,k) = C(n-1,k-1)+C(n-1,k)
-        for( int i = pascal.size()-1; i >= 1; --i )
-        {
+        for(unsigned int i = pascal.size()-1; i >= 1; --i) {
             pascal[i] += pascal[i-1];
         }
         pascal.push_back( 0 );

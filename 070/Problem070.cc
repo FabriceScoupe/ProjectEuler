@@ -36,12 +36,10 @@ void makePrimeSet( int limit, vector<int>& primes )
     for( int p = 3; p*p < limit; p += 2 )
     {
         bool yes = true;
-        for( int i = 1; yes && (i < primes.size()); ++i )
-        {
+        for(unsigned int i = 1; yes && (i < primes.size()); ++i) {
             yes = ( p % primes[i] != 0 );
         }
-        if ( yes )
-        {
+        if (yes) {
             primes.push_back( p );
             //cout << p << " prime." << endl;
         }
@@ -52,15 +50,12 @@ int digits_in_order( int n )
 {
     map< char, char > m;
     int p = n;
-    while( p > 0 )
-    {
-        ++m[ p % 10 ];
+    while(p > 0) {
+        ++m[p % 10];
         p /= 10;
     }
-    for( map<char,char>::iterator it = m.begin(); it != m.end(); ++it )
-    {
-        while( it->second > 0 )
-        {
+    for(map<char,char>::iterator it = m.begin(); it != m.end(); ++it) {
+        while(it->second > 0) {
             p *= 10;
             p += it->first;
             --(it->second);
@@ -84,34 +79,33 @@ int main( int argc, char** argv )
     int min_n   = 2;
     int min_phi = 1;
 
-    for( int i1 = p.size()-1; i1 >= 1; --i1 )
-    {
+    for( int i1 = p.size()-1; i1 >= 1; --i1 ) {
         for( int i2 = 1;
              (i2 <= i1 )&&(p[i1]*p[i2]<limit);
-             ++i2)
-        {
+             ++i2) {
             for( int i3 = 0;
                  (i3 <= i2)&&(p[i1]*p[i2]*p[i3]<limit);
-                 ++i3 )
-            {
+                 ++i3 ) {
                 int n123   = p[i1]*p[i2]*p[i3];
                 int phi123 = (p[i1]-1)*(p[i2]-1)*(p[i3]==1?1:p[i3]-1);
-                if ( digits_in_order( n123 ) == digits_in_order( phi123 ) )
-                {
+                if ( digits_in_order( n123 ) == digits_in_order( phi123 ) ) {
+                    /*
                     cout << "phi(" << n123 << "=" 
                          << p[i1] << " * " << p[i2] << " * " << p[i3]
                          << ")=" << phi123;
+                    */
                     // n1 / phi1 < n2 / phi2 <=> n1*phi2 < n2*phi1
                     long long left  = (long long)(n123)*(long long)(min_phi);
                     long long right = (long long)(min_n)*(long long)(phi123);
-                    if ( left < right )
-                    {
+                    if (left < right) {
                         min_n   = n123;
                         min_phi = phi123;
                     }
-                    cout << " (min n so far = " << min_n << ")" << endl;
+                    //cout << " (min n so far = " << min_n << ")" << endl;
                 }
             }
         }
     }
+    cout << "Min n = " << min_n << endl;
+    return 0;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <cstring>
 #include <set>
 #include <vector>
 
@@ -38,62 +39,58 @@ struct Fraction
     }
 };
 
-char sieve[ 62501 ]; // to detect all primes up < 1000000
+unsigned char *sieve = NULL; // to detect all primes up < 1000000
 
-void buildSieve()
+void buildSieve(unsigned long max)
 {
     cout << "Building sieve..." << endl;
-    memset( sieve, 0, 62501 );
-    long long iter = 0;
-    for( long long i = 3; i <= 333333; i+=2 )
-    {
-        for( long long j = 3; i*j <= 1000000; j += 2 )
-        {
-            if ( ++iter % 100000 == 0 ) { cout << "."; flush( cout ); }
-            long long m = (i*j)/2;
-            sieve[ m/8+(m%8?0:1) ] |= 1<<(m%8);
+    sieve = new unsigned char[(max/16)+1];
+    memset(sieve, 0, (max/16)+1);
+    for(unsigned long long n = 3; n*n <= max; n += 2) {
+        for(unsigned long long m = 3*n; m <= max; m += 2*n) {
+            sieve[(m-1)/16] |= 1 << (((m-1)/2)%8);
         }
     }
-    cout << endl;
 }
 
-bool isPrime( long long p );
-
-long long nextPrime( long long p )
+unsigned long long nextPrime(unsigned long long p)
 {
-    if ( 2 == p ) return 3;
-    long long q = p+2;
-    while( ( q < 1000000 ) && ( !isPrime( q ) ) ) q+=2; // not subtle.
-    if ( q >= 1000000 ) q = -1;
-    return q;
-}
-
-bool isPrime( long long p )
-{
-    long long q = p / 2;
-    return ( ( 2 == p ) ||
-             ( ( p % 2 ) && ! ( sieve[q/8+(q%8?0:1)] & 1<<(q%8) ) ) );
-}
-
-vector< long long > primes;
-// Property of totient: if a and b rel. prime, phi(ab)=phi(a).phi(b)
-long long totient( long long n )
-{
-    long long phi = 1;
-
-    if ( isPrime( n ) )
-    {
-        phi = n-1;
+    if (2 == p) return 3;
+    unsigned long long n = 0;
+    unsigned int index = (p-1)/16;
+    unsigned int bit   = ((p-1)/2)%8;
+    while(0 == n) {
+        ++bit;
+        if (bit >= 8) {
+            ++index;
+            bit = 0;
+        }
+        if ((sieve[index] & (1 << bit)) == 0) {
+            n = 16*index+1+2*bit;
+        }
     }
-    else
-    {
-        long long nn = n;
-        long long m  = 1;
-        for( int i = 0; primes[i] <= nn; ++i )
-        {
-            long long p = primes[i];
-            if ( nn % p == 0 )
-            {
+    return n;
+}
+
+bool isPrime(unsigned long long p)
+{
+    if (2 == p) return true;
+    if (p % 2 == 0) return false;
+    return((sieve[(p-1)/16] & (1<<(((p-1)/2)%8))) == 0);
+}
+
+// Property of totient: if a and b rel. prime, phi(ab)=phi(a).phi(b)
+unsigned long long totient(unsigned long long n)
+{
+    unsigned long long phi = 1;
+
+    if (isPrime(n)) {
+        phi = n-1;
+    } else {
+        unsigned long long nn = n;
+        unsigned long long m  = 1;
+        for(unsigned long long p = 2; p <= nn; p = nextPrime(p)) {
+            if (nn % p == 0) {
                 while( nn % p == 0 ) nn /= p;
                 phi *= p - 1;
                 m   *= p;
@@ -108,16 +105,7 @@ int main( int argc, char** argv )
 {
     int limit = 1000000;
     if ( argc > 1 ) limit = atoi( argv[ 1 ] );
-    buildSieve();
-    primes.push_back(2);
-    long long p = 3;
-    do
-    {
-        primes.push_back( p );
-        p = nextPrime( p );
-    }
-    while( ( p > 0 ) && ( p <= limit ) );
-    cout << primes.size() << " primes <= " << limit << endl;
+    buildSieve(limit);
 
     long long num_frac = limit;
     num_frac *= limit-1;
@@ -125,14 +113,11 @@ int main( int argc, char** argv )
     cout << "Total number of fractions: " << num_frac << endl;
 
     // Brute force
-    if ( limit <= 10000 )
-    {
+    if (limit <= 10000) {
         set< Fraction > s;
         long long iter = 0;
-        for( int d = 2; d <= limit; ++d )
-        {
-            for( int n = 1; n < d; ++ n )
-            {
+        for( int d = 2; d <= limit; ++d ) {
+            for( int n = 1; n < d; ++ n ) {
                 s.insert( Fraction( n, d ) );
                 ++iter;
             }
@@ -149,11 +134,13 @@ int main( int argc, char** argv )
 
     // The actual problem, using Totient.
     long long totient_sum = 0;
-    for( long long d = 2; d <= limit; ++d )
-    {
-        totient_sum += totient( d );
-        if ( d % 1000 == 0 ) { cout << '.'; flush( cout ); }
+    for( long long d = 2; d <= limit; ++d ) {
+        totient_sum += totient(d);
+        if (d % 1000 == 0) { cout << '.'; flush(cout); }
     }
     cout << endl << "Sum[k=2.." << limit << "] totient(k) = " 
          << totient_sum << endl;
+
+    delete[] sieve;
+    return 0;
 }

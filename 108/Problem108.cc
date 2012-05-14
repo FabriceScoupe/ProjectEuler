@@ -38,23 +38,19 @@ int decomp( long long n, map<long long, int>& dm )
     dm.clear();
     vector<long long>::iterator it = primes.begin();
     long long m = n;
-    while( ( m > 1 ) && ( it != primes.end() ) )
-    {
-        while( m % (*it) == 0 )
-        {
+    while((m > 1) && (it != primes.end())) {
+        while(m % (*it) == 0) {
             m /= (*it);
             dm[ *it ]++;
         }
         ++it;
     }
     int nd = 1;
-    if ( dm.empty() )
-    {
+    if (dm.empty()) {
         primes.push_back( n );
         dm[ n ]++;
     }
-    for( map<long long, int>::iterator i = dm.begin(); i != dm.end(); ++i )
-    {
+    for(map<long long, int>::iterator i = dm.begin(); i != dm.end(); ++i) {
         nd *= 1 + 2*i->second;
     }
     nd = ( nd + 1 ) / 2;
@@ -69,10 +65,9 @@ int main( int argc, char** argv )
     long long n = 1;
     int count = 0;
     primes.push_back( 2 );
-    while( count <= limit )
-    {
+    while(count <= limit) {
         ++n;
-        if ( n % 1000 == 0 ) { cout << '.'; flush( cout ); }
+        if (n % 1000 == 0) { cout << '.'; flush( cout ); }
         count = 0;
         /**
         cout << "Testing n = " << n << ":" << endl;
@@ -89,7 +84,9 @@ int main( int argc, char** argv )
         **/
         map<long long, int> m;
         count = decomp( n, m );
-        cout << "Calculated # of solutions for n = " << n << ": "
-             << count << endl << endl; 
+        //cout << "Calculated # of solutions for n = " << n << ": "
+        //     << count << endl << endl; 
     }
+    cout << endl << "Answer: " << n << endl;
+    return 0;
 }

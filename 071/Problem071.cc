@@ -14,16 +14,13 @@ using namespace std;
 
 void to_proper_fraction( int& n, int& d )
 {
-    while( ( n % 2 == 0 ) && ( d % 2 == 0 ) )
-    {
+    while((n % 2 == 0) && (d % 2 == 0)) {
         n /= 2;
         d /= 2;
     }
     int p = 3;
-    while( p < n )
-    {
-        while( ( n % p == 0 ) && ( d % p == 0 ) )
-        {
+    while(p < n) {
+        while(( n % p == 0) && (d % p == 0)) {
              n /= p;
              d /= p;
         }
@@ -39,22 +36,19 @@ int main( int argc, char** argv )
     int max_n = 1;
     int max_d = limit;
 
-    for( int d = 2; d <= limit; ++d )
-    {
+    for(int d = 2; d <= limit; ++d) {
         // Pick n so that n / d > max_n / max_d
         // n > d*max_n / max_d
         long long min = (long long) d * (long long) max_n /
                         (long long) max_d;
-        for( int n = min; 7*n < 3*d; ++n )
-        {
+        for(int n = min; 7*n < 3*d; ++n) {
             // n / d > max_n / max_d <=> n*max_d > d*max_n
             long long left  = (long long) n * (long long) max_d;
             long long right = (long long) d * (long long) max_n;
-            if ( left > right )
-            {
+            if (left > right) {
                 max_n = n;
                 max_d = d;
-                cout << max_n << " / " << max_d << endl;
+                //cout << max_n << " / " << max_d << endl;
             }
         }
     }
@@ -62,4 +56,5 @@ int main( int argc, char** argv )
     to_proper_fraction( max_n, max_d );
     cout << "With d <= " << limit << ", fraction to the left of 3/7 is "
          << max_n << " / " << max_d << endl;
+    return 0;
 }

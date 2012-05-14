@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <iomanip>
 #include <fstream>
 #include <map>
@@ -47,7 +48,7 @@ static char* freqs = (char*)
 
 void ParseFile( char* filename, vector<char>& message )
 {
-    cout << "Parsing: " << filename << endl << endl;
+    //cout << "Parsing: " << filename << endl << endl;
     ifstream in( filename );
     if ( in )
     {
@@ -59,7 +60,7 @@ void ParseFile( char* filename, vector<char>& message )
             if ( ( 0 == c ) || ( ',' == c ) )
             {
                 message.push_back( code );
-                cout << setw(4) << (int) code << " ";
+                //cout << setw(4) << (int) code << " ";
                 code = 0;
             }
             else if ( ( c >= '0' ) && ( c <= '9' ) )
@@ -70,7 +71,7 @@ void ParseFile( char* filename, vector<char>& message )
         }
         while( c != 0 );
         in.close();
-        cout << endl;
+        //cout << endl;
     }
 }
 
@@ -82,7 +83,7 @@ int main( int argc, char** argv )
     ParseFile( filename, msg );
     map<char,int> bags[3];
     set<pair<int,char> > dists[3];
-    for( int i = 0; i < msg.size(); ++i )
+    for(unsigned int i = 0; i < msg.size(); ++i )
     {
         ++bags[i % 3][msg[i]];
     }
@@ -93,20 +94,19 @@ int main( int argc, char** argv )
 
     for( int i = 0; i < 3; ++i )
     {
-        cout << "Top 10 for " << i << ": ";
+        //cout << "Top 10 for " << i << ": ";
         set<pair<int,char> >::reverse_iterator j = dists[i].rbegin();
         for( ; j != dists[i].rend(); ++j )
         {
-            cout << setw(3) << (int) j->second << "/" << j->first << " ";
+            //cout << setw(3) << (int) j->second << "/" << j->first << " ";
             ++j;
         }
-        cout << endl;
+        //cout << endl;
     }
 
     // Automatic hypotheses, based on freqs
-    cout << "Frequencies = " << freqs << endl << endl;
+    //cout << "Frequencies = " << freqs << endl << endl;
 
-    bool  match  = false;
     char key[4];
     key[0]=0;key[1]=0;key[2]=0;key[3]=0;
     set<pair<int,char> >::reverse_iterator ri;
@@ -124,7 +124,7 @@ int main( int argc, char** argv )
                 cout << "Trying key[" << i << "]=" << key[i] << endl;
                 // Check decryption
                 bool check = true;
-                for( int j = i; check && (j < msg.size()); j+=3 )
+                for(unsigned int j = i; check && (j < msg.size()); j += 3)
                 {
                     char d = key[i] ^ msg[j];
                     // ASCII 0..31 control characters (not printable)
@@ -134,18 +134,19 @@ int main( int argc, char** argv )
                 }
                 if ( ! check ) continue;
                 int sum = 0;
-                for( int j = 0; j < msg.size(); ++j )
+                for(unsigned int j = 0; j < msg.size(); ++j)
                 {
                     char clear = ( key[j%3]>0? ( msg[j] ^ key[j%3]) : '.');
-                    if ( clear < 31 ) exit(1);
+                    if (clear < 31) exit(1);
                     sum += clear;
                     cout << (char) clear;
                 }
                 cout << endl << endl << "Sum = " << sum << endl;
                 cout << endl << "Keep this? (y|n)" << endl;
-                char yes_or_no;
-                cin >> yes_or_no;
+                char yes_or_no = 'y';
+                //cin >> yes_or_no;
                 match = ( 'y' == yes_or_no ) || ( 'Y' == yes_or_no );
+                
                 if ( match ) break;
             }
         }

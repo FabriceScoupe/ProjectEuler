@@ -138,14 +138,13 @@ int main( int argc, char** argv )
 {
     vector<int> t_mat;
     int* i = test_mat;
-    while( *i >= 0 )
-    {
+    while( *i >= 0 ) {
         t_mat.push_back( *i );
         ++i;
     }
 
     int min = min_path_sum( t_mat, 5 );
-    cout << endl << "Test matrix: min path sum = " << min << endl;
+    //cout << endl << "Test matrix: min path sum = " << min << endl;
 
     char* filename = (char*) "matrix.txt";
     if ( argc > 1 ) filename = argv[1];
@@ -154,7 +153,7 @@ int main( int argc, char** argv )
     parseMatrix( filename, mat );
     cout << "Size of mat: " << mat.size() << endl;
     int r = 1;
-    while( r*r < mat.size() ) ++r;
+    while( r*r < (int) mat.size() ) ++r;
     cout << "Root = " << r << endl;
     min = min_path_sum( mat, r );
     cout << endl << "Min path sum = " << min << endl << endl;

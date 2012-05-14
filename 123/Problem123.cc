@@ -34,7 +34,7 @@ long long get_next_prime( )
     {
         p += 2;
         is_prime = true;
-        for( int i = 0; is_prime && ( i < primes.size() ); ++i )
+        for(unsigned int i = 0; is_prime && ( i < primes.size() ); ++i )
         {
             long long pi = primes[ i ];
             if ( pi*pi > p ) break;

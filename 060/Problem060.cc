@@ -1,5 +1,5 @@
 #include <iostream>
-#include <strings.h>
+#include <cstring>
 #include <set>
 #include <map>
 #include <vector>
@@ -14,62 +14,57 @@ using namespace std;
 // Find the lowest sum for a set of five primes for which any two primes
 // concatenate to produce another prime.
 //
-char sieve[ 625001 ]; // to detect all primes up < 10000000
+unsigned char* sieve = NULL; // to detect all primes up < 10000000
 
-void buildSieve()
+void buildSieve(unsigned long long max)
 {
     cout << "Building sieve..." << endl;
-    memset( sieve, 0, 625001 );
-    long long iter = 0;
-    for( long long i = 3; i <= 3333333; i+=2 )
-    {
-        for( long long j = 3; i*j <= 10000000; j += 2 )
-        {
-            if ( ++iter % 100000 == 0 ) { cout << "."; flush( cout ); }
-            long long m = (i*j)/2;
-            sieve[ m/8+(m%8?0:1) ] |= 1<<(m%8);
+    sieve = new unsigned char[(max/16)+1];
+    memset( sieve, 0, (max/16)+1);
+    for(unsigned long long n = 3; n*n <= max; n += 2) {
+        for(unsigned long long m = 3*n; m <= max; m += 2*n) {
+            sieve[(m-1)/16] |= 1 << (((m-1)/2)%8);
         }
     }
-    cout << endl;
 }
 
-bool isPrime( long long p );
-
-long long nextPrime( long long p )
+// Only works for p >= 3
+unsigned long long nextPrime(unsigned long long p)
 {
-    long long q = p+2;
-    while( ( q < 10000000 ) && ( !isPrime( q ) ) ) q+=2; // not subtle.
-    if ( q >= 10000000 ) q = -1;
-    return q;
+    unsigned long long n = 0;
+    unsigned int index = (p-1)/16;
+    unsigned int bit   = ((p-1)/2)%8;
+    while(0 == n) {
+        ++bit;
+        if (bit >= 8) {
+            ++index;
+            bit = 0;
+        }
+        if ((sieve[index] & (1 << bit)) == 0) {
+            n = 16*index+1+2*bit;
+        }
+    }
+    return n;
 }
 
-bool isPrime( long long p )
+bool isPrime(unsigned long long p, unsigned long long max)
 {
-    static set< long long > big_prime_cache;
+    static set<unsigned long long > big_prime_cache; // memoization
+
+    if (2 == p) return true;
+    if (p % 2 == 0) return false;
 
     bool ok = false;
-    if ( p < 10000000 )
-    {
-        long long q = p / 2;
-        ok = ( ( 2 == p ) ||
-               ( ( p % 2 ) && ! ( sieve[q/8+(q%8?0:1)] & 1<<(q%8) ) ) );
-    }
-    else if ( big_prime_cache.find( p ) != big_prime_cache.end() )
-    {
+    if (p < max) {
+        ok = ((sieve[(p-1)/16] & (1 << (((p-1)/2)%8))) == 0);
+    } else if ( big_prime_cache.find( p ) != big_prime_cache.end() ) {
         ok = true;
-    }
-    else
-    {
+    } else {
         ok = true;
-        for( long long d = 3; (d>0)&&( d*d < p ); d = nextPrime( d ) )
-        {
-            if ( p % d == 0 )
-            {
-                ok = false;
-                break;
-            }
+        for(unsigned long long d = 3; ok && (d*d <= p); d = nextPrime(d)) {
+            ok = (p % d != 0);
         }
-        if ( ok ) big_prime_cache.insert( p );
+        if (ok) big_prime_cache.insert(p);
     }
     return ok;
 }
@@ -79,8 +74,7 @@ long long power10shift( long n, int& sumdigits )
     long long pw = 1;
     long long m  = n;
     sumdigits = 0;
-    while( m > 0 )
-    {
+    while(m > 0) {
         sumdigits += m % 10;
         pw *= 10;
         m /= 10;
@@ -88,7 +82,7 @@ long long power10shift( long n, int& sumdigits )
     return pw;
 }
 
-bool test( long long a, long long b )
+bool test(long long a, long long b, long long max)
 {
     static pair< long long, long long > tmp_p;
     static map< pair< long long, long long >, bool > cache;
@@ -101,23 +95,23 @@ bool test( long long a, long long b )
     long long pw_a = power10shift( a, sa );
     int sb = 0;
     long long pw_b = power10shift( b, sb );
-    if ( ( sa + sb ) % 3 == 0 ) // Quick rule-out
-    {
-        cache[ tmp_p ] = false;
+    if ((sa + sb) % 3 == 0) { // Quick rule-out
+        cache[tmp_p] = false;
         return false;
     }
     long long ab = a*pw_b + b;
     long long ba = b*pw_a + a;
-    bool ok = ( isPrime( ab ) && isPrime( ba ) );
+    bool ok = (isPrime(ab, max) && isPrime(ba, max));
     cache[ tmp_p ] = ok;
     return ok;
 }
 
 int main( int argc, char** argv )
 {
-    buildSieve();
+    unsigned long long max = 10000000;
+    buildSieve(max);
     vector< int > primes;
-    for( int p = 3; p < 10000; p = nextPrime( p ) ) primes.push_back( p );
+    for(int p = 3; p < 10000; p = nextPrime(p)) primes.push_back(p);
     int psize = primes.size();
     cout << psize << " candidate primes under 10000." << endl;
 
@@ -126,50 +120,42 @@ int main( int argc, char** argv )
     int d = 0;
     int min = 30000;
     int sum = 0;
-    while( ( idx[ 0 ] < psize-4 ) && ( primes[ idx[ 0 ] ] < min ) )
-    {
+    while((idx[0] < psize-4) && (primes[idx[0]] < min)) {
         // Go to next "valid" prime
         bool found = false;
-        while( ( idx[ d ] < psize-1 ) && ! found )
-        {
-            ++idx[ d ];
+        while((idx[d] < psize-1) && ! found) {
+            ++idx[d];
             if ( (5-d)*primes[ idx[ d ] ]+sum >= min ) break;
             found = true;
-            for( int i = 0; found && (i < d); ++i )
-            {
-                found = test( primes[ idx[ i ] ], primes[ idx[ d ] ] );
+            for( int i = 0; found && (i < d); ++i ) {
+                found = test( primes[idx[i]], primes[idx[d]], max);
             }
         }
 
-        if ( found )
-        {
+        if ( found ) {
             sum += primes[ idx[ d ] ];
-            if ( 4 == d )
-            {
+            if ( 4 == d ) {
                 cout << endl;
-                for( int i = 0; i <= d; ++i )
-                {
-                    cout << primes[ idx[ i ] ] << " ";
+                for( int i = 0; i <= d; ++i ) {
+                    //cout << primes[ idx[ i ] ] << " ";
                 }
-                cout << " (" << sum << ")" << endl;
+                //cout << " (" << sum << ")" << endl;
                 if ( sum < min ) min = sum;
                 d = 0; // Rollback to depth 0
                 sum = 0;
-            }
-            else // Go deeper
-            {
+            } else { // Go deeper
                 //cout << '+'; flush( cout );
                 ++d;
                 idx[ d ] = idx[ d-1 ];
             }
-        }
-        else if ( d > 0 ) // Rollback one level
-        {
+        } else if ( d > 0 ) { // Rollback one level
             //cout << 'R'; flush( cout );
             --d;
             sum -= primes[ idx[ d ] ];
         }
-        if ( 0 == d ) { cout << primes[ idx[ 0 ] ] << "\t"; flush( cout ); }
+        //if ( 0 == d ) { cout << primes[ idx[ 0 ] ] << "\t"; flush( cout ); }
     }
     cout << "Min is " << min << endl;
+
+    return 0;
 }

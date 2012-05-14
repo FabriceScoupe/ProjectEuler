@@ -37,8 +37,8 @@ as a string: abcd.
 
 inline void eval( int na, int da, int nb, int db, char op, int&n, int& d )
 {
-    int nn;
-    int dd;
+    int nn = 0;
+    int dd = 0;
     switch( op )
     {
         case 0: // Addition na/da + nb/db = (db*na + da*nb) / (da*db)
@@ -62,8 +62,7 @@ inline void eval( int na, int da, int nb, int db, char op, int&n, int& d )
             break;
     }
 
-    if ( nn % dd == 0 )
-    {
+    if (nn % dd == 0) {
         nn /= dd;
         dd = 1;
     }
@@ -73,8 +72,8 @@ inline void eval( int na, int da, int nb, int db, char op, int&n, int& d )
 
 int calc( char a1, char a2, char a3, char a4, char op1, char op2, char op3 )
 {
-    int n;
-    int d;
+    int n = 0;
+    int d = 0;
     eval( a1, 1, a2, 1, op1, n, d );
     eval( n , d, a3, 1, op2, n, d );
     eval( n , d, a4, 1, op3, n, d );
@@ -85,8 +84,8 @@ int calc( char a1, char a2, char a3, char a4, char op1, char op2, char op3 )
 
 int calc2( char a1, char a2, char a3, char a4, char op1, char op2, char op3 )
 {
-    int n1;
-    int d1;
+    int n1 = 0;
+    int d1 = 0;
     eval( a1, 1, a2, 1, op1, n1, d1 );
     int n2;
     int d2;
@@ -158,10 +157,8 @@ int max_n( char a, char b, char c, char d )
     set<int>::iterator it = results.begin();
     for( ; (it != results.end())&&(*it<1); ++it );
     int max_n = 0;
-    if ( ( it != results.end() )&&( *it == 1 ) )
-    {
-        for( ; it != results.end(); ++it)
-        {
+    if ( ( it != results.end() )&&( *it == 1 ) ) {
+        for( ; it != results.end(); ++it) {
             if ( *it == max_n+1 ) ++max_n;
         }
     }
@@ -179,14 +176,14 @@ int main( int argc, char** argv )
                 for( char d = c+1; d <= 9; ++d )
     {
         int m = max_n( a,b,c,d );
-        cout<<"{"<<(int)a<<","<<(int)b<<","<<(int)c<<","<<(int)d
-            <<"} -> "<<m<<endl;
-        if ( m > max )
-        {
+        //cout<<"{"<<(int)a<<","<<(int)b<<","<<(int)c<<","<<(int)d
+        //    <<"} -> "<<m<<endl;
+        if ( m > max ) {
             ma = a; mb = b; mc = c; md = d;
             max = m;
         }
     }
 
-    cout <<endl<<"Max: {"<<ma<<","<<mb<<","<<mc<<","<<md<<"} => "<<max<<endl;
+    //cout <<endl<<"Max: {"<<ma<<","<<mb<<","<<mc<<","<<md<<"} => "<<max<<endl;
+    cout << endl << "Answer: " << ma << mb << mc << md << endl;
 }

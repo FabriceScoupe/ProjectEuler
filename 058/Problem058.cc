@@ -1,5 +1,5 @@
 #include <iostream>
-#include <strings.h>
+#include <string.h>
 using namespace std;
 
 // Starting with 1 and spiralling anticlockwise in the following way,
@@ -36,69 +36,66 @@ using namespace std;
 // Average gap between prime numbers near N is roughly ln(N)
 // Near N, change of number being prime ~ 1/ln(N). (Erdos-Kac?)
 
-char sieve[ 62501 ]; // to detect all primes up < 1000000
+unsigned char* sieve = NULL;
 
-void buildSieve()
+void buildSieve(unsigned long long max)
 {
     cout << "Building sieve..." << endl;
-    memset( sieve, 0, 62501 );
-    long long iter = 0;
-    for( int i = 3; i <= 333333; i+=2 )
-    {
-        for( int j = 3; i*j <= 1000000; j += 2 )
-        {
-            if ( ++iter % 100000 == 0 ) { cout << "."; flush( cout ); }
-            long long m = i*j/2;
-            sieve[ m/8+(m%8?0:1) ] |= 1<<(m%8);
+    sieve = new unsigned char[(max/16)+1];
+    memset(sieve, 0, (max/16)+1);
+    for(unsigned long long n = 3; n*n <= max; n += 2) {
+        for(unsigned long long m = 3*n; m <= max; m += 2*n) {
+            sieve[(m-1)/16] |= 1 << (((m-1)/2)%8);
         }
     }
-    cout << endl;
 }
 
-bool isPrime( long long p );
-
-int nextPrime( int p )
+// Only works for p >= 3
+unsigned long long next_prime(unsigned long long p)
 {
-    int q = p+2;
-    while( ( q < 1000000 ) && ( !isPrime( q ) ) ) q+=2; // not subtle.
-    if ( q >= 1000000 ) q = -1;
-    return q;
-}
-
-bool isPrime( long long p )
-{
-    bool ok = false;
-    if ( p < 1000000 )
-    {
-        long long q = p / 2;
-        ok = ( ( 2 == p ) ||
-               ( ( p % 2 ) && ! ( sieve[q/8+(q%8?0:1)] & 1<<(q%8) ) ) );
-    }
-    else
-    {
-        ok = true;
-        for( long long d = 3; (d>0)&&( d*d < p ); d = nextPrime( d ) )
-        {
-            if ( p % d == 0 )
-            {
-                ok = false;
-                break;
-            }
+    unsigned long long n = 0;
+    unsigned int index = (p-1)/16;
+    unsigned int bit   = ((p-1)/2)%8;
+    while(0 == n) {
+        ++bit;
+        if (bit >= 8) {
+            ++index;
+            bit = 0;
+        }
+        if ((sieve[index] & (1 << bit)) == 0) {
+            n = 16*index+1+2*bit;
         }
     }
-    return ok;
+    return n;
 }
 
-int main( int argc, char** argv )
+bool isPrime(unsigned long long p, unsigned long max)
 {
-    buildSieve();
+    if (2 == p) return true;
+    if (p % 2 == 0) return false;
+    if (p < max) {
+        return ((sieve[(p-1)/16] & (1 << (((p-1)/2)%8))) == 0);
+    }
+    for(unsigned long long q = 3; q*q <= p; q = next_prime(q)) {
+        if (p % q == 0) return false;
+    }
+    return true;
+}
+
+int main(int argc, char** argv)
+{
+    unsigned long long max = 1000000;
+    buildSieve(max);
 
     bool got_there = false;
     int  nd = 1;
     int  np = 0;
     int  n  = 1;
-    long long tr,tl,bl;
-    while( ! got_there )
+    int  ratio = 0;
+    unsigned long long tr = 0;
+    unsigned long long tl = 0;
+    unsigned long long bl = 0;
+    while(!got_there)
     {
         n += 2;
         nd = 1 + 2*(n-1);
@@ -106,14 +103,14 @@ int main( int argc, char** argv )
         tl = tr + n - 1;
         bl = tl + n - 1;
 
-        if ( isPrime( tr ) ) ++np;
-        if ( isPrime( tl ) ) ++np;
-        if ( isPrime( bl ) ) ++np;
+        if (isPrime(tr, max)) ++np;
+        if (isPrime(tl, max)) ++np;
+        if (isPrime(bl, max)) ++np;
 
-        int ratio = 100*np / nd;
-        cout << "Ratio(" << n << ")=" 
-             << np << " / " << nd << " = "
-             << ratio << "%" << endl;
+        ratio = 100*np / nd;
         got_there = ( ratio < 10 );
     }
+    cout << "Ratio("<<n<<")="<<np<<" / "<<nd<<" = "<< ratio << "%" << endl;
+    delete[] sieve;
+    return 0;
 }

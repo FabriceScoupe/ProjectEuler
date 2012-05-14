@@ -30,19 +30,17 @@ void add( const BigInt& a, BigInt& b, BigInt& c )
    c.clear();
    int  d  = 0;
    char dc = 0;
-   for( ; d < a.size() ; ++d )
-   {
+   for(; d < (int) a.size() ; ++d) {
        dc = a[d] + b[d] + carry;
        carry = ( dc >= 10 ? 1 : 0 );
        if (( b.size() > 25 ) && ( 8 == d )) carry = 0;
        c.push_back( dc % 10 );
    }
-   dc = carry + ( d < b.size() ? b[d] : 0 );
+   dc = carry + ( d < (int)b.size() ? b[d] : 0 );
    if ( dc > 0 ) c.push_back( dc % 10 );
    if ( dc >= 10 ) c.push_back( 1 );
    // Resize if need be:
-   if ( b.size() > 25 )
-   {
+   if ( b.size() > 25 ) {
        b.erase( b.begin()+9 );
        c.erase( c.begin()+9 );
    }
@@ -50,7 +48,7 @@ void add( const BigInt& a, BigInt& b, BigInt& c )
 
 void dump( const BigInt& b )
 {
-    for( int i = b.size()-1; i >= 0; i-- ) cout << (int)b[i];
+    for(unsigned int i = b.size()-1; i >= 0; i-- ) cout << (int)b[i];
     cout << endl;   
 }
 
@@ -83,15 +81,16 @@ int main( int argc, char** argv )
    bool pan_last  = false;
    while( !pan_first || !pan_last )
    {
-       if ( k % 100 == 0 ) cout << '.'; flush( cout );
+       //if ( k % 100 == 0 ) cout << '.'; flush( cout );
        add( *f1p, *f2p, *f3p );
        pan_first = is_pandigital( *f3p, true );
        pan_last  = is_pandigital( *f3p, false );
-       if ( pan_first || pan_last )
-       {
+       /*
+       if ( pan_first || pan_last ) {
            cout << endl << "F(" << k << ") panfirst = " << pan_first
                              << "  panlast  = " << pan_last << endl;
        }
+       */
        ++k;
        // Rotate pointers
        BigInt* tmp = f3p;
@@ -99,4 +98,7 @@ int main( int argc, char** argv )
        f1p = f2p;
        f2p = tmp;
    }
+
+   cout << "Answer: " << k-1 << endl;
+   return 0;
 }

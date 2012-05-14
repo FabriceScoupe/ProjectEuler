@@ -32,8 +32,7 @@ int gcd( int m, int n )
     int a = m;
     int b = n;
     int r = a % b;
-    while( r > 0 )
-    {
+    while(r > 0) {
         a = b;
         b = r;
         r = a % b;
@@ -49,19 +48,15 @@ int main( int argc, char** argv )
     while( r * r < limit/2 ) ++r;
     map<int,int> freqs;
     set<pair<int,int> > pairs;
-    for( int m = 1; m < r; ++m )
-    {
-        for( int n = 1; n < m; ++n )
-        {
+    for( int m = 1; m < r; ++m ) {
+        for( int n = 1; n < m; ++n ) {
             int   a = m*m - n*n;
             int   b = 2*m*n;
             int len = 2*m*(m+n);
-            for( int k = 1; k*len <= limit; ++k )
-            {
+            for( int k = 1; k*len <= limit; ++k ) {
                 pair<int,int> p(k*(a<b?a:b),k*(a<b?b:a));
-                if ( pairs.find( p ) == pairs.end() )
-                {
-                    cout << k*len<<": " << k*a << "," << k*b << endl;
+                if ( pairs.find( p ) == pairs.end() ) {
+                    //cout << k*len<<": " << k*a << "," << k*b << endl;
                     ++freqs[ k*len ];
                     pairs.insert( p );
                 }
@@ -70,9 +65,8 @@ int main( int argc, char** argv )
     }
 
     int count = 0;
-    for( map<int,int>::iterator i = freqs.begin(); i != freqs.end(); ++i )
-    {
-        cout << i->first << ": " << i->second << " time(s)." << endl;
+    for( map<int,int>::iterator i = freqs.begin(); i != freqs.end(); ++i ) {
+        //cout << i->first << ": " << i->second << " time(s)." << endl;
         if (i->second == 1) ++count;
     }
     cout << "Count = " << count << endl;

@@ -70,7 +70,7 @@ int main( int argc, char** argv )
         Triplet t( 0, 1, a0 );
         Triplet next_t;
         int p = 0;
-        cout << "sqrt(" << i << "): ";
+        //cout << "sqrt(" << i << "): ";
         while( ts.find( t ) == ts.end() )
         {
             //cout << "a(" << p << ")=" << t.a << " ";
@@ -82,9 +82,11 @@ int main( int argc, char** argv )
             t = next_t;
         }
         --p;
-        cout << " (period " << p << ")" << endl;
+        //cout << " (period " << p << ")" << endl;
         if ( p % 2 != 0 ) ++count;
     }
     cout << endl << "odd-period continued fraction for sqrt(N<=" << n 
          << ") = " << count << endl;
+
+    return 0;
 }

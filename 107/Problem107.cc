@@ -104,7 +104,7 @@ int main( int argc, char** argv )
     vector< int > m;
     uploadMatrix( filename, m );
     int r = 1;
-    while( r*r < m.size() ) ++r;
+    while(r*r < (int) m.size()) ++r;
     int w1 = weight( r, m );
     cout << "Initial weight = " << w1 << endl;
     vector< int > mst;

@@ -40,7 +40,7 @@ int r_max( int a )
         r.insert( tmp_r );
     }
     int res = *(r.rbegin() );
-    cout << "r_max(" << a << ")=" << res << "[" << r.size() << "]" << endl;
+    //cout << "r_max(" << a << ")=" << res << "[" << r.size() << "]" << endl;
     return res;
 }
 
