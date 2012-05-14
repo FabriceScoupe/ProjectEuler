@@ -29,7 +29,7 @@ using namespace std;
 // Building a tree
 
 struct Node {
-    Node(Node* p, int v) : parent(p), value(v), next(0) { };
+    Node(Node* p, int v) : parent(p), next(0), value(v) { };
     Node* parent;
     Node* next;
     int value;
@@ -58,10 +58,12 @@ int main(int argc, char** argv)
             for(int i = 2; (0 == zm) && (i <= 200); ++i) {
                 if (m[i] == 0) zm = i;
             }
+/*
             cout << "m(" << val << ") = " << depth 
                  << " count(" << count << ") "
                  << " nodes(" << nodes << ") "
                  << " missing(" << zm << ")" << endl;
+*/
         }
         // Calculate children
         for(Node* p = n; p != 0; p = p->parent) {

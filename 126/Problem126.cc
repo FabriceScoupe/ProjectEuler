@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <map>
 
 using namespace std;
 
@@ -66,7 +65,9 @@ int nl(int l, int a, int b, int c) {
 
 int main(int argc, char* argv[])
 {
-    int dim_max = 4000;
+    // Assuming that n is <= 20000, must consider all cubes up to ~5000(^3).
+
+    int dim_max = 5000;
     if (argc > 1) dim_max = atoi(argv[1]);
     int ncubs_max = 20000;
     if (argc > 2) ncubs_max = atoi(argv[2]);
@@ -82,10 +83,10 @@ int main(int argc, char* argv[])
     cout << "nl(1,1,2,7) = " << nl(1,1,2,7) << endl;
     cout << "nl(1,1,1,11) = " << nl(1,1,1,11) << endl;
 
-    map<int,int> ncubs;
+    int* ncubs = new int [ncubs_max / 2]; // Only even values possible
 
     for(int a = 1; a <= dim_max; ++a) {
-        cout << 'a'; flush(cout);
+        cout << '.'; flush(cout);
         for(int b = a; b <= dim_max; ++b) {
             //cout << 'b'; flush(cout);
             for(int c = b; c <= dim_max; ++c) {
@@ -98,18 +99,18 @@ int main(int argc, char* argv[])
                     //cout << 'l'; flush(cout);
                     nl += 4*(2*l+s-2);
                     ++l;
-                    ++ncubs[nl];
+                    if (nl < (ncubs_max)) ++ncubs[nl/2];
                 } while(nl < ncubs_max);
             }
         }
     }
     cout << endl;
 
-    for(map<int,int>::iterator i = ncubs.begin(); i != ncubs.end(); ++i) {
-        int n = i->first;
-        int c = i->second;
-        cout << "C(" << n << ") = " << c << endl;
-        if (limit == c) break;
+    for(int i = 0; i < (ncubs_max / 2); ++i) {
+        if (limit == ncubs[i]) {
+            cout << "C(" << i*2 << ") = " << ncubs[i] << endl;
+            break;
+        }
     }
     return 0;
 }
