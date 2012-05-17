@@ -4,7 +4,7 @@
 using namespace std;
 
 // Closed form
-int getSum1( int a, int b, int n )
+static inline int getSum1( int a, int b, int n )
 {
     int max_a  = n / a - ( n % a ? 0 : 1 );
     int max_b  = n / b - ( n % b ? 0 : 1 );
@@ -16,13 +16,10 @@ int getSum1( int a, int b, int n )
 }
 
 // Brute force
-int getSum2( int a, int b, int n )
+static inline int getSum2( int a, int b, int n )
 {
     int sum = 0;
-    for( int i = 1; i < n; ++i )
-    {
-        sum += ( ( i % a == 0 ) || ( i % b == 0 ) ? i : 0 );
-    }
+    for(int i = 1; i < n; ++i) sum += ((i % a == 0) || (i % b == 0) ? i : 0);
     return sum;
 }
 
