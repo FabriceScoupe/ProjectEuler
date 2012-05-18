@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 048 (http://projecteuler.net/problem=48)
+ */
+
 // Find the last 10 digits of the series 1^1+2^2+3^3+...+1000^1000
 // Note: 1^1+2^2+...+10^10 = 10405071317.
 
@@ -28,5 +32,7 @@ int main( int argc, char** argv )
         sum %= pow10;
     }
     sum %= pow10;
-    cout << "sum[k=1.." << n << "] k^k % 10^10 = " << sum << endl;
+    cout << "sum[k=1.." << n << "] k^k % 10^10:" << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

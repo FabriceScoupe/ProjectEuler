@@ -4,6 +4,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 018 (http://projecteuler.net/problem=18)
+ */
+
 const char* raw = "\
 75 \
 95 64 \
@@ -102,5 +106,6 @@ int main( int argc, char** argv )
         cout << endl;
     }
 
-    cout << "Max sum = " << maxSum( triangle ) << endl;
+    cout << "Answer: " << maxSum( triangle ) << endl;
+    return 0;
 }

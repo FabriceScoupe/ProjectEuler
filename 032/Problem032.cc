@@ -2,6 +2,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 032 (http://projecteuler.net/problem=32)
+ */
+
 // Find the sum of all products whose multiplicand/multiplier/product identity
 // can be written as 1 through 9 pandigital.
 
@@ -89,5 +93,6 @@ int main( int argc, char** argv )
         sum += i->first;
     }
 
-    cout << "Sum of products = " << sum << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

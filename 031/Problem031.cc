@@ -4,11 +4,16 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 031 (http://projecteuler.net/problem=31)
+ */
+
 // Number of ways of making £2 with any number of coins from set:
 // {1p,2p,5p,10p,20p,50p,£1 and £2)
 
 // Using brute-force: generating all possible partitions,
 // putting them in a map to make sure we avoid repetitions!
+// (hadn't thought about generating functions at the time... :-( )
 
 typedef map< int, int > Partition;
 typedef map< Partition, int > PartitionMap;
@@ -134,5 +139,7 @@ int main( int argc, char** argv )
     }
     */
 
-    cout << "Total number of partitions: " << np << endl;
+    cout << "Total number of partitions: " << endl;
+    cout << "Answer: " << np << endl;
+    return 0;
 }

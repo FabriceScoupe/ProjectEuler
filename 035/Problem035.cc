@@ -5,6 +5,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 035 (http://projecteuler.net/problem=35)
+ */
+
 // How many circular primes below one million?
 // Circular prime: all rotations of digits --> also prime numbers
 
@@ -15,17 +19,15 @@ void BuildSieve()
     cout << "Building sieve..." << endl;
     memset( sieve, 0, 125001);
 
-    for( int i=2; i <= 500000; ++i )
-    {
-        for( int j = 2; i*j <= 1000000; ++j )
-        {
+    for( int i=2; i <= 500000; ++i ) {
+        for( int j = 2; i*j <= 1000000; ++j ) {
             int m = i*j;
             sieve[ m/8 + ( m%8 ? 0 : 1 ) ] |= 1<<(m%8);
         }
     }
 }
 
-bool checkPrime( int p )
+static inline bool checkPrime( int p )
 {
     return ( ( sieve[ p/8 + ( p%8 ? 0 : 1 ) ] & (1<<(p%8))) == 0 );
 }
@@ -51,8 +53,7 @@ void getDigits( int p, vector<char>& dv )
 {
     int n = p;
     dv.clear();
-    while( n > 0 )
-    {
+    while( n > 0 ) {
         dv.push_back( n % 10 );
         n /= 10; 
     }
@@ -61,16 +62,13 @@ void getDigits( int p, vector<char>& dv )
 bool checkCircularPrime( int p )
 {
     bool ok = checkPrime( p );
-    if ( ok )
-    {
+    if ( ok ) {
         vector<char> dv;
         getDigits( p, dv );
         char nd = dv.size();
-        for( char s = 1; ( s < nd ) && ok ; ++s )
-        {
+        for( char s = 1; ( s < nd ) && ok ; ++s ) {
             int q = 0;
-            for( char t = 0; t < nd; ++t )
-            {
+            for( char t = 0; t < nd; ++t ) {
                 q += power10( t )*dv[(t+s)%nd];
             }
             ok = checkPrime( q );
@@ -90,4 +88,6 @@ int main( int argc, char** argv )
     if ( checkCircularPrime( 2 ) ) ++count;
     for( int i = 3; i < n; i += 2 ) if ( checkCircularPrime( i ) ) ++count;
     cout << "Found "  << count << " circular primes under " << n << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

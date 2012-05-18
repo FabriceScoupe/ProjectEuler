@@ -3,6 +3,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 037 (http://projecteuler.net/problem=37)
+ */
+
 // Find the sum of the only 11 primes that are both truncable from left to 
 // right and right to left:
 // 3797, 797, 97, 7, 3, 37, 379, 3797 for instance.
@@ -89,5 +93,6 @@ int main( int argc, char** argv )
             default: dv[ nd-1 ] = 1; dv.push_back( 2 ); break;
         }
     }
-    cout << "sum = " << sum << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

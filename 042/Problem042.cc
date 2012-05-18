@@ -2,6 +2,9 @@
 #include <fstream>
 #include <set>
 
+/*
+ * Project Euler: Problem 042 (http://projecteuler.net/problem=42)
+ */
 using namespace std;
 
 // How many triangle words in file?
@@ -53,5 +56,7 @@ int main( int argc, char** argv )
     char* filename = (char*) "words.txt";
     if ( argc > 1 ) filename = argv[1];
     int count = numberOfTriangleWords( filename );
-    cout << endl << "Number of triangle words = " << count << endl;
+    cout << endl << "Number of triangle words:" << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

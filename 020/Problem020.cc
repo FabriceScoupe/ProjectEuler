@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 020 (http://projecteuler.net/problem=20)
+ */
+
 // Sum of digits in 100!
 
 typedef vector<char> BigInt;
@@ -82,8 +86,9 @@ int main( int argc, char** argv )
     }
     cout << n << "! = ";
     dump(c);
-    cout << "Sum of digits of " << n << "! = ";
+    cout << "Sum of digits of " << n << "! :" << endl;
     int sum = 0;
     for( int i = 0; i < (int) c.size(); ++i ) sum += c[i];
-    cout << sum << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

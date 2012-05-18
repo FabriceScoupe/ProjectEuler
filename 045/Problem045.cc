@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 045 (http://projecteuler.net/problem=45)
+ */
+
 // After 40755, what is the next triangle number that is also
 // pentagonal and hexagonal?
 // T(n)=n(n+1)/2 P(n)=n(3n-1)/2 H(n)= n(2n-1)
@@ -31,4 +35,6 @@ int main( int argc, char** argv )
         }
         target += 4*c+1;
     }
+    cout << "Answer: " << h << endl;
+    return 0;
 }

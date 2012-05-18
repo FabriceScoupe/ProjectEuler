@@ -5,6 +5,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 022 (http://projecteuler.net/problem=22)
+ */
+
 // Total alphabetical score of sorted name list
 // Score = sum of alphabetical value * position in sorted list
 
@@ -57,5 +61,6 @@ int main( int argc, char** argv )
         //     << " (" << it->second << ")" << endl;
         total += ( it->second ) * count;
     }
-    cout << "Total score = " << total << endl;
+    cout << "Answer: " << total << endl;
+    return 0;
 }

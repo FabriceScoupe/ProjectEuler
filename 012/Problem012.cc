@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 012 (http://projecteuler.net/problem=12)
+ */
+
 // Finding triangle number T(n) = n * (n+1) / 2 with > 500 divisors
 // d | a and d | b => d | ( a+b )
 // d | a and d | b => d | ( a.b )
@@ -28,10 +32,8 @@ int numDivs( long long n, bool show=false )
     int nd = 2; // At least 1 and n as divisors
     long long d = n-1;
     int r = root(n);
-    while( d >= r )
-    {
-        if ( n % d == 0 )
-        {
+    while( d >= r ) {
+        if ( n % d == 0 ) {
             nd += 2; // Count d and n/d
             if ( show ) cout << d << " " << n/d << endl;
         }
@@ -50,8 +52,7 @@ int main( int argc, char** argv )
     int prev_nd = 1;
     int i = 2;
     long long t = 0;
-    while ( nd <= n )
-    {
+    while ( nd <= n ) {
         t = (i-1)*i/2;
         int curr_nd = ( i % 2 == 0 ? numDivs( i / 2 ) : numDivs( i ) );
         nd = prev_nd * curr_nd;
@@ -62,4 +63,7 @@ int main( int argc, char** argv )
 
     cout << endl <<  t << " has more than " << n << " divisor(s)." << endl;
     cout << "Check: " << endl << numDivs( t, false ) << endl;
+
+    cout << "Answer: " << t << endl;
+    return 0;
 }

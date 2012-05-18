@@ -3,6 +3,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 28 (http://projecteuler.net/problem=28)
+ */
+
 // Sum of numbers on diagonals of spiral 1001 x 1001
 
 // Closed formula: sum for spiral n x n (n odd) = sd(n)
@@ -167,4 +171,7 @@ int main( int argc, char** argv )
     cout << "Check: rec_sum_diags          = " << rec_sum_diags(n) << endl;
     cout << "Check: fully_closed_sum_diags = " 
          << fully_closed_sum_diags(n) << endl;
+
+    cout << "Answer: " << fully_closed_sum_diags(n) << endl;
+    return 0;
 }

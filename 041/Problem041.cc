@@ -3,6 +3,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 041 (http://projecteuler.net/problem=41)
+ */
+
 // What is the largest n-digit pandigital prime that exists?
 // (Eg: 2143 is a 4-digit pandigital prime, uses 1..4 exactly once).
 // 987654321 largest pandigital integer.
@@ -17,7 +21,7 @@ using namespace std;
 
 char sieve[1000001];
 
-bool isPrime( int p )
+static inline bool isPrime( int p )
 {
     return( ( 2 == p ) ||
             ( ( p % 2 ) && ! ( sieve[p/8+(p%8?0:1)] & 1<<(p%8) ) ) );
@@ -27,17 +31,15 @@ void BuildSieve( )
 {
     cout << "Creating sieve..." << endl;
     memset( sieve, 0, 1000001 );
-    for( int i = 3; i < 4000000; i+=2 )
-    {
-        for( int j = 2; i*j <= 8000000; ++j )
-        {
+    for( int i = 3; i < 4000000; i+=2 ) {
+        for( int j = 2; i*j <= 8000000; ++j ) {
             int m = i*j;
             sieve[m/8+(m%8?0:1)] |= 1<<(m%8);
         }
     }
 }
 
-void swap( char& a, char& b )
+static inline void swap( char& a, char& b )
 {
     char tmp = a; a = b; b = tmp;
 }
@@ -52,26 +54,21 @@ void reverse( char* set, int length )
 bool next_perm( char* set, int dim )
 {
     bool ok = false;
-    if ( dim > 2 )
-    {
+    if ( dim > 2 ) {
         ok = next_perm( set + 1, dim - 1 );
-        if ( ! ok )
-        {
+        if ( ! ok ) {
              // No next perm for set + 1 => set + 1 "reverse" ordered
              // Try and find smallest elem in set+1 greater than set[0]
              int pos = dim-1;
              while( ( pos > 0 ) && ( set[0] > set[pos] ) ) --pos;
-             if ( pos > 0 )
-             {
+             if ( pos > 0 ) {
                  swap( set[0], set[pos] );
                  // reverse order of set+1
                  reverse( set+1, dim-1 );
                  ok = true;
              }
         }
-    }
-    else if ( 2 == dim )
-    {
+    } else if ( 2 == dim ) {
         ok = ( set[ 1 ] > set[ 0 ] );
         if ( ok ) swap( set[ 1 ], set[ 0 ] );
     }
@@ -85,13 +82,10 @@ int main( int argc, char** argv )
     char n[8];
     // Checking 4-digit pandigital numbers
     strcpy( n, "1234" );
-    do
-    {
-        if ((n[3]!='2')&&(n[3]!='4'))
-        {
+    do {
+        if ((n[3]!='2')&&(n[3]!='4')) {
             int p = atoi( n );
-            if ( isPrime( p ) )
-            {
+            if ( isPrime( p ) ) {
                 max = p;
                 //cout << "Found: " << p << endl;
             }
@@ -101,18 +95,15 @@ int main( int argc, char** argv )
     
     // Checking 7-digit pandigital numbers
     strcpy( n, "1234567" );
-    do
-    {
-        if ((n[6]!='2')&&(n[6]!='4')&&(n[6]!='5')&&(n[6]!='6'))
-        {
+    do {
+        if ((n[6]!='2')&&(n[6]!='4')&&(n[6]!='5')&&(n[6]!='6')) {
             int p = atoi( n );
-            if ( isPrime( p ) )
-            {
+            if ( isPrime( p ) ) {
                 max = p;
                 //cout << "Found: " << p << endl;
             }
         }
-    }
-    while( next_perm( n, 7 ) );
-    cout << endl << "max pandigital prime: " << max << endl;
+    } while( next_perm( n, 7 ) );
+    cout << endl << "Answer: " << max << endl;
+    return 0;
 }

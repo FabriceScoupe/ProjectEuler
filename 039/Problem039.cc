@@ -4,6 +4,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 039 (http://projecteuler.net/problem=39)
+ */
+
 // if p perimeter (a+b+c) or right-angle triangle (a,b,c integers),
 // which p <= 1000 corresponds to most triplets (a,b,c) ?
 // See also problem 9.
@@ -68,5 +72,6 @@ int main( int argc, char** argv )
         cout << "(" << a << "," << b << "," << root(a*a+b*b) << ")" << endl;
     }
     cout << endl << "max(a+b+c) = " << max_p << " (" <<v.size()<< ")" << endl;
+    cout << "Answer: " << max_p << endl;
     return 0;
 }

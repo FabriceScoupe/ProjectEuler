@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 030 (http://projecteuler.net/problem=30)
+ */
+
 // Find the sum of all numbers that can be written as the sum of
 // fifth powers of their digits.
 //
@@ -186,6 +190,7 @@ int main( int argc, char** argv )
     sum += sum_for_n_digits_rec(4, nfound);
     sum += sum_for_n_digits_rec(5, nfound);
     sum += sum_for_n_digits_rec(6, nfound);
-    cout << "Recursive sum = " << sum << endl;
+    cout << "Answer: " << sum << endl;
     cout << "Calls to sum_for_n_digits_rec = " << calls_to_sum_rec << endl;
+    return 0;
 }

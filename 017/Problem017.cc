@@ -4,6 +4,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 017 (http://projecteuler.net/problem=17)
+ */
+
 // How many letters used to write all numbers from 1 to 1000 ?
 
 const char* word( int d )
@@ -102,5 +106,7 @@ int main( int argc, char** argv )
         //cout << "(" << len << " letters)" << endl;
         sum += len;
     }
-    cout << "Total letters = " << sum << endl;
+    cout << "Total letters: " << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

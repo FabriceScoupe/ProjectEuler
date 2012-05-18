@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 006 (http://projecteuler.net/problem=6)
+ */
+
 // Difference between sum(i=1 to i=n) of square(i) and
 //                    square( sum(i=1 to i=n) of i.
 //
@@ -42,6 +46,7 @@ int main( int argc, char** argv )
     if ( argc > 1 ) n = atoi( argv[1] );
     int sumSq = sumSquare( n );
     int sqSum = squareSum( n );
-    cout << sqSum << " - " << sumSq << " = " << sqSum - sumSq
-         << " = " << diff( n ) << endl;
+    cout << sqSum << " - " << sumSq << " = " << sqSum - sumSq << endl;
+    cout << "Answer: " << diff( n ) << endl;
+    return 0;
 }

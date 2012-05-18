@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 044 (http://projecteuler.net/problem=44)
+ */
+
 // Find the smallest pair of pentagonal numbers whose sum and
 // difference is pentagonal.
 // P(n) = n(3n-1)/2 (P(n+1)-P(n)=3n+1, recursion p:=p+n<<1+n+1)
@@ -102,4 +106,6 @@ int main( int argc, char** argv )
         ++d;
     }
     cout << endl << "min |Pk-Pj| = " << min_pd << endl;
+    cout << "Answer: " << min_pd << endl;
+    return 0;
 }

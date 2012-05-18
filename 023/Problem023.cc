@@ -4,6 +4,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 023 (http://projecteuler.net/problem=23)
+ */
+
 // Sum of all positive integers which cannot be written as the sum of
 // two abundant numbers.
 // Abundant <=> greater than the sum of its divisors
@@ -84,7 +88,8 @@ int main( int argc, char** argv )
         }
     }
 
-    cout << "Sum: " << sum << endl;
+    cout << "Answer: " << sum << endl;
 
     delete[] sieve;
+    return 0;
 }

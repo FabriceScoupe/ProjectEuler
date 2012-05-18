@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 025 (http://projecteuler.net/problem=25)
+ */
+
 // First term in Fibonacci sequence to contain 1000 digits?
 // ( n > 2 ) Fn = Fn-1 + Fn-2
 // F1 = F2 = 1;
@@ -14,8 +18,7 @@ void add( BigInt&a, BigInt& b, BigInt& c )
 {
     c.clear();
     char carry = 0;
-    for( int pos = 0; (pos < (int) a.size()) || (pos < (int) b.size()); ++pos )
-    {
+    for(int pos = 0; (pos < (int) a.size()) || (pos < (int) b.size()); ++pos) {
         char sum = ( pos < (int) a.size() ? a[pos] : 0 ) +
                    ( pos < (int) b.size() ? b[pos] : 0 ) +
                    carry;
@@ -29,8 +32,7 @@ void dump( BigInt& a )
 {
     int pos = a.size()-1;
     while( ( a[pos]==0 ) && ( pos > 0 ) ) --pos;
-    while( pos >= 0 )
-    {
+    while( pos >= 0 ) {
         //cout << (int) a[pos];
         --pos;
     }
@@ -50,8 +52,7 @@ int main( int argc, char** argv )
     BigInt* f2 = &b;
     BigInt* f3 = &c;
     int idx = 2;
-    do
-    {
+    do {
         ++idx;
         add( *f1, *f2, *f3 );
         //cout << idx << " term = ";
@@ -60,5 +61,6 @@ int main( int argc, char** argv )
         // Rotate pointers
         BigInt* tmp = f1; f1 = f2; f2 = f3; f3 = tmp;
     } while( (int) f2->size() < n );
-    cout << "Index: " << idx << endl;
+    cout << "Answer: " << idx << endl;
+    return 0;
 }

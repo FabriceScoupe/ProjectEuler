@@ -36,4 +36,6 @@ for p in problems:
         "@echo >> "+log,
         "@echo \"--- STOP:\" `date +%H:%M:%S.%N` >> "+log,
         "@echo >> "+log,
-        "@cat "+log], chdir=1)
+        "@cat "+log,
+        "@if ! egrep -q \"^`tail -1 README`$\" "+log+"; then echo \"WRONG ANSWER!\"; exit 1; fi",
+        "@echo \"(matches README's answer)\""], chdir=1)

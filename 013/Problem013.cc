@@ -3,6 +3,10 @@
 #include <strings.h>
 #include <vector>
 
+/*
+ * Project Euler: Problem 013 (http://projecteuler.net/problem=13)
+ */
+
 using namespace std;
 
 // Finding first 10 digits of sum of 100 50-digit numbers
@@ -183,11 +187,17 @@ int main( int argc, char** argv )
     //cout << "log10(77777)=" << log10(77777) << endl;
     //cout << "log10(1000000)=" << log10(1000000) << endl;
 
-    cout << "Sum is: " << endl;
+    cout << "Sum = ";
     vector<char> sumv;
     calcSum( num_elems, num_digit, data, sumv );
     int pos = sumv.size() - 1;
     while( sumv[pos] == 0 ) --pos;
+    int first = pos;
     while( pos >= 0 ) cout << (int) sumv[pos--];
     cout << endl;
+
+    cout << "Answer: ";
+    for(int i = 0; i < 10; ++i) cout << (int) sumv[first-i];
+    cout << endl;
+    return 0;
 }

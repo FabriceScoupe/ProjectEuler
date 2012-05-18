@@ -3,6 +3,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 009 (http://projecteuler.net/problem=9)
+ */
+
 // Find pythagorean triplet(s) (a,b,c) such as a+b+c = 1000
 // a*a+b*b=c*c => a + b + sqrt( a*a + b*b ) = 1000
 // Assume a <= b < c
@@ -31,15 +35,14 @@ int main( int argc, char** argv )
     for(int i = 1; i*i <= max_square_c; ++i) roots[i*i]=i;
 
     int iter = 0;
-    for(int b = n/2; b >= n/3; --b )
-        for( int a = 1; a <= b; ++a )
-        {
-            if ( check( a, b, n ) )
-            {
+    for(int b = n/2; b >= n/3; --b ) {
+        for( int a = 1; a <= b; ++a ) {
+            if ( check( a, b, n ) ) {
                 cout << endl <<  a << " + " << b  << " + "
                      << roots[a*a+b*b] << " = " << n << endl;
                 long long prod = a*b*roots[a*a+b*b];
-                cout << "a.b.c = " << prod << endl;
+                cout << "Answer: " << prod << endl;
+                return 0;
             }
             ++iter;
             if ( iter % 1000 == 0 )
@@ -48,5 +51,7 @@ int main( int argc, char** argv )
                 flush(cout);
             }
         }
+    }
     cout << endl;
+    return 1; /* Should not get here */
 }

@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 015 (http://projecteuler.net/problem=15)
+ */
+
 // Number of top-left to bottom-right routes in a 20x20 grid
 // (0,0) to (20,20)
 // No backtracking: at each node, increment is (0,1) or (1,0)
@@ -20,12 +24,10 @@ long long numberRoutes( int grid_N )
 {
     long long result = 1;
     int divisor = 1;
-    for( int i = 1; i <= grid_N; ++i )
-    {
+    for( int i = 1; i <= grid_N; ++i ) {
         result *= (i+grid_N);
         divisor *= i;
-        if ( result % divisor == 0 )
-        {
+        if ( result % divisor == 0 ) {
             result /= divisor;
             divisor = 1;
         }
@@ -38,5 +40,7 @@ int main( int argc, char** argv )
     int n = 20;
     if ( argc > 1 ) n = atoi( argv[1] );
     cout << "Number of top-left to bottom-right routes in a " 
-         << n << " x " << n << " grid = " << numberRoutes( n ) << endl;
+         << n << " x " << n << " grid :" << endl;
+    cout << "Answer: " << numberRoutes( n ) << endl;
+    return 0;
 }

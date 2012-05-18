@@ -3,6 +3,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 046 (http://projecteuler.net/problem=46)
+ */
+
 // What is the smallest odd composite (non-prime) that cannot be written
 // as the sum of a prime and twice a square?
 
@@ -78,5 +82,6 @@ int main( int argc, char** argv )
             }
         }
     }
-    cout << n << " is the one!" << endl;
+    cout << "Answer: " << n << endl;
+    return 0;
 }

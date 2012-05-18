@@ -3,6 +3,9 @@
 #include <strings.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 011 (http://projecteuler.net/problem=11)
+ */
 char* raw = (char*) "\
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00\
@@ -37,15 +40,13 @@ void ParseMatrix( char* r )
     int i = 0;
     int j = 0;
     char* p = r;
-    while( ( *p != 0 ) && ( i < 20 ) )
-    {
+    while( ( *p != 0 ) && ( i < 20 ) ) {
         while( *p ==' ') ++p;
         matrix[i][j]=(*p-'0')*10;
         ++p;
         matrix[i][j]+=(*p-'0');
         j++;
-        if ( j == 20 )
-        {
+        if ( j == 20 ) {
             i++;
             j=0;
         }
@@ -60,19 +61,15 @@ void maxProd( int i0, int j0, int di, int dj )
     int count = 0;
     int i = i0;
     int j = j0;
-    while( ( i >= 0 ) && ( i < 20 ) && ( j >= 0 ) && ( j < 20 ) )
-    {
-        if ( matrix[i][j] > 0 )
-        {
+    while( ( i >= 0 ) && ( i < 20 ) && ( j >= 0 ) && ( j < 20 ) ) {
+        if ( matrix[i][j] > 0 ) {
             ++count;
             if ( count > 4 ) count = 4;
-            if ( count == 4 )
-            {
+            if ( count == 4 ) {
                 int prod = 1;
                 for( int k = 0; k < 4; ++k )
                     prod *= matrix[ i - k*di ][ j - k*dj ];
-                if ( prod > gmax )
-                {
+                if ( prod > gmax ) {
                     gmax = prod;
                     gmax_i = i - 3*di;
                     gmax_j = j - 3*dj;
@@ -80,9 +77,7 @@ void maxProd( int i0, int j0, int di, int dj )
                     gmax_dj = dj;
                 }
             }
-        }
-        else
-        {
+        } else {
             count = 0;
         }
         i += di;
@@ -94,8 +89,7 @@ int main( int argc, char** argv )
 {
     ParseMatrix( raw );
     cout << "20x20 matrix is:" << endl;
-    for(int i=0; i<20; ++i)
-    {
+    for(int i=0; i<20; ++i) {
         for(int j=0; j<20; ++j) cout << setw(2) << (int)matrix[i][j] << " ";
         cout << endl;
     }
@@ -111,11 +105,11 @@ int main( int argc, char** argv )
     cout << "Position 0 = ("<<gmax_i<<","<<gmax_j<<")" << endl;
     cout << "Direction = ("<<gmax_di<<","<<gmax_dj<<")" << endl;
     int prod = 1;
-    for( int k = 0; k < 4; ++k )
-    {
+    for( int k = 0; k < 4; ++k ) {
         int m = matrix[gmax_i+k*gmax_di][gmax_j+k*gmax_dj];
         cout << setw(2) << m << " ";
         prod *= m;
     }
-    cout << " = " << prod << endl;
+    cout << endl << "Answer: " << prod << endl;
+    return 0;
 }

@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cstdlib>
 
+/*
+ * Project Euler: Problem 001 (http://projecteuler.net/problem=1)
+ */
+
 using namespace std;
 
 // Closed form
@@ -34,5 +38,6 @@ int main( int argc, char** argv )
     cout << "Sum1 = " << getSum1(3,5,n) << endl;
     cout << "Sum2 = " << getSum2(3,5,n) << endl;
 
+    cout << "Answer: " << getSum1(3, 5, n) << endl;
     return 0;
 }

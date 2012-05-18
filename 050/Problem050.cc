@@ -5,6 +5,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 50 (http://projecteuler.net/problem=50)
+ */
+
 // Which prime below one million can be written as the sum of the
 // most consecutive primes?
 
@@ -64,5 +68,6 @@ int main( int argc, char** argv )
         }
     }
     cout << max_prime << " (" << max_count << " primes)" << endl;
+    cout << "Answer: " << max_prime << endl;
     return 0;
 }

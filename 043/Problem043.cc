@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 043 (http://projecteuler.net/problem=43)
+ */
+
 // Find the sum of all 0 to 9 pandigital numbers with the following 
 // property: let n be d1d2d3d4d5d6d7d8d9d10 (digits in "natural" order)
 // d2d3d4 % 2 == 0
@@ -11,7 +15,7 @@ using namespace std;
 // d7d8d9 % 13 == 0
 // d8d9d10 % 17 == 0
 
-void swap( char& a, char& b )
+static inline void swap( char& a, char& b )
 {
     char tmp = a; a = b; b = tmp;
 }
@@ -81,5 +85,6 @@ int main( int argc, char** argv )
             cout << endl;
         }
     } while( next_perm( n, 10 ) );
-    cout << endl << "Sum = " << sum << endl;
+    cout << endl << "Answer: " << sum << endl;
+    return 0;
 }

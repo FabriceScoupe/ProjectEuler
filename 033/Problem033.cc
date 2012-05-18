@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 033 (http://projecteuler.net/problem=33)
+ */
+
 // Discover all fractions with an unorthodox cancelling method.
 
 // possible cases: 
@@ -14,21 +18,15 @@ int main( int argc, char** argv )
     int prod1 = 1;
     int prod2 = 1;
 
-    for( int a = 1; a <= 9; ++a )
-    {
-        for( int b = 1; b <= 9; ++b )
-        {
-            for( int c = a+1; c <= 9; ++c ) // a < c
-            {
-                if( 10*b*c == a*(9*c+b) )
-                {
+    for( int a = 1; a <= 9; ++a ) {
+        for( int b = 1; b <= 9; ++b ) {
+            for( int c = a+1; c <= 9; ++c ) { // a < c
+                if( 10*b*c == a*(9*c+b) ) {
                     cout << b << a << "/" << c << b << " = " 
                          << a << "/" << c << endl;
                     prod1 *= a;
                     prod2 *= c;
-                }
-                else if ( 10*a*b == c*(9*a+b) )
-                {
+                } else if ( 10*a*b == c*(9*a+b) ) {
                     cout << a << b << "/" << b << c << " = "
                          << a << "/" << c << endl;
                     prod1 *= a;
@@ -38,13 +36,12 @@ int main( int argc, char** argv )
         }
     }
 
-    for( char d = 2; d <= 9; ++d )
-    {
-        while( ( 0 == ( prod1 % d ) ) && ( 0 == ( prod2 % d ) ) )
-        {
+    for( char d = 2; d <= 9; ++d ) {
+        while( ( 0 == ( prod1 % d ) ) && ( 0 == ( prod2 % d ) ) ) {
             prod1 /= d;
             prod2 /= d;
         }
     }
-    cout << "Product is " << prod1 << "/" << prod2 << endl;
+    cout << "Answer: " << prod2 << endl;
+    return 0;
 }

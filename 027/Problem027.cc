@@ -3,6 +3,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 027 (http://projecteuler.net/problem=27)
+ */
+
 // Q(n) = n^2 + a.n + b such as |a| and |b| < 1000
 // L(Q) = l such as Q(0),Q(1),...,Q(l) all primes.
 // Find max L(Q)
@@ -27,7 +31,7 @@ using namespace std;
 // 2000000 elements sieve
 static char sieve[250001];
 
-bool checkPrime( long long p )
+static inline bool checkPrime( long long p )
 {
     return ( ( p >= 2 ) && ! ( sieve[p/8+(p%8==0?1:0)] & ( 1 << ( p%8 ) ) ) );
 }
@@ -35,8 +39,7 @@ bool checkPrime( long long p )
 int findNextPrime( int p )
 {
     int np = 0;
-    if ( p > 2 )
-    {
+    if ( p > 2 ) {
         np = p-1;
         while( ! checkPrime( np ) ) --np;
     }
@@ -47,10 +50,8 @@ void makePrimeSieve( int n )
 {
     cout << "Creating prime sieve..." << endl;
     memset( sieve, 0, 250001 );
-    for( int i = 2; i < 1000000; ++i )
-    {
-        for( int j = 2; i*j < n; ++j )
-        {
+    for( int i = 2; i < 1000000; ++i ) {
+        for( int j = 2; i*j < n; ++j ) {
             int mul = i*j;
             sieve[ ( mul / 8 ) + ( ( mul % 8 ) == 0 ? 1 : 0 ) ] |= 
                 1 << ( mul % 8 );
@@ -63,8 +64,7 @@ int nprimes( int a, int b )
 {
     long long q = b;
     int n = 0;
-    for( n = 0; ( n <= ( b - a ) ) && checkPrime( q ); ++n )
-    {
+    for( n = 0; ( n <= ( b - a ) ) && checkPrime( q ); ++n ) {
         q += n + n + 1 + a;
     }
     return n;
@@ -80,14 +80,11 @@ int main( int argc, char** argv )
     int max_a = 1;
 
     int b = findNextPrime( 1000 );
-    while( b > ( ( max_l / 2 ) + 1 ) )
-    {
-        for( int a = 2-b; a < (b-max_l); ++a )
-        {
+    while( b > ( ( max_l / 2 ) + 1 ) ) {
+        for( int a = 2-b; a < (b-max_l); ++a ) {
             int l = nprimes( a, b );
             //cout << "nprimes(" << a << "," << b << ") = " << l << endl;
-            if ( l > max_l )
-            {
+            if ( l > max_l ) {
                 cout << "New max: "<< l <<" ("<< a <<","<< b <<")"<< endl;
                 max_l = l;
                 max_a = a;
@@ -99,4 +96,6 @@ int main( int argc, char** argv )
 
     cout << "Max L(Q) = " << max_l << " a = " << max_a << " b = " << max_b
          << " a.b = " << max_a*max_b << endl;
+    cout << "Answer: " << max_a*max_b << endl;
+    return 0;
 }

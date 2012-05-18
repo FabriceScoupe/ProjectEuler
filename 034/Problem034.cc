@@ -1,6 +1,10 @@
 #include <iostream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 034 (http://projecteuler.net/problem=34)
+ */
+
 // Find sum of all numbers which are equal to the sum of the factorial of
 // their digits (1! and 2! are not sums, so not included).
 //
@@ -117,5 +121,6 @@ int main( int argc, char** argv )
     sum += sum_for_n_digits(5);
     sum += sum_for_n_digits(6);
     sum += sum_for_n_digits(7);
-    cout << endl <<  "Sum = " << sum << endl << endl;
+    cout << endl <<  "Answer: " << sum << endl << endl;
+    return 0;
 }

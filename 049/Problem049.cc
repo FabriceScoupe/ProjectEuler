@@ -3,6 +3,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 049 (http://projecteuler.net/problem=49)
+ */
+
 // Find arithmetic sequences, made of prime terms, whose four digits are
 // permutations of each other.
 
@@ -65,9 +69,12 @@ int main( int argc, char** argv )
                  ( sameDigits( p1, p2 ) ) &&
                  ( sameDigits( p2, p3 ) ) )
             {
-                cout << p1 << ", " << p2 << ", " << p3
-                     << " (" << i << ") : " << p1 << p2 << p3 << endl;
+                if (1487 == p1) continue; // Looking for the OTHER one.
+                cout << p1<<", "<<p2<<", "<<p3<<" ("<<i<<"):" << endl;
+                cout << "Answer: " << p1 << p2 << p3 << endl;
+                return 0;
             }
         }
     }
+    return 1; /* Should never reach this point */
 }

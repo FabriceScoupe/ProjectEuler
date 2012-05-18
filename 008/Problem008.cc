@@ -2,6 +2,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 008 (http://projecteuler.net/problem=8)
+ */
+
 char* number = (char*) "\
 73167176531330624919225119674426574742355349194934\
 96983520312774506326239578318016984801869478851843\
@@ -37,26 +41,20 @@ int main( int argc, char** argv )
    int max_pos = 0;   // Position of first digit in maximum product
 
    int count = 0;     // Current count of non-zero successive digits.
-   for( int i = 0; i < (int) strlen(n); ++i )
-   {
-       if ( n[i] > 0 )
-       {
+   for( int i = 0; i < (int) strlen(n); ++i ) {
+       if ( n[i] > 0 ) {
            ++count;
            if ( count > 5 ) count = 5;
-       }
-       else
-       {
+       } else {
            count = 0;
            continue;
        }
 
        // 5 consecutive non-zero digits found!
-       if ( count == 5 )
-       {
+       if ( count == 5 ) {
            int prod = 1;
            for( int k = 0; k < 5; ++k ) prod *= n[i-k]-'0';
-           if ( prod > max )
-           {
+           if ( prod > max ) {
                max = prod;
                max_pos = i-4;
            }
@@ -69,8 +67,8 @@ int main( int argc, char** argv )
                         << n[max_pos+2] << "*"
                         << n[max_pos+3] << "*"
                         << n[max_pos+4] << " [" << max_pos << "]" << endl;
-   cout << "Check = ";
    int prod = 1;
    for( int k = 0; k <5; ++k ) prod *= n[max_pos+k]-'0';
-   cout << prod << endl;
+   cout << "Answer: " << prod << endl;
+   return 0;
 }

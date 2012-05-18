@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 021 (http://projecteuler.net/problem=21)
+ */
+
 // Sum of all amicable numbers under 10000
 // Proper divisors of n = numbers < n which divide evenly into n
 // d(n) = sum of proper divisors of n
@@ -68,5 +72,7 @@ int main( int argc, char** argv )
            sum += *it;
         }
     }
-    cout << "Sum of amicable numbers < " << n << " = " << sum << endl;
+    cout << "Sum of amicable numbers < " << n << ":" << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

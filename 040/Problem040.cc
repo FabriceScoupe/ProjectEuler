@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 040 (http://projecteuler.net/problem=40)
+ */
+
 // Finding the n-th digit of the fractional part of the irrational
 // number whose decimal fraction is created by concatenating the
 // positive integers: 0.1234567891011121314151617...
@@ -52,5 +56,6 @@ int main( int argc, char** argv )
     cout << "d(100000) = " << (int) d(100000) << endl;
     cout << "d(100000) = " << (int) d(100000) << endl;
     int prod = d(1)*d(10)*d(100)*d(1000)*d(10000)*d(100000)*d(1000000);
-    cout << endl << "Product = " << prod << endl;
+    cout << endl << "Answer: " << prod << endl;
+    return 0;
 }

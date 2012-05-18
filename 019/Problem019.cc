@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 019 (http://projecteuler.net/problem=19)
+ */
+
 // How many Sundays fell on the first of the month during the 20th century,
 // ie between 1 Jan 1901 and 31 Dec 2000?
 // Calibration: 1 Jan 1900 -> Monday
@@ -78,5 +82,7 @@ int main( int argc, char** argv )
                 cout << '.';
             }
     cout << endl;
-    cout << "Number of Sundays on 1st of month in 20th C = " << count << endl;
+    cout << "Number of Sundays on 1st of month in 20th C:" << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

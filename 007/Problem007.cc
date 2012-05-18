@@ -3,6 +3,9 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 7 (http://projecteuler.net/problem=7)
+ */
 typedef vector<int> Vint;
 typedef Vint::iterator Iter;
 
@@ -12,16 +15,13 @@ int buildPrimes( int n )
 {
     int np = 0;
     int p = 2;
-    while( np < n )
-    {
+    while( np < n ) {
         bool prime = true;
-        for( Iter i = primes.begin(); i != primes.end(); ++i )
-        {
+        for( Iter i = primes.begin(); i != primes.end(); ++i ) {
             prime = ( p % *i != 0 );
             if ( ! prime ) break;
         }
-        if ( prime )
-        {
+        if ( prime ) {
             ++np;
             primes.push_back( p );
             //cout << "Prime #" << np << " = " << p << endl;
@@ -36,5 +36,7 @@ int main( int argc, char** argv )
     int n = 10001;
     if ( argc > 1 ) n = atoi( argv[1] );
     int nth_prime = buildPrimes( n );
-    cout << "Prime # " << n << " = " << nth_prime << endl;
+    cout << "Prime # " << n << ":" << endl;
+    cout << "Answer: " << nth_prime << endl;
+    return 0;
 }

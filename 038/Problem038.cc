@@ -2,6 +2,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 038 (http://projecteuler.net/problem=38)
+ */
+
 // Largest 1 to 9 pandigital 9-digit number that can be formed as the 
 // concatenated product of an integer with (1,2,...,n) / n>1 ?
 
@@ -74,5 +78,6 @@ int main( int argc, char** argv )
             if ( number > max ) max = number;
         } 
     }
-    cout << endl <<  "Max: " << max << endl;
+    cout << endl <<  "Answer: " << max << endl;
+    return 0;
 }

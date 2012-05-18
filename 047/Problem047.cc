@@ -2,6 +2,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 047 (http://projecteuler.net/problem=47)
+ */
+
 // Find the first four consecutive integers to have four distinct
 // prime factors.
 // E.g. 14 = 2 x 7 15 = 3 x 5 (two consecutive integers to have
@@ -96,4 +100,6 @@ int main( int argc, char** argv )
         }
         cout << endl;
     }
+    cout << "Answer: " << n[1] << endl;
+    return 0;
 }
