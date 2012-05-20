@@ -4,6 +4,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 66 (http://projecteuler.net/problem=66)
+ */
+
 // Consider quadratic Diophantine equations of the form: x^2-D.y^2 = 1
 // For example when D=13, the minimal solution in x is 649^2-13*180^2 = 1
 // It can be assumed that there are no solutions in positive integers
@@ -207,6 +211,6 @@ int main( int argc, char** argv )
         */
     }
 
-    cout << "Max D = " << max_d << endl;
+    cout << "Answer: " << max_d << endl;
     return 0;
 }

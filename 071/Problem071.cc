@@ -3,6 +3,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 071 (http://projecteuler.net/problem=71)
+ */
+
 // Proper fraction:  n / d, n < d and n and d relatively prime.
 // Listing all proper fraction with d <= 8 in ascending order:
 // 1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8,
@@ -56,5 +60,6 @@ int main( int argc, char** argv )
     to_proper_fraction( max_n, max_d );
     cout << "With d <= " << limit << ", fraction to the left of 3/7 is "
          << max_n << " / " << max_d << endl;
+    cout << "Answer: " << max_n << endl;
     return 0;
 }

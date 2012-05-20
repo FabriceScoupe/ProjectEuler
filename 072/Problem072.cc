@@ -3,8 +3,11 @@
 #include <cstring>
 #include <set>
 #include <vector>
-
 using namespace std;
+
+/*
+ * Project Euler: Problem 072 (http://projecteuler.net/problem=72)
+ */
 
 // Proper fraction n / d, n < d, n and d relatively prime.
 // Number of elements in proper fraction set PF(d) = { proper fractions with
@@ -138,8 +141,8 @@ int main( int argc, char** argv )
         totient_sum += totient(d);
         if (d % 1000 == 0) { cout << '.'; flush(cout); }
     }
-    cout << endl << "Sum[k=2.." << limit << "] totient(k) = " 
-         << totient_sum << endl;
+    cout << endl << "Sum[k=2.." << limit << "] totient(k) = " << endl;
+    cout << "Answer: " << totient_sum << endl;
 
     delete[] sieve;
     return 0;

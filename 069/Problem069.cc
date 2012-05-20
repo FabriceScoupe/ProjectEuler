@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 069 (http://projecteuler.net/problem=69)
+ */
+
 // Euler's Totient function phi(n) is used to determine the number of
 // numbers less than n which are relatively prime to n.
 // For instance 1,2,4,5,7 and 8 are all less than 9 and relatively prime to it,
@@ -44,5 +48,7 @@ int main( int argc, char** argv )
     {
         n /= primes[i-1];
     }
-    cout << "Largest n / phi(n) for n <= " << limit << " is " << n << endl;
+    cout << "Largest n / phi(n) for n <= " << limit << " is:" << endl;
+    cout << "Answer: " << n << endl;
+    return 0;
 }

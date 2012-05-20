@@ -2,6 +2,10 @@
 #include <string.h>
 using namespace std;
 
+/*
+ * Project Euler: Problem 058 (http://projecteuler.net/problem=58)
+ */
+
 // Starting with 1 and spiralling anticlockwise in the following way,
 // a square spiral with side length 7 is formed.
 //
@@ -111,6 +115,7 @@ int main(int argc, char** argv)
         got_there = ( ratio < 10 );
     }
     cout << "Ratio("<<n<<")="<<np<<" / "<<nd<<" = "<< ratio << "%" << endl;
+    cout << "Answer: " << n << endl;
     delete[] sieve;
     return 0;
 }

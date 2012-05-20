@@ -4,6 +4,10 @@
 using namespace std;
 
 /*
+ * Project Euler: Problem 111 (http://projecteuler.net/problem=111)
+ */
+
+/*
  * Considering 4-digit primes containing repeated digits it is clear that
  * they cannot all be the same: 1111 is divisible by 11, 2222 is divisible
  * by 22, and so on. But there are nine 4-digit primes containing three ones:
@@ -155,7 +159,7 @@ int main(int argc, char* argv[])
     }
     unsigned long long sum = 0ULL;
     for(int i = 0; i <= 9; ++i) sum += s10[i];
-    cout << "Sum = " << sum << endl;
+    cout << "Answer: " << sum << endl;
 
     delete[] sieve;
     return 0;

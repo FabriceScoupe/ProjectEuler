@@ -2,6 +2,10 @@
 #include <cstdlib>
 using namespace std;
 
+/*
+ * Project Euler: Problem 055 (http://projecteuler/problem=55)
+ */
+
 // How many Lychrel numbers are there below 10000 ?
 // Lychrel number: a number that never forms a palindrome through the
 // reverse and add process.
@@ -51,5 +55,7 @@ int main( int argc, char** argv )
             ++lychrels;
         }
     }
-    cout << endl << lychrels << " Lychrel numbers < " << limit << endl;
+    cout << endl << "Answer: " << lychrels << endl;
+    cout << " Lychrel numbers < " << limit << endl;
+    return 0;
 }

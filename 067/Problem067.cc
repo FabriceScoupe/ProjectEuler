@@ -2,6 +2,10 @@
 #include <fstream>
 #include <vector>
 
+/*
+ * Project Euler: Problem 67 (http://projecteuler.net/problem=67)
+ */
+
 // Find the maximum sum from top to bottom in file
 // See problem 18, same idea there!
 
@@ -64,5 +68,6 @@ int main( int argc, char** argv )
     unsigned int tn = 1;
     while( tn < t.size() ) tn += ++n;
     cout << n << " levels." << endl;
-    cout << endl << "Max sum = " << maxSum( t, n ) << endl;
+    cout << endl << "Answer: " << maxSum( t, n ) << endl;
+    return 0;
 }

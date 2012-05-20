@@ -4,6 +4,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 070 (http://projecteuler.net/problem=70)
+ */
+
 // Like 69, about Euler's Totient function, ie number of positive numbers less
 // than or equal to n which are relatively prime to n.
 // Phi(87109)=79180 (digit permutation).
@@ -106,6 +110,6 @@ int main( int argc, char** argv )
             }
         }
     }
-    cout << "Min n = " << min_n << endl;
+    cout << "Answer: " << min_n << endl;
     return 0;
 }

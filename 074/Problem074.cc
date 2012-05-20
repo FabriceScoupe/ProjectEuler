@@ -5,6 +5,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 074 (http://projecteuler.net/problem=074)
+ */
+
 // The number 145 is well known for the property that the sum of the
 // factorial of its digits is equal to 145:
 // 1! + 4! + 5! = 1 + 24 + 120 = 145.
@@ -80,5 +84,7 @@ int main( int argc, char** argv )
         //cout << n << "-> " << len << endl;
         if ( 60 == len ) ++count;
     }
-    cout << "Number of 60-long non-repeating chains = " << count << endl;
+    cout << "Number of 60-long non-repeating chains =" << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

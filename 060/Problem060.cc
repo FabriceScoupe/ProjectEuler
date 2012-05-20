@@ -5,6 +5,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 060 (http://projecteuler.net/problem=60)
+ */
+
 // The primes 3, 7, 109, and 673, are quite remarkable.
 // By taking any two primes and concatenating them in any order
 // the result will always be prime.
@@ -155,7 +159,6 @@ int main( int argc, char** argv )
         }
         //if ( 0 == d ) { cout << primes[ idx[ 0 ] ] << "\t"; flush( cout ); }
     }
-    cout << "Min is " << min << endl;
-
+    cout << "Answer: " << min << endl;
     return 0;
 }

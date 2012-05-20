@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 057 (http://projecteuler.net/problem=57)
+ */
+
 // Sqrt(2) = 1 + 1 / ( 2 + 1 / ( 2 + 1 / ( 2 .... = 1.414213...
 // (Infinite continuous fraction)
 // 1 + 1/2 = 1.5 = 3/2
@@ -89,5 +93,6 @@ int main( int argc, char** argv )
         add( (*p1), d, (*p0) );
         tp = p0; p0 = p1; p1 = tp;  // swap 
     }
-    cout << endl << "Count = " << count << endl;
+    cout << endl << "Answer: " << count << endl;
+    return 0;
 }

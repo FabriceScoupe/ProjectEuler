@@ -2,6 +2,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 068 (http://projecteuler.net/problem=68)
+ */
+
 // [...] Using the numbers 1 to 10 and depending on arrangements, it is
 // possible to form 16- and 17-digit strings.
 // What is the maximum 16-digit string for a "magic" 5-gon ring?
@@ -106,5 +110,7 @@ int main( int argc, char** argv )
             if ( ( str < 10000000000000000LL )&&( str > max_s ) ) max_s = str;
         }
     } while(next_perm(data, 10));
-    cout << endl << "Maximum 16-digit string = " << max_s << endl;
+    cout << endl << "Maximum 16-digit string:" << endl;
+    cout << "Answer: " << max_s << endl;
+    return 0;
 }

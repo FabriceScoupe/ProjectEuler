@@ -7,6 +7,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 059 (http://projecteuler.net/problem=59)
+ */
+
 // Each character on a computer is assigned a unique code and the preferred
 // standard is ASCII (American Standard Code for Information Interchange).
 // For example, uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.
@@ -110,6 +114,7 @@ int main( int argc, char** argv )
     char key[4];
     key[0]=0;key[1]=0;key[2]=0;key[3]=0;
     set<pair<int,char> >::reverse_iterator ri;
+    int sum = 0;
     
     for( int i = 0; i < 3; ++i )
     {
@@ -133,7 +138,7 @@ int main( int argc, char** argv )
                     check &= ( d != '^' ) && ( d != '~' ) && ( d != '`' );
                 }
                 if ( ! check ) continue;
-                int sum = 0;
+                sum = 0;
                 for(unsigned int j = 0; j < msg.size(); ++j)
                 {
                     char clear = ( key[j%3]>0? ( msg[j] ^ key[j%3]) : '.');
@@ -151,4 +156,6 @@ int main( int argc, char** argv )
             }
         }
     }
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

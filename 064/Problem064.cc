@@ -3,6 +3,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 064 (http://projecteuler.net/problem=64)
+ */
+
 // All square roots are periodic when written as continued fractions
 // and can be written in the form:
 // sqrt(N) = a0 + 1 / ( a1 + 1 / ( a2 + 1 / ( a3 + ... ) ) )
@@ -85,8 +89,8 @@ int main( int argc, char** argv )
         //cout << " (period " << p << ")" << endl;
         if ( p % 2 != 0 ) ++count;
     }
-    cout << endl << "odd-period continued fraction for sqrt(N<=" << n 
-         << ") = " << count << endl;
+    cout << "Odd-period continued fractions for sqrt(N<=" << n << "):" << endl;
+    cout << "Answer: " << count << endl;
 
     return 0;
 }

@@ -3,6 +3,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 073 (http://projecteuler.net/problem=73)
+ */
+
 // Consider the fraction n/d, n and d positive integers.
 // If n < d and Highest Common Factor HCF(n,d)=1, it is called a
 // proper reduced fraction.
@@ -38,6 +42,7 @@ int main( int argc, char** argv )
             sf.insert( Fraction( n, d ) );
 
     cout << "For d <= " << limit
-         << " number of proper reduced fraction > 1/3 < 1/2 = "
-         << sf.size() << endl;
+         << " number of proper reduced fraction > 1/3 < 1/2 :" << endl;
+    cout << "Answer: " << sf.size() << endl;
+    return 0;
 }

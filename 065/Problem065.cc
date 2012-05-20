@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 065 (http://projecteuler.net/problem=65)
+ */
+
 // Continued fractions:
 // e = [2; 1,2,1,1,4,1,1,6,1,1,....,1,2k,1,...]
 // Convergents:
@@ -129,6 +133,6 @@ int main( int argc, char** argv )
 
     int sum = 0;
     for(unsigned int i = 0; i < n_curr.size(); ++i) sum += n_curr[i];
-    cout << endl << "sum = " << sum << endl;
+    cout << endl << "Answer: " << sum << endl;
     return 0;
 }

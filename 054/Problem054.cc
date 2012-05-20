@@ -3,6 +3,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 054 (http://projecteuler.net/problem=54)
+ */
+
 // How many hands did Player 1 win in the game of poker?
 // H(earts) C(lub) S(pade) D(iamond)
 // 2,3,4,5,6,7,8,9,10,J,Q,K,A
@@ -201,7 +205,8 @@ int ParseHands( const char* filename )
         while( c != 0 );
         in.close();
     }
-    cout << endl << "Won by player 1: " << won_by_1 << endl;
+    cout << endl << "Won by player 1: " << endl;
+    cout << "Answer: " << won_by_1 << endl;
     return won_by_1;
 }
 
@@ -210,4 +215,5 @@ int main( int argc, char** argv )
     char* filename = (char*) "poker.txt";
     if ( argc > 1 ) filename = argv[ 1 ];
     ParseHands( filename );
+    return 0;
 }

@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 053 (http://projecteuler.net/problem=53)
+ */
+
 // How many Cn,r (= n!/(r!.(n-r)! ) are > 1000000 for 1 <= n <= 100 ?
 
 // Use Pascal's triangle.
@@ -45,6 +49,7 @@ int main( int argc, char** argv )
     }
     while( (int) line.size() <= n );
 
-    cout << "Cn,r > " << threshold << " for n <= " << n
-         << " = " << count << endl;
+    cout << "Cn,r > " << threshold << " for n <= " << n << ":" << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

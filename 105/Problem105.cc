@@ -1,7 +1,6 @@
 #include <iostream>
+#include <vector>
 #include <set>
-#include <stack>
-#include <map>
 #include <fstream>
 
 using namespace std;
@@ -29,79 +28,66 @@ identify all the special sum sets, A1, A2, ..., Ak,
 and find the value of S(A1) + S(A2) + ... + S(Ak).
 ***/
 
-// B != 0, C != 0, B ^ C = 0 => S(B) != S(C)
-// card B > card C => S(B) > S(C)
-// For given card n, Cn such as card C = n with S(Cn)=max(S(C))
-// map n -> max(S(C) / card C = n); max(n)
-// map n -> min(S(C) / card C = n); min(n)
-// for 1 < n < card A, min(n) > max(n-1)
+// See Problem 103! Re-use the check functions, simplified.
 
-static inline int sum( const set<int>& s )
-{
-   int sum = 0;
-   for( set<int>::iterator i=s.begin(); i!=s.end(); ++i ) sum += *i;
-   return sum;
-}
+// Convenient Type Aliases:
+typedef unsigned int  uint;
+typedef vector<uint>  Set;
 
-void dump( const set<int>& s )
+// Check that min sum of k+1 elements is bigger than max sum of k elements.
+bool check_min_max(const Set& A)
 {
-    cout << "{ ";
-    for(set<int>::iterator i=s.begin(); i!=s.end(); ++i) {
-        cout << *i << " ";
+    uint min_sum = A[0];
+    uint max_sum = 0;
+
+    for(uint k = 1; 2*k < A.size(); ++k) {
+        min_sum += A[k];
+        max_sum += A[A.size()-k];
+        if (min_sum <= max_sum) return false;
     }
-    cout << "}";
+    return true;
 }
 
-// Generates the set of parts of set s
-void get_parts( const set<int>& s, set< set< int > >& parts )
+// Calculate sum of subset of A, given by number p in 0..2^n-1 (n bits)
+static inline uint sum(const Set& A, uint p = 0)
 {
-   parts.clear();
-   set< int > t;    
-   parts.insert( t ); // Insert empty set
-   unsigned int d = 1;
-   while(d < s.size()) {
-       for( set< set< int > >::iterator pit = parts.begin();
-            pit != parts.end(); ++pit )
-       {
-           for(set< int >::iterator sit = s.begin(); sit != s.end(); ++sit) {
-               set< int > u = *pit;
-               u.insert( *sit );
-               parts.insert( u );
-           }
-       }
-       ++d;
-   }
+    if (0 == p) p = (1 << A.size())-1;
+    uint s = 0;
+    uint q = p;
+    for(uint j = 0; j < A.size(); ++j, q >>= 1) if (q & 1) s += A[j];
+    return s;
+}
+
+// Check that there are no equal sums for any 2 subsets of A
+bool check_unequal_sums(const Set& A)
+{
+    uint p2n = 1 << A.size();
+    uint max_sum = sum(A);
+    Set sums2parts(max_sum+1);
+    for(uint s = 0; s <= max_sum; ++s) sums2parts[s] = p2n;
+
+    // For all subsets of A (illustrated by numbers from 1 to 2^n-1):
+    for(uint p = 1; p < p2n; ++p) {
+        uint  s = sum(A, p);
+        uint& parts = sums2parts[s];
+        // Equal sums detected
+        if (parts < p2n) return false;
+        parts = p;
+    }
+    return true;
+}
+
+void dump(const Set& A, bool separated = false)
+{
+    cout << (separated ? "A = { " : "");
+    for(uint i = 0; i < A.size(); ++i) cout << A[i] << (separated ? " " : "");
+    cout << (separated ? "}" : "") << endl;
 }
 
 // Check whether this is a special set, if special returns sum, else 0
-int is_special( const set<int>& s )
+static inline uint is_special( const Set& s )
 {
-   // Generate set of parts
-   set< set< int > > p;
-   get_parts( s, p );
-   set< int > e;
-   p.erase( p.find( e ) ); // erase empty set
-   p.erase( p.find( s ) ); // erase full set
-   //cout << "size of p = " << p.size() << endl;
-
-   set< int > sums;
-   map< int, int > mins;
-   map< int, int > maxs;
-   for(set< set< int > >::iterator pit = p.begin(); pit != p.end(); ++pit) {
-       int tmp = sum( *pit );
-       // Checking that all parts have different sums
-       if ( sums.find( tmp ) != sums.end() ) return 0;
-       sums.insert( tmp );
-       int& mn = mins[ pit->size() ];
-       if ( ( 0 == mn ) || ( tmp < mn ) ) mn = tmp;
-       int& mx = maxs[ pit->size() ];
-       if ( tmp > mx ) mx = tmp;
-   }
-   // Checking 1 < n < card s, min(n) > max(n-1)
-   for(unsigned int d = 2; d < s.size(); ++d ) {
-       if ( mins[ d ] <= maxs[ d-1 ] ) return 0;
-   }
-   return sum(s);
+   return((check_min_max(s) && (check_unequal_sums(s))) ? sum(s) : 0);
 }
 
 int parseFile( char* filename )
@@ -110,21 +96,25 @@ int parseFile( char* filename )
    ifstream in( filename );
    char c = 0;
    int  n = 0;
-   set< int > s;
+   set<int> t_s; // temp set for sorting values
    if ( in ) do {
        if ( ! in.get( c ) ) c = 0;
        if ( ( '\r' == c ) || ( '\n' == c ) || ( 0 == c ) ) {
            if ( n > 0 ) {
-               s.insert( n );
+               t_s.insert( n );
+               Set s;
+               for(set<int>::iterator i = t_s.begin(); i != t_s.end(); ++i) {
+                   s.push_back(*i);
+               }
                n = 0;
-               //dump( s );
+               //dump(s, true);
                int tmp = is_special( s );
                //cout << " special sum = " << tmp << endl;
                total += tmp;
-               s.clear();
+               t_s.clear();
            }
        } else if ( ',' == c ) {
-           s.insert( n );
+           t_s.insert( n );
            n = 0;
        } else if ( ( c >= '0' ) && ( c <= '9' ) ) {
            n *= 10;
@@ -138,5 +128,7 @@ int main( int argc, char** argv )
 {
    char* filename = (char*) "sets.txt";
    if ( argc > 1 ) filename = argv[ 1 ];
-   cout << "Sum of special sets' sum = " << parseFile( filename ) << endl;
+   cout << "Sum of special sets' sum:" << endl;
+   cout << "Answer: " << parseFile( filename ) << endl;
+   return 0;
 }

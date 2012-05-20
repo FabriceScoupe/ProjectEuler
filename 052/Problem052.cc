@@ -2,6 +2,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 052 (http://projecteuler.net/problem=52)
+ */
+
 // Find the smallest positive integer x such that 2x, 3x, 4x, 5x and 6x 
 // all contain the same digits as x, in a different order.
 
@@ -59,7 +63,7 @@ int main( int argc, char** argv )
            roof *= 10;
        }
    }
-   cout << "Found: " << found << endl;
+   cout << "Answer: " << found << endl;
    cout << " x2 =  " << found*2 << endl;
    cout << " x3 =  " << found*3 << endl;
    cout << " x4 =  " << found*4 << endl;

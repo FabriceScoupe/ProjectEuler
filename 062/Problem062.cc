@@ -4,6 +4,10 @@
 #include <map>
 using namespace std;
 
+/*
+ * Project Euler: Problem 062 (http://projecteuler/problem=62)
+ */
+
 // Cube 41063625 (345^3) can be permuted to produce two other cubes:
 // 56623104 (384^3) and 66430125 (405^3). In fact, it is the smallest cube
 // which has exactly three permutations of its digits which are also cube.
@@ -60,7 +64,9 @@ int main( int argc, char** argv )
     }
     int tmp_nd = 0;
     vector< long long >& fv = m[ digits_in_order( found, tmp_nd ) ];
-    cout << "Found: " << fv[0]*fv[0]*fv[0] << " = ";
+    cout << "Answer: " << fv[0]*fv[0]*fv[0] << endl;
+    cout << "= ";
     for( int i = 0; i < limit; ++i ) cout << fv[i] << "^3 ";
     cout << endl;
+    return 0;
 }
