@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 091 (http://projecteuler.net/problem=91)
+ */
+
 /***
 The points P(x1,y1) and Q(x2,y2) are plotted at integer co-ordinates and
 are joined to the origin , O(0,0) to form the triangle OPQ.
@@ -48,5 +52,7 @@ int main( int argc, char** argv )
                         ++count;
                     }
     cout << endl << "Number of right angle triangles with 0 <= x1,y1,x2,y2 <=";
-    cout << limit << " = " << count << endl;
+    cout << limit << " = " << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

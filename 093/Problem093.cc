@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 093 (http://projecteuler.net/problem=93)
+ */
+
 /***
 By using each of the digits from the set {1,2,3,4} exactly once, and making
 use of the four arithmetic operations (+,-,*,.) and brackets or parentheses,
@@ -186,4 +190,5 @@ int main( int argc, char** argv )
 
     //cout <<endl<<"Max: {"<<ma<<","<<mb<<","<<mc<<","<<md<<"} => "<<max<<endl;
     cout << endl << "Answer: " << ma << mb << mc << md << endl;
+    return 0;
 }

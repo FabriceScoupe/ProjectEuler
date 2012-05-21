@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 076 (http://projecteuler.net/problem=76)
+ */
+
 // It is possible to write five as a sum in exactly six different ways:
 //
 // 4 + 1
@@ -58,8 +62,7 @@ int main( int argc, char** argv )
         p.push_back( tmp_p );
     }
 
-    cout << "Number of way to write " << n << " as a sum = "
-         << p[n] - 1 << endl;
-
+    cout << "Number of way to write " << n << " as a sum = " << endl;
+    cout << "Answer: " << p[n] - 1 << endl;
     return 0;
 }

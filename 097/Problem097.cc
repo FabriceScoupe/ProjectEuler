@@ -2,6 +2,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 097 (http://projecteuler.net/problem=097)
+ */
+
 // The first known prime found to exceed one million digits was discovered in
 // 1999, and is a Mersenne prime of the form 2^(6972593)−1; it contains exactly
 // 2,098,960 digits. Subsequently other Mersenne primes, of the form 2^(p)−1,
@@ -23,5 +27,7 @@ int main( int argc, char** argv )
     }
     ++num;
 
-    cout << "Last 10 digits = " << num << endl;
+    cout << "Last 10 digits = " << endl;
+    cout << "Answer: " << num << endl;
+    return 0;
 }

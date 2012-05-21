@@ -1,6 +1,10 @@
 #include <iostream>
 #include <fstream>
 
+/*
+ * Project Euler: Problem 089 (http://projecteuler.net/problem=89)
+ */
+
 // The rules for writing Roman numerals allow for many ways of writing each
 // number (see FAQ: Roman Numerals). However, there is always a "best" way of
 // writing a particular number.
@@ -113,6 +117,6 @@ int main( int argc, char** argv )
     char* filename = (char*) "roman.txt";
     if ( argc > 1 ) filename = argv[ 1 ];
 
-    cout << "Delta = " << parseRomans( filename ) << endl;
+    cout << "Answer: " << parseRomans( filename ) << endl;
     return 0;
 }

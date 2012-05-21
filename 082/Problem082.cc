@@ -3,6 +3,10 @@
 #include <fstream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 082 (http://projecteuler.net/problem=81)
+ */
+
 // NOTE: This problem is a more challenging version of Problem 81.
 // 
 // The minimal path sum in the 5 by 5 matrix below, by starting in any cell
@@ -121,5 +125,7 @@ int main( int argc, char** argv )
     int r = 1;
     while( r*r < (int) mat.size() ) ++r;
     cout << "Root = " << r << endl;
-    cout << endl << "Min path sum = " << min_path_sum( mat, r ) << endl << endl;
+    cout << endl << "Min path sum:" << endl; 
+    cout << "Answer: " << min_path_sum( mat, r ) << endl << endl;
+    return 0;
 }

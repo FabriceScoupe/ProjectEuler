@@ -4,6 +4,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 075 (http://projecteuler.net/problem=75)
+ */
+
 // It turns out that 12 cmn is the smallest length of wire that can be
 // be bent to form an integer-sided right-angle triangle in exactly one
 // way, but there are more examples:
@@ -69,5 +73,6 @@ int main( int argc, char** argv )
         //cout << i->first << ": " << i->second << " time(s)." << endl;
         if (i->second == 1) ++count;
     }
-    cout << "Count = " << count << endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

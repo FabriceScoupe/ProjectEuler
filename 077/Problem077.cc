@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 077 (http://projecteuler.net/problem=77)
+ */
+
 // It is possible to write ten as the sum of primes in exactly five
 // different ways:
 // 7 + 3
@@ -87,6 +91,7 @@ int main( int argc, char** argv )
         ++value;
     }
     cout << "Value is " << value << "(" << p1[value] << " ways)" << endl;
+    cout << "Answer: " << value << endl;
 
     return 0;
 }

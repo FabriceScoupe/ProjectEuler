@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 099 (http://projecteuler.net/problem=99)
+ */
+
 /***
 Comparing two numbers written in index form like 2^11 and 3^7 is not
 difficult, as any calculator will confirm that 2^11=2048 < 3^7= 2187.
@@ -66,5 +70,6 @@ int main( int argc, char** argv )
     if ( argc > 1 ) filename = argv[ 1 ];
    
     int mline = max_line( filename );
-    cout << "Max line: " << mline << endl;
+    cout << "Answer: " << mline << endl;
+    return 0;
 }

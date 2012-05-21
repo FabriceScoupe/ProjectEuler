@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 100 (http://projecteuler.net/problem=100)
+ */
+
 /***
 If a box contains twenty-one coloured discs, composed of fifteen blue discs
 and six red discs, and two discs were taken at random, it can be seen that
@@ -62,4 +66,6 @@ int main( int argc, char** argv )
         cout << "B = " << ( y + 1 ) / 2 << " N = " << ( x + 1 ) / 2 << endl;
     }
     while( ( x + 1 ) / 2 <= min );
+    cout << "Answer: " << (y + 1) / 2;
+    return 0;
 }

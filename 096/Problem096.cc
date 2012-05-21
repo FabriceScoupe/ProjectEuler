@@ -5,6 +5,10 @@
 #include <map>
 #include <cassert>
 
+/*
+ * Project Euler: Problem 096 (http://projecteuler.net/problem=96)
+ */
+
 using namespace std;
 
 class Grid
@@ -239,5 +243,7 @@ int main( int argc, char** argv )
     }
     while( c != 0 );
 
-    cout << endl << "The sum is : " << sum << endl;
+    cout << endl << "The sum is : " << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

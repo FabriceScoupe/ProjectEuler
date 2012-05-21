@@ -5,6 +5,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 095 (http://projecteuler.net/problem=95)
+ */
+
 /***
 The proper divisors of a number are all the divisors excluding the number
 itself. For example, the proper divisors of 28 are 1, 2, 4, 7, and 14.
@@ -97,5 +101,6 @@ int main( int argc, char** argv )
     cout << "Max length = " << max_length 
          << ", min element = " << min_elem << endl;
 
+    cout << "Answer: " << min_elem << endl;
     return 0;
 }

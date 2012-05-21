@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 094 (http://projecteuler.net/problem=94)
+ */
+
 /***
 It is easily proved that no equilateral triangle exists with integral length
 sides and integral area. However, the almost equilateral triangle 5-5-6 has an
@@ -69,5 +73,7 @@ int main( int argc, char** argv )
     }
 
     cout << "Sum of perimeters of almost equilateral triangles (perimeter <="
-         << limit << ") = " << sum << endl;
+         << limit << ") = " << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }

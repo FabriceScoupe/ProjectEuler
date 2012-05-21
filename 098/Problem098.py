@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+#
+# Project Euler: Problem 098 (http://projecteuler.net/problem=98)
+#
+
 import sys
 
 filename = "words.txt"
@@ -64,4 +68,4 @@ max_square = ('',0)
 for fl in found_list:
     if (int(fl[1]) > int(max_square[1])): max_square = fl
 
-print "Max square = ", max_square
+print "Answer:", max_square[1]

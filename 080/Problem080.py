@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+
+#
+# Project Euler: Problem 080 (http://projecteuler.net/problem=80)
+#
+
 # It is well known that if the square root of a natural number is not
 # an integer, then it is irrational.
 # The decimal expansion of such square roots is infinite without any
@@ -45,4 +50,4 @@ if __name__ == "__main__" :
         s = rootDigitSum( i, 100 )
         #print "sum ",i," = ",s
         sum += s
-    print "Total sum = ",sum
+    print "Answer:",sum

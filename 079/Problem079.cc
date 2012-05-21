@@ -3,6 +3,10 @@
 #include <set>
 using namespace std;
 
+/*
+ * Project Euler: Problem 079 (http://projecteuler.net/problem=79)
+ */
+
 // A common security method used for online banking is to ask the user for
 // three random characters from a passcode. For example, if the passcode was
 // 531278, they may asked for the 2nd, 3rd, and 5th characters; the expected
@@ -135,8 +139,9 @@ int main( int argc, char** argv )
     for( it = by_row.begin(); it != by_row.end(); ++it )
         cout << it->second;
 
-    cout << endl << "Password by col: ";
+    cout << endl << "Password by col: " << endl << "Answer: ";
     for( it = by_col.begin(); it != by_col.end(); ++it )
         cout << it->second;
     cout << endl;
+    return 0;
 }

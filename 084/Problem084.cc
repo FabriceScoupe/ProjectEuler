@@ -5,6 +5,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 084 (http://projecteuler.net/problem=84)
+ */
+
 // In the game, Monopoly, the standard board is set up in the following way:
 //
 //GO A1 CC1 A2 T1 R1 B1 CH1 B2 B3 JAIL 
@@ -232,7 +236,8 @@ int main( int argc, char** argv )
         cout << it->second << " (" << it->first << ")" << endl;
     }
     */
-    cout << "Answer = " << it->second; ++it;
+    cout << "Answer: " << it->second; ++it;
     cout << it->second; ++it;
     cout << it->second << endl;
+    return 0;
 }

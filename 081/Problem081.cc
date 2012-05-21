@@ -3,6 +3,10 @@
 #include <fstream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 081 (http://projecteuler.net/problem=81)
+ */
+
 // In the 5 by 5 matrix below, the minimal path sum from the top left
 // to the bottom right, by only moving to the right and down, is indicated
 // in bold red and is equal to 2427.
@@ -144,7 +148,8 @@ int main( int argc, char** argv )
             cout << mat[i*r+j] << ( j < r-1 ? ",": "\r\n");
     }
 
-    cout << endl << "Min path sum = " << min << endl << endl;
+    cout << endl << "Min path sum:" << endl;
+    cout << "Answer: " << min << endl << endl;
 
     //show_path( mat_o, mat, r );
 

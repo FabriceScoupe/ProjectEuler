@@ -5,6 +5,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 088 (http://projecteuler.net/problem=88)
+ */
+
 /***
 A natural number, N, that can be written as the sum and product of a given set
 of at least two natural numbers, {a_(1), a_(2), ... , a_(k)} is called
@@ -166,6 +170,8 @@ int main( int argc, char** argv )
 
     cout << endl 
          << "Sum of all distinct minimal product-sum number for 2 <= k <= "
-         << limit << " = " << sum << "." << endl;
+         << limit << " = " << endl;
+    cout << "Answer: " << sum << endl;
+    return 0;
 }
 

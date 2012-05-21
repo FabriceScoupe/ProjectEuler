@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+/*
+ * Project Euler: Problem 078 (http://projecteuler.net/problem=78)
+ */
+
 // Let p(n) represent the number of different ways in which n coins can be
 // separated into piles. For example, five coins can separated into piles
 // in exactly seven different ways, so p(5)=7.
@@ -56,4 +60,6 @@ int main( int argc, char** argv )
     }
 
     cout << "p(" << i-1 << ") is divisible by " << div << "." << endl;
+    cout << "Answer: " << i-1 << endl;
+    return 0;
 }

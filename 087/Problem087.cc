@@ -3,6 +3,10 @@
 #include <vector>
 #include <set>
 
+/*
+ * Project Euler: Problem 087 (http://projecteuler.net/problem=87)
+ */
+
 // The smallest number expressible as the sum of a prime square, prime cube,
 // and prime fourth power is 28. In fact, there are exactly four numbers below
 // fifty that can be expressed in such a way:
@@ -63,7 +67,7 @@ int main( int argc, char** argv )
             }
         }
     }
-    cout << endl << solutions.size() << " numbers < " << limit << endl;
-
+    cout << endl << "Answer: " << solutions.size() << endl;
+    cout << " numbers < " << limit << endl;
     return 0;
 }

@@ -2,6 +2,10 @@
 #include <string>
 #include <vector>
 
+/*
+ * Project Euler: Problem 090 (http://projecteuler.net/problem=90)
+ */
+
 // ============================================================================
 // Two dice, each with distinct digits among [0..9].
 // Must be able to display all squares 0 < x < 100, ie:
@@ -72,6 +76,6 @@ int main(int argc, char** argv)
    }
 
    cout << endl << count << " combinations found." << endl;
-
+   cout << "Answer: " << count << endl;
    return 0;
 }

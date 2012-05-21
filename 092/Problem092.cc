@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 092 (http://projecteuler.net/problem=92)
+ */
+
 // A number chain is created by continuously adding the square of the digits
 // in a number to form a new number until it has been seen before.
 // For example,
@@ -42,6 +46,7 @@ int main( int argc, char** argv )
     }
     cout << endl;
     cout << count << " numbers below " << limit << " arrive at 89." << endl;
+    cout << "Answer: " << count << endl;
     delete[] limits;
     return 0;
 }

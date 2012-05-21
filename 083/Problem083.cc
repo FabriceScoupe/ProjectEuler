@@ -4,6 +4,10 @@
 #include <fstream>
 using namespace std;
 
+/*
+ * Project Euler: Problem 083 (http://projecteuler.net/problem=83)
+ */
+
 // NOTE: This problem is a significantly more challenging version of Problem 81
 // In the 5 by 5 matrix below, the minimal path sum from the top left to the
 // bottom right, by moving left, right, up, and down, is indicated in bold red
@@ -156,5 +160,7 @@ int main( int argc, char** argv )
     while( r*r < (int) mat.size() ) ++r;
     cout << "Root = " << r << endl;
     min = min_path_sum( mat, r );
-    cout << endl << "Min path sum = " << min << endl << endl;
+    cout << endl << "Min path sum:" << endl;
+    cout << "Answer: " << min << endl << endl;
+    return 0;
 }
