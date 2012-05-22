@@ -7,21 +7,29 @@ using namespace std;
  * Project Euler: Problem 162 (http://projecteuler.net/problem=162)
  */
 
-// Note: trinomial coeff C(a,b,c) = (a+b+c)! / (a!b!c!)
-// Putting k "balls" in n "holes": (n+k-1)!/(k!(n-1)!)
+// Inclusion-exclusion principle:
+// See: https://en.wikipedia.org/wiki/Inclusion-exclusion_principle
+// (Sieve principle)
+
+// |A u B| = |A| + |B| - |A ^ B|
+// |A u B u C| = |A| + |B| + |C| - |A ^ B| - |B ^ C| - |C ^ A| + |A ^ B ^ C|
+// 16^n n-digit hex numbers.
+// 15*16^(n-1) of those NOT starting with 0
+// A: Numbers without any 1 in them 14*15^(n-1) (neither 0 nor 1 at the start)
+// B: Numbers without any A in them 14*15^(n-1) (neither 0 nor A at the start)
+// C: Numbers without any 0 in them 15^n        (not 0 at the start)
+// A^C: Without any 0 nor 1: 14^n
+// B^C: Without any 0 nor A: 14^n
+// A^B: Without any 1 nor A: 13*14^(n-1)
+// A^B^C: Without 0, 1 nor A: 13^n
+// AuBuC: Without any 0 or without any 1 or without any A
+// Complementary of AuBuC is what we're after:
+// with at least one 0 AND at least one 1 AND at least one A.
 //
-// Number of ways of picking a 0s, b 1s and c As, a+b+c = m -> C(a,b,c)
-// 1 or A as first digit: consider the (n-1) next digits, b or c can be 0.
-// (interchangeable, so consider, say, 1, and multiply result by 2).
-// (n-1-m) digits left, neither 0,1 or A => 13^(n-1-m) possible choices.
-// Number of ways of putting m digits in n-1-m+1=n-m "holes":
-// 1.X.X.X.X.
-// ==> (n-m+m-1)!(m!(n-m-1)) = (n-1)!/m!(n-m-1)! (3 <= m <= n-1)
-//
-// All together:
-// 2 * sum(n=3..16) sum(m=3..n-1) sum(a+b+c=m, a >= 0, b,c >= 1)
-//     C(a,b,c)*13^(n-1-m)*(n-1)!/(m!(n-m-1)!)
-//  == 13^(n-1-m)*(n-1)!/(a!b!c!(n-m-1)!)
+// |AuBuC|=2*14*15^(n-1)+15^n-2*14^n-13*14^(n-1)+13^n
+//        = 43*15^(n-1)-41*14^(n-1)+13^n
+
+// so count=15*16^(n-1)-43*15^(n-1)+41*14^(n-1)-13^n
 
 unsigned long brute_force(unsigned long long n) {
     unsigned long long count = 0;
@@ -41,9 +49,9 @@ unsigned long brute_force(unsigned long long n) {
             }
             ii /= 16;
         }
-        // Starts with 1 or A, number of 0s, 1s and As all >= 1:
-        if (((1==d)||(10==d))&&(n_0 >= 1)&&(n_1 >= 1)&&(n_A >= 1)) {
-            cout << uppercase << hex << i << endl;
+        // Number of 0s, 1s and As all >= 1:
+        if ((n_0 >= 1)&&(n_1 >= 1)&&(n_A >= 1)) {
+            //cout << uppercase << hex << i << endl;
             ++count;
         }
     }
@@ -54,38 +62,23 @@ int main(int argc, char* argv[])
 {
     int n_max = 16;
     if (argc > 1) n_max = atoi(argv[1]);
-    // Calculate and store factorials up from 0! to n!
-    unsigned long long * fact = new unsigned long long[n_max+1];
-    fact[0] = 1;
-    for(int i = 1; i <= n_max; ++i) {
-        fact[i] = i*fact[i-1];
-        //cout << i << "! = " << fact[i] << endl;
-    }
 
     unsigned long long count = 0ULL;
-    for(int n = 3; n <= n_max; ++n) {
-        for(int m = 2; m <= n-1; ++m) {
-            unsigned long long sum_m = 0;
-            for(int a = 0; a <= m-2; ++a) {
-                for(int b = 1; b <= m-a-1; ++b) {
-                    int c = m-a-b;
-                    unsigned long long c_abc = 
-                        fact[n-1] / (fact[a]*fact[b]*fact[c]);
-                    sum_m += c_abc;
-                }
-            }
-            sum_m /= fact[n-m-1];
-            for(int i = 0; i < n-m-1; ++i) sum_m *= 13;
-            count += sum_m;
-        }
-    }
-    count *= 2;
 
     if (n_max <= 6) {
         cout << "Brute force: " << dec << brute_force(1<<(4*n_max)) << endl;
     }
+    // so count=15*16^(n-1)-43*15^(n-1)+41*14^(n-1)-13^n
+    unsigned long p16 = 1;
+    unsigned long p15 = 1;
+    unsigned long p14 = 1;
+    unsigned long p13 = 13;
+    for(int n = 0; n < n_max-1; ++n) {
+        p16 *= 16; p15 *= 15; p14 *= 14; p13 *= 13;
+        count += 15*p16-43*p15+41*p14-p13;
+    }
+
     cout << "Decimal answer: " << count << endl;
     cout << "Answer: " << uppercase << hex << count << endl;
-    delete[] fact;
     return 0;
 }
