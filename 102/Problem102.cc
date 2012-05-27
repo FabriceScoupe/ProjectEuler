@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 102 (http://projecteuler.net/problem=102)
+ */
+
 /***
 Three distinct points are plotted at random on a Cartesian plane,
 for which -1000 ≤ x, y ≤ 1000, such that a triangle is formed.
@@ -91,5 +95,7 @@ int main( int argc, char** argv )
     char* filename = (char*) "triangles.txt";
     if ( argc > 1 ) filename = argv[ 1 ];
     int count = parseFile( filename );
-    cout << endl << "Number of triangles containing origin = "<< count << endl;
+    cout << endl << "Number of triangles containing origin = "<< endl;
+    cout << "Answer: " << count << endl;
+    return 0;
 }

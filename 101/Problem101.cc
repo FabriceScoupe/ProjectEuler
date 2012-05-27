@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 101 (http://projecteuler.net/problem=101)
+ */
+
 /**
 If we are presented with the first k terms of a sequence it is impossible
 to say with certainty the value of the next term, as there are infinitely
@@ -124,7 +128,7 @@ int main(int argc, char** argv)
         sum_fit += f;
         cout << "u("<<k<<") = "<< u(k) << " FIT = " << f << endl;
     }
-    cout << "Sum of FITs = " << sum_fit << endl << endl;
-
+    cout << "Sum of FITs = " << endl;
+    cout << "Answer: " << sum_fit << endl << endl;
     return 0;
 }

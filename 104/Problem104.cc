@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Project Euler: Problem 104 (http://projecteuler.net/problem=104)
+ */
+
 /***
 The Fibonacci sequence is defined by the recurrence relation:
 

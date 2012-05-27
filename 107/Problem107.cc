@@ -3,8 +3,11 @@
 #include <fstream>
 #include <map>
 #include <set>
-
 using namespace std;
+
+/*
+ * Project Euler: Problem 107 (http://projecteuler.net/problem=107)
+ */
 
 /***
 Removing links in graph to achieve maximum savings while keeping
@@ -111,5 +114,6 @@ int main( int argc, char** argv )
     buildMST( r, m, mst );
     int w2 = weight( r, mst );
     cout << "Final weight = " << w2 << endl;
-    cout << "Savings = " << w1 - w2 << endl;
+    cout << "Answer: " << w1 - w2 << endl;
+    return 0;
 }
