@@ -3,8 +3,11 @@
 #include <vector>
 #include <map>
 #include <cmath>
-
 using namespace std;
+
+/*
+ * Project Euler: Problem 110 (http://projecteuler.net/problem=110)
+ */
 
 /***
 In the following equation x, y, and n are positive integers.

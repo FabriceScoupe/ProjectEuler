@@ -1,6 +1,9 @@
 #include <iostream>
-
 using namespace std;
+
+/*
+ * Project Euler: Problem 112 (http://projecteuler.net/problem=112)
+ */
 
 /***
 Working from left-to-right if no digit is exceeded by the digit to its left
@@ -66,5 +69,6 @@ int main( int argc, char** argv )
         found = ( p >= 99 );
         ++n;
     }
+    cout << "Answer: " << n-1 << endl;
     return 0;
 }

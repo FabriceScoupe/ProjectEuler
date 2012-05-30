@@ -1,7 +1,10 @@
 #include <iostream>
 #include <cstdlib>
-
 using namespace std;
+
+/*
+ * Project Euler: Problem 113 (http://projecteuler.net/problem=113)
+ */
 
 /***
 Working from left-to-right if no digit is exceeded by the digit to its left it is called an increasing number; for example, 134468.
@@ -68,6 +71,7 @@ int main( int argc, char** argv )
 
     non_bouncy -= 1; // Don't count 0
     
-    cout << "Number of non-bouncy numbers below 10^" << ndigits
-         << " = " << non_bouncy << endl;
+    cout << "Number of non-bouncy numbers below 10^" << ndigits << " = ";
+    cout << endl << "Answer: " << non_bouncy << endl;
+    return 0;
 }

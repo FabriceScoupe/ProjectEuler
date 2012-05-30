@@ -1,8 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <map>
-
 using namespace std;
+
+/*
+ * Project Euler: Problem 114 (http://projecteuler.net/problem=114)
+ */
 
 /***
 A row measuring seven units in length has red blocks with a minimum length of
@@ -77,5 +80,7 @@ int main( int argc, char** argv )
     cout << "Length of row = " << len << endl;
     calc_binomial( len );
     long long nw = 1 + nways( len );
-    cout << "Total number of ways = " << nw << endl;
+    cout << "Total number of ways = " << endl;
+    cout << "Answer: " << nw << endl;
+    return 0;
 }
