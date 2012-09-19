@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include <set>
 using namespace std;
 
 /*
@@ -84,8 +83,7 @@ int main(int argc, char* argv[])
     // Build prime numbers up to 100000000 (8 digit primes)
     // All 9-digit numbers with 1..9 cannot be a prime (digits sum to 45)
     build_sieve(100000000);
-
-    set< set<unsigned long long> >  valid_ones;
+    int count = 0;
 
     // 9-digit permutation: abcdefghi
     // Note: max size of a possible prime: 8 digits, so >= 2 elements in set.
@@ -100,35 +98,25 @@ int main(int argc, char* argv[])
             unsigned int start  = 0;
             unsigned int length = 1;
             unsigned long long n = 0;
-            set<unsigned long long> tmp_set;
+            unsigned long long last_n = 0;
             bool ok = true;
             for(int i = 0; ok && (i < 8); ++i) {
                 if ((st & (1 << i)) == 0) {
                     ++length;
                 } else {
                     n = charset2int(&perm[start], length);
-                    tmp_set.insert(n);
-                    ok = is_prime(n);
+                    ok = (n > last_n) && (is_prime(n));
                     start += length;
                     length = 1;
+                    last_n = n;
                 }
             }
             if (!ok) continue;
             n = charset2int(&perm[start], length);
-            tmp_set.insert(n);
-            if (is_prime(n)) {
-                valid_ones.insert(tmp_set);
-                /*
-                for(set<unsigned long long>::iterator it = tmp_set.begin();
-                    it != tmp_set.end(); ++it) {
-                    cout << *it << " ";
-                }
-                cout << endl;
-                */
-            }
+            if ((n > last_n) && is_prime(n)) ++count;
         }
     } while(next_perm(perm, 9));
 
-    cout << "Answer: " << valid_ones.size() << endl;
+    cout << "Answer: " << count << endl;
     return 0;
 }
