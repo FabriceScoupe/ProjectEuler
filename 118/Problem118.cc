@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include <sstream>
+#include <set>
 using namespace std;
 
 /*
@@ -44,7 +44,7 @@ static inline void reverse( unsigned char* set, int length )
     for( int i = 0; 2*i < length; ++i ) swap( set[i], set[ length -1 - i ] );
 }
 
-// (Permutator from problem 068) Here, dimension is 9.
+// (Permutator from problem 068)
 static inline bool next_perm( unsigned char* set, int dim )
 {
     bool ok = false;
@@ -85,27 +85,29 @@ int main(int argc, char* argv[])
     // All 9-digit numbers with 1..9 cannot be a prime (digits sum to 45)
     build_sieve(100000000);
 
-    unsigned char perm[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    unsigned int count = 0;
+    set< set<unsigned long long> >  valid_ones;
 
     // 9-digit permutation: abcdefghi
-    // 0 to 8 commas in between => 8 bit, 0..255 range
+    // Note: max size of a possible prime: 8 digits, so >= 2 elements in set.
+    // 0 to 8 commas in between => 8 bit, 1..255 range
     // 0000 0001 => 1 comma
     // 1111 1111 => 8 commas
-    // 256 sets to test.
+
+    unsigned char perm[9] = {1,2,3,4,5,6,7,8,9};
+
     do { // Loop over permutations of the 9 digits
         for(int st = 1; st < 256; ++st) { // Loop over sets
-            stringstream out;
             unsigned int start  = 0;
             unsigned int length = 1;
             unsigned long long n = 0;
+            set<unsigned long long> tmp_set;
             bool ok = true;
             for(int i = 0; ok && (i < 8); ++i) {
                 if ((st & (1 << i)) == 0) {
                     ++length;
                 } else {
                     n = charset2int(&perm[start], length);
-                    out << n << " ";
+                    tmp_set.insert(n);
                     ok = is_prime(n);
                     start += length;
                     length = 1;
@@ -113,14 +115,20 @@ int main(int argc, char* argv[])
             }
             if (!ok) continue;
             n = charset2int(&perm[start], length);
-            out << n << endl;
+            tmp_set.insert(n);
             if (is_prime(n)) {
-                ++count;
-                cout << out.str();
+                valid_ones.insert(tmp_set);
+                /*
+                for(set<unsigned long long>::iterator it = tmp_set.begin();
+                    it != tmp_set.end(); ++it) {
+                    cout << *it << " ";
+                }
+                cout << endl;
+                */
             }
         }
     } while(next_perm(perm, 9));
 
-    cout << "Answer: " << count << endl;
+    cout << "Answer: " << valid_ones.size() << endl;
     return 0;
 }

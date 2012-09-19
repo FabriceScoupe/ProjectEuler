@@ -95,5 +95,6 @@ int main( int argc, char** argv )
     cout << green << " ways of replacing with green tiles" << endl;
     long long blue  = nways( len, 4 );
     cout << blue << " ways of replacing with blue tiles" << endl;
-    cout << "Total = " << red + green + blue << endl;
+    cout << "Answer: " << red + green + blue << endl;
+    return 0;
 }

@@ -74,8 +74,9 @@ int main( int argc, char** argv )
     if ( argc > 1 ) m = atoi( argv[ 1 ] );
     long long limit = 1000000LL;
     if ( argc > 2 ) limit = atoll( argv[ 2 ] );
-    cout << "min(n) such as F(" << m << ", n) > " << limit << " = ";
+    cout << "min(n) such as F(" << m << ", n) > " << limit << " = " << endl;
     int n = m;
     while( F( m, n ) <= limit ) ++n;
-    cout << n << endl;
+    cout << "Answer: " << n << endl;
+    return 0;
 }

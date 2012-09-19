@@ -96,4 +96,7 @@ int main( int argc, char** argv )
         prod /= 3125; prod *= 3087;
     }
     dumpProd( prod, m );
+
+    cout << "Answer: " << endl;
+    return 0;
 }
